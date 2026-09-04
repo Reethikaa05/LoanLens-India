@@ -251,10 +251,10 @@ export function App() {
 
       {/* Footer (Rendered outside landing and standalone auth/dashboard routes) */}
       {!hideTopNavbar && (
-        <footer className="border-t border-[#E2D9DE] dark:border-[#33293A] bg-white dark:bg-neutral-900 py-8 px-4 sm:px-6 lg:px-8 text-xs text-[#6E6069] dark:text-[#A99DA5] transition-colors">
+        <footer className="border-t border-[#E2D9DE] dark:border-[#2D1F35] bg-white dark:bg-neutral-900 py-8 px-4 sm:px-6 lg:px-8 text-xs text-[#6E6069] dark:text-[#A99DA5] transition-colors">
           <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
             <div className="flex items-center gap-2">
-              <div className="w-6 h-6 rounded-md bg-[#4B2440] dark:bg-[#CFA5C1] text-white dark:text-neutral-900 flex items-center justify-center font-display font-bold text-xs">
+              <div className="w-6 h-6 rounded-md bg-[#EA580C] dark:bg-[#F59E0B] text-white dark:text-neutral-900 flex items-center justify-center font-display font-bold text-xs">
                 As
               </div>
               <span className="font-display font-medium text-sm text-[#221A20] dark:text-[#EEE6EA]">
@@ -268,7 +268,7 @@ export function App() {
               <span>·</span>
               <span>100% In-Browser Memory</span>
               <span>·</span>
-              <button onClick={() => navigateTo('landing')} className="hover:underline text-[#4B2440] dark:text-[#CFA5C1] font-bold cursor-pointer">
+              <button onClick={() => navigateTo('landing')} className="hover:underline text-[#EA580C] dark:text-[#F59E0B] font-bold cursor-pointer">
                 Return to Home
               </button>
             </div>

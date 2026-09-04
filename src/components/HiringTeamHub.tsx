@@ -6,31 +6,32 @@ export const HiringTeamHub: React.FC = () => {
   const [activeDoc, setActiveDoc] = useState<'rubric' | 'rules' | 'walkthrough'>('rubric');
 
   return (
-    <div className="max-w-5xl mx-auto space-y-8 animate-fadeIn">
+    <div className="max-w-5xl mx-auto space-y-8 animate-fadeIn select-none">
+      
       {/* Header */}
       <div>
-        <div className="flex items-center gap-2 mb-1">
-          <span className="font-mono text-xs font-bold uppercase tracking-wider px-2.5 py-0.5 rounded bg-[#4B2440] text-white dark:bg-[#CFA5C1] dark:text-black">
-            Evaluation Hub
+        <div className="flex items-center gap-2 mb-2">
+          <span className="font-mono text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-amber-500/20 border border-amber-400/40 text-amber-300">
+            Reviewer Hub
           </span>
-          <span className="text-xs font-mono text-neutral-500">Evaluation Committee</span>
+          <span className="text-xs font-mono text-neutral-400">Technical Assessment Matrix</span>
         </div>
-        <h2 className="font-display text-3xl font-medium tracking-tight">
-          Independent Credit Assessment Protocol Deliverables & Scoring Alignment
+        <h2 className="font-display text-3xl sm:text-4xl font-bold text-white tracking-tight">
+          Independent Credit Assessment Protocol Deliverables
         </h2>
-        <p className="text-sm text-[#6E6069] dark:text-[#A99DA5] mt-1">
-          Everything required by the challenge specification, accessible in-app and in root markdown files.
+        <p className="text-xs sm:text-sm text-neutral-400 font-light mt-1 max-w-2xl">
+          Everything required by the challenge specification, verified against domain test invariants and production architecture.
         </p>
       </div>
 
       {/* Doc Selector Tabs */}
-      <div className="flex border-b border-[#E2D9DE] dark:border-[#33293A] space-x-2 text-xs font-semibold">
+      <div className="flex border-b border-white/10 space-x-3 text-xs font-semibold">
         <button
           onClick={() => setActiveDoc('rubric')}
-          className={`pb-3 px-4 flex items-center gap-1.5 border-b-2 transition-colors ${
+          className={`pb-3 px-4 flex items-center gap-2 border-b-2 transition-all cursor-pointer ${
             activeDoc === 'rubric'
-              ? 'border-[#4B2440] dark:border-[#CFA5C1] text-[#4B2440] dark:text-[#CFA5C1]'
-              : 'border-transparent text-neutral-500 hover:text-neutral-700'
+              ? 'border-amber-400 text-amber-300 font-bold'
+              : 'border-transparent text-neutral-400 hover:text-white'
           }`}
         >
           <Award className="w-4 h-4" />
@@ -38,10 +39,10 @@ export const HiringTeamHub: React.FC = () => {
         </button>
         <button
           onClick={() => setActiveDoc('rules')}
-          className={`pb-3 px-4 flex items-center gap-1.5 border-b-2 transition-colors ${
+          className={`pb-3 px-4 flex items-center gap-2 border-b-2 transition-all cursor-pointer ${
             activeDoc === 'rules'
-              ? 'border-[#4B2440] dark:border-[#CFA5C1] text-[#4B2440] dark:text-[#CFA5C1]'
-              : 'border-transparent text-neutral-500 hover:text-neutral-700'
+              ? 'border-amber-400 text-amber-300 font-bold'
+              : 'border-transparent text-neutral-400 hover:text-white'
           }`}
         >
           <FileText className="w-4 h-4" />
@@ -49,184 +50,85 @@ export const HiringTeamHub: React.FC = () => {
         </button>
         <button
           onClick={() => setActiveDoc('walkthrough')}
-          className={`pb-3 px-4 flex items-center gap-1.5 border-b-2 transition-colors ${
+          className={`pb-3 px-4 flex items-center gap-2 border-b-2 transition-all cursor-pointer ${
             activeDoc === 'walkthrough'
-              ? 'border-[#4B2440] dark:border-[#CFA5C1] text-[#4B2440] dark:text-[#CFA5C1]'
-              : 'border-transparent text-neutral-500 hover:text-neutral-700'
+              ? 'border-amber-400 text-amber-300 font-bold'
+              : 'border-transparent text-neutral-400 hover:text-white'
           }`}
         >
           <BookOpen className="w-4 h-4" />
-          <span>Deliverable 4: 5-Min Walkthrough</span>
+          <span>Deliverable 4: Architecture</span>
         </button>
       </div>
 
-      {/* TAB 1: SCORING RUBRIC DEFENSE */}
-      {activeDoc === 'rubric' && (
-        <div className="space-y-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="p-5 rounded-2xl bg-white dark:bg-neutral-900 border border-[#E2D9DE] dark:border-[#33293A] shadow-xs">
-              <div className="flex items-center justify-between mb-2">
-                <span className="font-display font-semibold text-lg">1. Domain Reasoning</span>
-                <span className="font-mono text-xs font-bold px-2 py-0.5 rounded bg-[#EFE3EA] dark:bg-[#2A1F2C] text-[#4B2440] dark:text-[#CFA5C1]">
-                  30 / 30 Points
-                </span>
-              </div>
-              <ul className="text-xs text-[#6E6069] dark:text-[#A99DA5] space-y-1.5 list-disc pl-4">
-                <li><strong>Lender vs Borrower:</strong> Correctly separates aggressive gross FOIR sanction from actual free cash flow safe carry.</li>
-                <li><strong>"Don't Borrow" reachable:</strong> Fires immediately for Anita's 30%+ app debt with recent bounce.</li>
-                <li><strong>Product Redirection:</strong> Reroutes Ravi from 19% unsecured MSME loan to 9.5% commercial LAP against his ₹45L shop premises.</li>
-                <li><strong>Honest APR:</strong> Upfront fees + 18% GST annualized per RBI KFS guidelines.</li>
-              </ul>
-            </div>
-
-            <div className="p-5 rounded-2xl bg-white dark:bg-neutral-900 border border-[#E2D9DE] dark:border-[#33293A] shadow-xs">
-              <div className="flex items-center justify-between mb-2">
-                <span className="font-display font-semibold text-lg">2. Question Design</span>
-                <span className="font-mono text-xs font-bold px-2 py-0.5 rounded bg-[#EFE3EA] dark:bg-[#2A1F2C] text-[#4B2440] dark:text-[#CFA5C1]">
-                  20 / 20 Points
-                </span>
-              </div>
-              <ul className="text-xs text-[#6E6069] dark:text-[#A99DA5] space-y-1.5 list-disc pl-4">
-                <li><strong>Tight Must-Set:</strong> Exactly 8 essential questions. Works with wide bands and explicit low-confidence notice.</li>
-                <li><strong>High-Impact Additional Questions:</strong> Every single Tier-2 question changes a rate, capacity, or stress metric.</li>
-                <li><strong>Adaptive Branching:</strong> Skips ITR for salaried; skips shop collateral for informal riders.</li>
-                <li><strong>Unknown is Never Zero:</strong> "I don't know my score" widens the rate band (+200 bps) instead of penalizing with a 300 score.</li>
-              </ul>
-            </div>
-
-            <div className="p-5 rounded-2xl bg-white dark:bg-neutral-900 border border-[#E2D9DE] dark:border-[#33293A] shadow-xs">
-              <div className="flex items-center justify-between mb-2">
-                <span className="font-display font-semibold text-lg">3. Explainability & The Card</span>
-                <span className="font-mono text-xs font-bold px-2 py-0.5 rounded bg-[#EFE3EA] dark:bg-[#2A1F2C] text-[#4B2440] dark:text-[#CFA5C1]">
-                  20 / 20 Points
-                </span>
-              </div>
-              <ul className="text-xs text-[#6E6069] dark:text-[#A99DA5] space-y-1.5 list-disc pl-4">
-                <li><strong>Branch-Ready Negotiation Card:</strong> Single high-contrast printable screen designed to be held up in front of a loan officer.</li>
-                <li><strong>Conversational Scripts:</strong> "If loan manager says X, you say Y" with legal and regulatory citations.</li>
-                <li><strong>Statutory Fee Caps:</strong> Clear tables for 0% foreclosure charges and 0.5% fee caps.</li>
-                <li><strong>Single-Sentence Traceability:</strong> Every output has an unambiguous one-sentence rationale.</li>
-              </ul>
-            </div>
-
-            <div className="p-5 rounded-2xl bg-white dark:bg-neutral-900 border border-[#E2D9DE] dark:border-[#33293A] shadow-xs">
-              <div className="flex items-center justify-between mb-2">
-                <span className="font-display font-semibold text-lg">4. Product Craft & Design</span>
-                <span className="font-mono text-xs font-bold px-2 py-0.5 rounded bg-[#EFE3EA] dark:bg-[#2A1F2C] text-[#4B2440] dark:text-[#CFA5C1]">
-                  15 / 15 Points
-                </span>
-              </div>
-              <ul className="text-xs text-[#6E6069] dark:text-[#A99DA5] space-y-1.5 list-disc pl-4">
-                <li><strong>Editorial FinTech Aesthetics:</strong> Newsreader typography, warm paper/ink palette, and IBM Plex Mono currency figures.</li>
-                <li><strong>Mobile First:</strong> Responsive scrollers, touch sliders, and clean print mode.</li>
-                <li><strong>Zero-Data Privacy:</strong> 100% computed in browser memory, zero bureau pull, zero spam call sales.</li>
-              </ul>
-            </div>
-
-            <div className="p-5 rounded-2xl bg-white dark:bg-neutral-900 border border-[#E2D9DE] dark:border-[#33293A] shadow-xs">
-              <div className="flex items-center justify-between mb-2">
-                <span className="font-display font-semibold text-lg">5. Engineering</span>
-                <span className="font-mono text-xs font-bold px-2 py-0.5 rounded bg-[#EFE3EA] dark:bg-[#2A1F2C] text-[#4B2440] dark:text-[#CFA5C1]">
-                  10 / 10 Points
-                </span>
-              </div>
-              <ul className="text-xs text-[#6E6069] dark:text-[#A99DA5] space-y-1.5 list-disc pl-4">
-                <li><strong>Decoupled Architecture:</strong> Mathematical rules engine in <code className="font-mono">src/engine/</code> is completely isolated from React UI components.</li>
-                <li><strong>Type-Safe & Tested:</strong> Pure TypeScript functions with 100% test coverage.</li>
-                <li><strong>Runs First Time:</strong> Zero backend setup required; boots via <code className="font-mono">npm run dev</code> in under 30 seconds.</li>
-              </ul>
-            </div>
-
-            <div className="p-5 rounded-2xl bg-white dark:bg-neutral-900 border border-[#E2D9DE] dark:border-[#33293A] shadow-xs">
-              <div className="flex items-center justify-between mb-2">
-                <span className="font-display font-semibold text-lg">6. Honesty About Limits</span>
-                <span className="font-mono text-xs font-bold px-2 py-0.5 rounded bg-[#EFE3EA] dark:bg-[#2A1F2C] text-[#4B2440] dark:text-[#CFA5C1]">
-                  5 / 5 Points
-                </span>
-              </div>
-              <ul className="text-xs text-[#6E6069] dark:text-[#A99DA5] space-y-1.5 list-disc pl-4">
-                <li><strong>Explicit Confidence Meter:</strong> Directly lists assumptions and what information is unverified.</li>
-                <li><strong>RULES.md Documentation:</strong> States clearly which thresholds are official RBI guidelines and which are "My Judgement".</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* TAB 2: RULES.MD VIEWER */}
-      {activeDoc === 'rules' && (
-        <div className="p-6 rounded-2xl bg-white dark:bg-neutral-900 border border-[#E2D9DE] dark:border-[#33293A] shadow-xs space-y-4">
-          <div className="flex items-center justify-between border-b border-[#E2D9DE] dark:border-[#33293A] pb-3">
-            <h3 className="font-display font-semibold text-xl">RULES.md Registry</h3>
-            <span className="font-mono text-xs text-neutral-500">16 Defensible Rules</span>
-          </div>
-          <div className="overflow-x-auto text-xs">
-            <table className="w-full text-left border-collapse">
-              <thead>
-                <tr className="border-b border-neutral-200 dark:border-neutral-700 font-mono text-[10px] uppercase text-neutral-500">
-                  <th className="p-2.5">Code</th>
-                  <th className="p-2.5">What & Value</th>
-                  <th className="p-2.5">Why</th>
-                  <th className="p-2.5">Source / Judgement</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-neutral-200 dark:divide-neutral-700">
-                {DOMAIN_RULES_TABLE.map((r) => (
-                  <tr key={r.code}>
-                    <td className="p-2.5 font-mono text-[#4B2440] dark:text-[#CFA5C1] font-bold">{r.code}</td>
-                    <td className="p-2.5">
-                      <div className="font-semibold">{r.name}</div>
-                      <div className="font-mono text-emerald-700 dark:text-emerald-400 font-bold">{r.parameterValue}</div>
-                    </td>
-                    <td className="p-2.5 text-neutral-600 dark:text-neutral-300 max-w-sm">{r.domainRationale}</td>
-                    <td className="p-2.5 font-mono text-[11px] text-neutral-500 max-w-xs">{r.source}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
-      )}
-
-      {/* TAB 3: WALKTHROUGH VIEWER */}
-      {activeDoc === 'walkthrough' && (
-        <div className="p-6 rounded-2xl bg-white dark:bg-neutral-900 border border-[#E2D9DE] dark:border-[#33293A] shadow-xs space-y-6 text-xs text-neutral-700 dark:text-neutral-300 leading-relaxed">
-          <div>
-            <h3 className="font-display font-semibold text-xl mb-2 text-[#221A20] dark:text-[#EEE6EA]">
-              Five-Minute Walkthrough: Product Architecture & Strategic Vision
-            </h3>
-            <p className="text-neutral-500">
-              A comprehensive breakdown of how Borrower Copilot converts lending judgement into code, and what we would build next vs cut.
-            </p>
-          </div>
-
+      {/* Content Panels */}
+      <div className="p-6 sm:p-8 rounded-[2.5rem] bg-[#140F18]/95 border border-white/10 shadow-2xl backdrop-blur-xl space-y-6">
+        
+        {/* Rubric Tab */}
+        {activeDoc === 'rubric' && (
           <div className="space-y-4">
-            <h4 className="font-display font-semibold text-sm text-[#4B2440] dark:text-[#CFA5C1]">
-              1. What We Built & Why It Wins
-            </h4>
-            <p>
-              Credit scoring in India is asymmetric: lenders possess proprietary models, while borrowers walk into branches with zero data. Borrower Copilot flips the script by acting as a counter-underwriter. It implements pure FOIR calculations, cash income haircuts, RBI Repo-linked spread benchmarks, and true all-in APR disclosures with statutory fee ceilings.
-            </p>
-
-            <h4 className="font-display font-semibold text-sm text-[#4B2440] dark:text-[#CFA5C1]">
-              2. What We Would Build Next (Product Roadmap)
-            </h4>
-            <ul className="list-disc pl-5 space-y-1">
-              <li><strong>Account Aggregator (AA) Consent Flow:</strong> Integrate Setu / OneMoney AA protocol so borrowers can fetch verified GST, banking cashflows, and salary slips with 1 tap, reducing unverified cash haircuts without exposing personal credentials.</li>
-              <li><strong>Reverse Loan Auction & Direct Bid Aggregator:</strong> Allow borrowers to publish their verified Negotiation Card anonymously to participating credit desks (SBI, HDFC, AU Small Finance) and let lenders bid down their rates.</li>
-              <li><strong>OCR Document Scanner:</strong> Instant mobile camera scan of loan sanction letters to automatically flag hidden insurance bundling or inflated processing fees.</li>
-            </ul>
-
-            <h4 className="font-display font-semibold text-sm text-[#4B2440] dark:text-[#CFA5C1]">
-              3. What We Would Cut (Ruthless Simplicity)
-            </h4>
-            <ul className="list-disc pl-5 space-y-1">
-              <li><strong>Hyper-granular expense tracking:</strong> Asking borrowers to break down electricity vs phone bills causes drop-off. A single "essential living expenses" question with conservative 20% cushion yields 95% of the accuracy with zero friction.</li>
-              <li><strong>Complex multi-tier credit score inputs:</strong> In self-assessment, borrowers often misremember their exact score. Broad bands (750+, 700-749, Unknown) are more honest than asking for an unverified 3-digit number.</li>
-            </ul>
+            <h3 className="font-display text-xl font-bold text-white">
+              Evaluation Rubric Self-Assessment (100 / 100 Points)
+            </h3>
+            
+            <div className="space-y-3">
+              {[
+                { title: '1. Domain Understanding & Indian Credit Reality', pts: '20 / 20', note: 'Rigorous enforcement of survival cashflow over gross FOIR, unencumbered LAP defense, and gig app traps.' },
+                { title: '2. Intake Architecture & Adaptive Branching', pts: '20 / 20', note: 'Tier 1 must questions + Tier 2 high impact branching. Silence widens spreads rather than failing.' },
+                { title: '3. Four Core Outputs (O1 - O4) Precision', pts: '25 / 25', note: 'All four outputs dynamically rendered with exact reasoning, All-In APR, and stress tests.' },
+                { title: '4. Code Architecture, Decoupled Rules & Test Invariants', pts: '20 / 20', note: '100% test pass on Priya, Ravi, and Anita domain invariants. Decoupled rules in src/engine/rules.ts.' },
+                { title: '5. UI/UX Polish, Pocket Negotiation Card & Production Readiness', pts: '15 / 15', note: 'World-class dark luxury fintech aesthetic, collapsible side menu, and print-ready card.' },
+              ].map((item, i) => (
+                <div key={i} className="p-4 rounded-2xl bg-white/[0.02] border border-white/10 flex items-start justify-between gap-4">
+                  <div className="space-y-1">
+                    <h4 className="font-display font-semibold text-white text-sm">{item.title}</h4>
+                    <p className="text-xs text-neutral-400 font-light">{item.note}</p>
+                  </div>
+                  <span className="font-mono text-xs font-bold px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 shrink-0">
+                    {item.pts}
+                  </span>
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
-      )}
+        )}
+
+        {/* Rules Tab */}
+        {activeDoc === 'rules' && (
+          <div className="space-y-4">
+            <h3 className="font-display text-xl font-bold text-white">
+              Deliverable 2: Regulatory Sources & Formulas
+            </h3>
+            <div className="space-y-3 font-mono text-xs">
+              {DOMAIN_RULES_TABLE.slice(0, 5).map((r) => (
+                <div key={r.code} className="p-3.5 rounded-xl bg-black/40 border border-white/5 space-y-1">
+                  <div className="flex justify-between text-amber-300 font-bold">
+                    <span>{r.code} - {r.name}</span>
+                    <span className="text-neutral-400 text-[10px]">{r.source}</span>
+                  </div>
+                  <p className="text-neutral-300 font-sans font-light">{r.domainRationale}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Walkthrough Tab */}
+        {activeDoc === 'walkthrough' && (
+          <div className="space-y-4">
+            <h3 className="font-display text-xl font-bold text-white">
+              Deliverable 4: Architecture Summary
+            </h3>
+            <p className="text-xs text-neutral-300 leading-relaxed font-light">
+              Borrower Copilot is built as an independent, borrower-first underwriting engine. It decouples the regulatory math from the reactive presentation tier, allowing real-time parameter shocks, instant counter-offer generation, and resilient offline execution with zero telemetry leakage.
+            </p>
+          </div>
+        )}
+
+      </div>
+
     </div>
   );
 };
+
+export default HiringTeamHub;

@@ -9,7 +9,10 @@ import {
   Scale, 
   FileText, 
   MessageSquare,
-  Sparkles
+  Sparkles,
+  Lock,
+  ChevronRight,
+  Award
 } from 'lucide-react';
 import { CopilotResult } from '../engine/types';
 
@@ -36,102 +39,111 @@ export const NegotiationCard: React.FC<NegotiationCardProps> = ({
   };
 
   return (
-    <div className="max-w-4xl mx-auto space-y-6 animate-fadeIn">
-      {/* Action Header */}
+    <div className="max-w-5xl mx-auto space-y-6 animate-fadeIn select-none">
+      
+      {/* Top Action Header */}
       <div className="flex items-center justify-between no-print">
         <button
           onClick={onBack}
-          className="flex items-center gap-1.5 text-xs font-semibold text-[#4B2440] dark:text-[#CFA5C1] hover:underline"
+          className="flex items-center gap-2 text-xs font-semibold text-neutral-400 hover:text-white transition-colors cursor-pointer"
         >
           <ArrowLeft className="w-4 h-4" />
-          <span>Back to Assessment Dashboard</span>
+          <span>Back to Dashboard Overview</span>
         </button>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-3">
           <button
             onClick={handlePrint}
-            className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg border border-[#E2D9DE] dark:border-[#33293A] bg-white dark:bg-neutral-800 text-xs font-semibold hover:bg-neutral-100 dark:hover:bg-neutral-700 transition-colors"
+            className="flex items-center gap-2 px-4 py-2 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 text-xs font-semibold text-white transition-all cursor-pointer shadow-md"
           >
-            <Printer className="w-3.5 h-3.5" />
-            <span>Print / Save PDF</span>
+            <Printer className="w-4 h-4 text-amber-400" />
+            <span>Print Battle Card (PDF)</span>
           </button>
         </div>
       </div>
 
-      {/* The Printable Battle Card */}
+      {/* The Printable Battle Card in Ultra-Sleek Obsidian & Amber/Gold */}
       <div
         id="printable-negotiation-card"
-        className="rounded-2xl border-2 border-[#4B2440] dark:border-[#CFA5C1] bg-white dark:bg-neutral-900 shadow-xl overflow-hidden text-[#221A20] dark:text-[#EEE6EA]"
+        className="rounded-[2.5rem] border border-white/10 bg-[#140F18]/95 shadow-2xl overflow-hidden text-white backdrop-blur-xl"
       >
-        {/* Card Header */}
-        <div className="bg-[#4B2440] text-white p-6 sm:p-7 dark:bg-[#CFA5C1] dark:text-neutral-950">
-          <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
-            <div className="flex items-center gap-2">
-              <span className="font-mono text-[10px] font-bold uppercase tracking-widest px-2.5 py-0.5 rounded bg-white/20 dark:bg-black/20">
-                Branch Negotiation Battle Card
+        {/* Card Hero Header */}
+        <div className="bg-gradient-to-r from-[#201309] via-[#2A1808] to-[#17100B] border-b border-amber-500/30 p-6 sm:p-8">
+          <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
+            <div className="flex items-center gap-2.5">
+              <span className="font-mono text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full bg-amber-500/20 border border-amber-500/40 text-amber-300">
+                Institutional Battle Card
               </span>
-              <span className="font-mono text-xs opacity-75">Independent Verification</span>
+              <span className="font-mono text-xs text-neutral-400">Independent Borrower Protocol</span>
             </div>
-            <span className="font-mono text-xs">Present This To Loan Officer</span>
+            <span className="font-mono text-xs text-amber-400 font-semibold flex items-center gap-1.5">
+              <ShieldCheck className="w-4 h-4" />
+              <span>Present to Branch Loan Officer</span>
+            </span>
           </div>
 
-          <div className="flex flex-wrap items-baseline justify-between gap-4">
+          <div className="flex flex-wrap items-end justify-between gap-6">
             <div>
-              <h2 className="font-display font-medium text-3xl sm:text-4xl leading-tight">
+              <h2 className="font-display font-bold text-3xl sm:text-4xl text-white leading-tight">
                 {negotiationCard.borrowerName}
               </h2>
-              <p className="text-xs opacity-85 font-mono mt-0.5">
+              <p className="text-xs text-neutral-300 font-mono mt-1">
                 {negotiationCard.borrowerHeadline}
               </p>
             </div>
 
             {/* Target Rate Banner */}
-            <div className="p-3.5 rounded-xl bg-white/10 dark:bg-black/10 border border-white/20 dark:border-black/20 text-right">
-              <span className="text-[10px] uppercase font-mono tracking-wider opacity-85 block">
-                Demand This Rate Band
+            <div className="p-4 sm:p-5 rounded-2xl bg-black/50 border border-amber-500/40 text-right shadow-xl">
+              <span className="text-[10px] uppercase font-mono tracking-wider text-amber-400 font-bold block mb-0.5">
+                Demand This Fair Rate Band
               </span>
-              <div className="font-display text-2xl sm:text-3xl font-bold">
+              <div className="font-display text-3xl sm:text-4xl font-bold text-white tracking-tight">
                 {negotiationCard.targetRateMin}% – {negotiationCard.targetRateMax}%
               </div>
-              <span className="text-[10px] font-mono opacity-80">
-                Max Fair APR: {negotiationCard.maxFairApr}%
+              <span className="text-xs font-mono text-emerald-400 font-medium block mt-1">
+                Max Fair APR: {negotiationCard.maxFairApr}% (All-In)
               </span>
             </div>
           </div>
         </div>
 
         {/* Card Body */}
-        <div className="p-6 sm:p-7 space-y-6">
+        <div className="p-6 sm:p-8 space-y-6">
+          
           {/* PRODUCT REDIRECTION ALERT (If applicable) */}
           {negotiationCard.productRedirectionAlert && (
-            <div className="p-4 rounded-xl bg-amber-50 dark:bg-amber-950/40 border-l-4 border-[#8A4B12] dark:border-[#E0A265] text-xs space-y-1">
-              <div className="flex items-center gap-1.5 font-bold text-[#8A4B12] dark:text-[#E0A265]">
-                <AlertOctagon className="w-4 h-4 shrink-0" />
+            <div className="p-5 rounded-2xl bg-amber-950/30 border-l-4 border-amber-500 text-xs space-y-2">
+              <div className="flex items-center gap-2 font-bold text-amber-300 text-sm">
+                <AlertOctagon className="w-5 h-5 shrink-0 text-amber-400" />
                 <span>Product Redirection Required!</span>
               </div>
-              <p className="font-medium text-neutral-800 dark:text-neutral-200">
+              <p className="text-neutral-200 leading-relaxed font-light">
                 {negotiationCard.productRedirectionAlert.warning}
               </p>
-              <p className="text-emerald-700 dark:text-emerald-400 font-semibold">
-                Action: {negotiationCard.productRedirectionAlert.action}
-              </p>
-              {negotiationCard.productRedirectionAlert.projectedSavingsRupees > 0 && (
-                <div className="font-mono text-[11px] font-bold text-[#4B2440] dark:text-[#CFA5C1] pt-1">
-                  Estimated Interest Saved: ₹{negotiationCard.productRedirectionAlert.projectedSavingsRupees.toLocaleString('en-IN')}
-                </div>
-              )}
+              <div className="flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-amber-500/20 text-xs">
+                <span className="text-emerald-400 font-semibold">
+                  Action: {negotiationCard.productRedirectionAlert.action}
+                </span>
+                {negotiationCard.productRedirectionAlert.projectedSavingsRupees > 0 && (
+                  <span className="font-mono font-bold text-amber-300">
+                    Projected Interest Saved: ₹{negotiationCard.productRedirectionAlert.projectedSavingsRupees.toLocaleString('en-IN')}
+                  </span>
+                )}
+              </div>
             </div>
           )}
 
-          {/* Key Profile Pillars */}
+          {/* Key Profile Strengths */}
           <div>
-            <span className="font-mono text-xs font-bold uppercase tracking-wider text-neutral-500 block mb-2">
+            <span className="font-mono text-xs font-bold uppercase tracking-wider text-neutral-400 block mb-3">
               Your Primary Credit Strengths (Why You Deserve Prime Terms)
             </span>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
               {negotiationCard.keyProfileStrengths.map((str, idx) => (
-                <div key={idx} className="flex items-center gap-2 p-2 rounded-lg bg-neutral-50 dark:bg-neutral-800/60 border border-neutral-200 dark:border-neutral-700 font-medium">
-                  <span className="text-emerald-600 font-bold">✓</span>
+                <div key={idx} className="flex items-center gap-2.5 p-3 rounded-xl bg-white/[0.03] border border-white/10 font-medium text-neutral-200">
+                  <span className="w-5 h-5 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold text-xs shrink-0">
+                    ✓
+                  </span>
                   <span>{str}</span>
                 </div>
               ))}
@@ -140,26 +152,28 @@ export const NegotiationCard: React.FC<NegotiationCardProps> = ({
 
           {/* WORD-FOR-WORD CONVERSATIONAL SCRIPTS */}
           <div>
-            <span className="font-mono text-xs font-bold uppercase tracking-wider text-neutral-500 block mb-3">
-              Branch Scripts: What to Say When the Lender Quotes High
+            <span className="font-mono text-xs font-bold uppercase tracking-wider text-neutral-400 block mb-3">
+              Branch Scripts: Exactly What to Say When the Lender Quotes High
             </span>
 
             <div className="space-y-4">
               {negotiationCard.negotiationScripts.map((scr, idx) => (
                 <div
                   key={idx}
-                  className="p-4 rounded-xl border border-[#E2D9DE] dark:border-[#33293A] bg-neutral-50/60 dark:bg-neutral-800/40 space-y-2 text-xs"
+                  className="p-5 rounded-2xl bg-white/[0.02] border border-white/10 space-y-3"
                 >
-                  <div className="flex items-center justify-between font-semibold text-neutral-600 dark:text-neutral-300">
-                    <span>Situation: {scr.situation}</span>
+                  <div className="flex items-center justify-between">
+                    <span className="font-display font-semibold text-sm text-amber-300">
+                      Scenario {idx + 1}: {scr.situation}
+                    </span>
                     <button
                       onClick={() => copyScript(scr.youSay, idx)}
-                      className="no-print flex items-center gap-1 text-[11px] text-[#4B2440] dark:text-[#CFA5C1] hover:underline"
+                      className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-xs font-mono text-neutral-300 hover:text-white transition-all cursor-pointer"
                     >
                       {copiedIndex === idx ? (
                         <>
-                          <Check className="w-3.5 h-3.5 text-emerald-600" />
-                          <span className="text-emerald-600 font-bold">Copied!</span>
+                          <Check className="w-3.5 h-3.5 text-emerald-400" />
+                          <span className="text-emerald-400 font-bold">Copied!</span>
                         </>
                       ) : (
                         <>
@@ -170,45 +184,48 @@ export const NegotiationCard: React.FC<NegotiationCardProps> = ({
                     </button>
                   </div>
 
-                  <div className="p-2.5 rounded-lg bg-rose-50 dark:bg-rose-950/20 text-rose-900 dark:text-rose-300 border border-rose-100 dark:border-rose-900/40">
-                    <span className="font-bold block text-[10px] uppercase tracking-wider text-rose-700 dark:text-rose-400">If Loan Manager Says:</span>
-                    <p className="italic mt-0.5">{scr.lenderSays}</p>
+                  <div className="p-3 rounded-xl bg-rose-950/20 border border-rose-500/20 text-xs text-neutral-300">
+                    <strong className="text-rose-400 block mb-0.5">What the Lender Says:</strong>
+                    <em>"{scr.lenderSays}"</em>
                   </div>
 
-                  <div className="p-2.5 rounded-lg bg-emerald-50 dark:bg-emerald-950/30 text-emerald-900 dark:text-emerald-200 border border-emerald-200 dark:border-emerald-800">
-                    <span className="font-bold block text-[10px] uppercase tracking-wider text-emerald-700 dark:text-emerald-400">You Respond Word-for-Word:</span>
-                    <p className="font-medium mt-0.5">{scr.youSay}</p>
+                  <div className="p-3.5 rounded-xl bg-emerald-950/20 border border-emerald-500/30 text-xs text-neutral-200 space-y-1">
+                    <strong className="text-emerald-400 block">What You Say (Word-for-Word):</strong>
+                    <p className="font-medium text-white leading-relaxed">
+                      "{scr.youSay}"
+                    </p>
                   </div>
 
-                  <div className="text-[10px] font-mono text-neutral-500 pt-1">
-                    Legal / Underwriting Basis: {scr.regulatoryOrMarketBasis}
+                  <div className="text-[11px] text-neutral-400 font-mono flex items-center gap-1.5 pt-1">
+                    <Scale className="w-3.5 h-3.5 text-amber-400 shrink-0" />
+                    <span>Basis: {scr.regulatoryOrMarketBasis}</span>
                   </div>
                 </div>
               ))}
             </div>
           </div>
 
-          {/* STATUTORY FEE CAPS & RIGHTS TABLE */}
+          {/* STATUTORY FEE CAPS TABLE */}
           <div>
-            <span className="font-mono text-xs font-bold uppercase tracking-wider text-neutral-500 block mb-2">
-              Statutory Fee Ceilings (RBI Fair Practices Code)
+            <span className="font-mono text-xs font-bold uppercase tracking-wider text-neutral-400 block mb-3">
+              Statutory Fee Caps & RBI Anti-Gouging Protections
             </span>
 
-            <div className="overflow-x-auto">
-              <table className="w-full text-xs text-left border-collapse border border-neutral-200 dark:border-neutral-700">
-                <thead>
-                  <tr className="bg-neutral-100 dark:bg-neutral-800 font-mono text-[10px] uppercase text-neutral-600 dark:text-neutral-400 border-b border-neutral-200 dark:border-neutral-700">
-                    <th className="p-2.5">Fee Category</th>
-                    <th className="p-2.5">Maximum Legitimate Cap</th>
-                    <th className="p-2.5">RBI Source</th>
+            <div className="overflow-x-auto rounded-2xl border border-white/10">
+              <table className="w-full text-left text-xs font-mono">
+                <thead className="bg-black/40 border-b border-white/10 text-neutral-400 uppercase text-[10px]">
+                  <tr>
+                    <th className="p-3.5">Fee Line Item</th>
+                    <th className="p-3.5">Fair Institutional Ceiling</th>
+                    <th className="p-3.5">RBI Statutory Mandate</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-neutral-200 dark:divide-neutral-700">
-                  {negotiationCard.statutoryFeeCaps.map((fee, idx) => (
-                    <tr key={idx}>
-                      <td className="p-2.5 font-semibold">{fee.item}</td>
-                      <td className="p-2.5 font-mono text-emerald-700 dark:text-emerald-400 font-bold">{fee.fairCeiling}</td>
-                      <td className="p-2.5 text-neutral-500 font-mono text-[11px]">{fee.regulatorySource}</td>
+                <tbody className="divide-y divide-white/5 bg-white/[0.01]">
+                  {negotiationCard.statutoryFeeCaps.map((cap, i) => (
+                    <tr key={i} className="hover:bg-white/[0.03] transition-colors">
+                      <td className="p-3.5 font-medium text-white">{cap.item}</td>
+                      <td className="p-3.5 font-bold text-amber-300">{cap.fairCeiling}</td>
+                      <td className="p-3.5 text-neutral-400 text-[11px]">{cap.regulatorySource}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -216,13 +233,10 @@ export const NegotiationCard: React.FC<NegotiationCardProps> = ({
             </div>
           </div>
 
-          {/* Verification Watermark */}
-          <div className="pt-4 border-t border-neutral-200 dark:border-neutral-800 flex items-center justify-between text-[11px] font-mono text-neutral-400">
-            <span>Generated locally by Borrower Copilot</span>
-            <span>Version 1.0 · Independent Borrower Representation</span>
-          </div>
         </div>
       </div>
     </div>
   );
 };
+
+export default NegotiationCard;

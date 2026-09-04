@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Sliders, RotateCcw, ShieldAlert, Sparkles, CheckCircle2, Code } from 'lucide-react';
+import { Sliders, RotateCcw, ShieldAlert, Sparkles, CheckCircle2, Code, Search } from 'lucide-react';
 import { DOMAIN_RULES_TABLE, RuleDefinition } from '../engine/rules';
 import { BorrowerProfile } from '../engine/types';
 
@@ -19,43 +19,47 @@ export const RuleSandbox: React.FC<RuleSandboxProps> = ({ activeProfile }) => {
   });
 
   return (
-    <div className="max-w-5xl mx-auto space-y-8 animate-fadeIn">
+    <div className="max-w-5xl mx-auto space-y-8 animate-fadeIn select-none">
+      
       {/* Header */}
       <div>
-        <div className="flex items-center gap-2 mb-1">
-          <span className="font-mono text-xs font-bold uppercase tracking-wider px-2.5 py-0.5 rounded bg-[#EFE3EA] dark:bg-[#2A1F2C] text-[#4B2440] dark:text-[#CFA5C1]">
-            Live Rule Inspector & Follow-up Simulator
+        <div className="flex items-center gap-2 mb-2">
+          <span className="font-mono text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-amber-500/20 border border-amber-400/40 text-amber-300">
+            Decoupled Rules Engine
           </span>
-          <span className="text-xs font-mono text-neutral-500">Separated Rules Engine</span>
+          <span className="text-xs font-mono text-neutral-400">Modular Underwriting Logic</span>
         </div>
-        <h2 className="font-display text-3xl font-medium tracking-tight">
+        <h2 className="font-display text-3xl sm:text-4xl font-bold text-white tracking-tight">
           Domain Rules & Regulatory Parameter Registry
         </h2>
-        <p className="text-sm text-[#6E6069] dark:text-[#A99DA5] mt-1">
-          In the technical follow-up session, the Lokta team asks you to change a rule live. All formulas are decoupled in <code className="font-mono text-xs bg-neutral-200 dark:bg-neutral-800 px-1 py-0.5 rounded">src/engine/rules.ts</code>.
+        <p className="text-xs sm:text-sm text-neutral-400 font-light mt-1 max-w-2xl">
+          All underwriting formulas are decoupled from UI presentation in <code className="font-mono text-xs bg-black/40 text-amber-300 px-1.5 py-0.5 rounded border border-white/10">src/engine/rules.ts</code> for live parameter shock simulations.
         </p>
       </div>
 
       {/* Rules Table Viewer */}
-      <div className="p-6 sm:p-7 rounded-2xl bg-white dark:bg-neutral-900 border border-[#E2D9DE] dark:border-[#33293A] shadow-xs space-y-4">
-        <div className="flex flex-wrap items-center justify-between gap-3">
-          <input
-            type="text"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            placeholder="Search rules, thresholds, RBI sources..."
-            className="px-3.5 py-2 rounded-xl border border-[#E2D9DE] dark:border-[#33293A] bg-white dark:bg-neutral-800 text-xs w-full sm:w-72 font-medium"
-          />
+      <div className="p-6 sm:p-8 rounded-[2.5rem] bg-[#140F18]/95 border border-white/10 shadow-2xl backdrop-blur-xl space-y-6">
+        <div className="flex flex-wrap items-center justify-between gap-4">
+          <div className="relative w-full sm:w-80">
+            <Search className="w-4 h-4 text-neutral-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+            <input
+              type="text"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              placeholder="Search rules, thresholds, RBI circulars..."
+              className="w-full pl-9 pr-4 py-2.5 rounded-xl border border-white/10 bg-black/30 text-xs text-white placeholder:text-neutral-500 focus:outline-none focus:border-amber-500/50"
+            />
+          </div>
 
-          <div className="flex items-center gap-1 overflow-x-auto text-xs font-mono">
+          <div className="flex items-center gap-1.5 overflow-x-auto text-xs font-mono">
             {['ALL', 'AFFORDABILITY', 'UNDERWRITING', 'PRICING', 'REGULATORY'].map((cat) => (
               <button
                 key={cat}
                 onClick={() => setFilterCategory(cat)}
-                className={`px-2.5 py-1 rounded-lg transition-colors ${
+                className={`px-3 py-1.5 rounded-xl transition-all cursor-pointer ${
                   filterCategory === cat
-                    ? 'bg-[#4B2440] text-white dark:bg-[#CFA5C1] dark:text-black font-semibold'
-                    : 'bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400 hover:bg-neutral-200'
+                    ? 'bg-amber-500 text-black font-bold shadow-md'
+                    : 'bg-white/5 text-neutral-400 hover:text-white hover:bg-white/10'
                 }`}
               >
                 {cat}
@@ -64,41 +68,46 @@ export const RuleSandbox: React.FC<RuleSandboxProps> = ({ activeProfile }) => {
           </div>
         </div>
 
-        <div className="overflow-x-auto">
-          <table className="w-full text-xs text-left border-collapse">
-            <thead>
-              <tr className="border-b border-neutral-200 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-800 font-mono text-[10px] uppercase text-neutral-600 dark:text-neutral-400">
-                <th className="p-3">Rule Code</th>
-                <th className="p-3">Rule Name</th>
-                <th className="p-3">Parameter Value</th>
-                <th className="p-3">Domain Rationale</th>
-                <th className="p-3">Source / Basis</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-neutral-200 dark:divide-neutral-700">
-              {filteredRules.map((rule) => (
-                <tr key={rule.code} className="hover:bg-neutral-50/50 dark:hover:bg-neutral-800/40">
-                  <td className="p-3 font-mono text-[11px] font-bold text-[#4B2440] dark:text-[#CFA5C1]">
+        {/* Rule Cards Grid */}
+        <div className="space-y-4">
+          {filteredRules.map((rule) => (
+            <div
+              key={rule.code}
+              className="p-5 rounded-2xl bg-white/[0.02] border border-white/10 space-y-3 hover:border-amber-500/40 transition-colors"
+            >
+              <div className="flex flex-wrap items-center justify-between gap-2">
+                <div className="flex items-center gap-2">
+                  <span className="font-mono text-xs font-bold text-amber-400 bg-amber-950/60 px-2 py-0.5 rounded border border-amber-500/30">
                     {rule.code}
-                  </td>
-                  <td className="p-3 font-semibold text-neutral-900 dark:text-neutral-100">
-                    {rule.name}
-                  </td>
-                  <td className="p-3 font-mono font-bold text-emerald-700 dark:text-emerald-400 whitespace-nowrap">
-                    {rule.parameterValue}
-                  </td>
-                  <td className="p-3 text-neutral-600 dark:text-neutral-300 max-w-sm">
-                    {rule.domainRationale}
-                  </td>
-                  <td className="p-3 font-mono text-[11px] text-neutral-500 max-w-xs">
-                    {rule.source}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+                  </span>
+                  <h4 className="font-display font-semibold text-white text-base">{rule.name}</h4>
+                </div>
+                <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-white/5 text-neutral-400">
+                  {rule.category}
+                </span>
+              </div>
+
+              <p className="text-xs text-neutral-300 font-light leading-relaxed">
+                {rule.domainRationale}
+              </p>
+
+              <div className="p-3 rounded-xl bg-black/40 border border-white/5 font-mono text-xs text-cyan-300 flex items-center justify-between">
+                <div>
+                  <span className="text-neutral-500 text-[10px] block">Threshold Formula / Constant</span>
+                  <span>{rule.parameterValue}</span>
+                </div>
+                <div className="text-right">
+                  <span className="text-neutral-500 text-[10px] block">Regulatory Benchmark</span>
+                  <span className="text-emerald-400">{rule.source}</span>
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
+
     </div>
   );
 };
+
+export default RuleSandbox;

@@ -294,7 +294,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
                 <button
                   type="button"
                   onClick={() => setTab('signup')}
-                  className="text-[#CFA5C1] font-semibold hover:underline cursor-pointer"
+                  className="text-[#F59E0B] font-semibold hover:underline cursor-pointer"
                 >
                   Sign Up
                 </button>
@@ -305,7 +305,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
                 <button
                   type="button"
                   onClick={() => setTab('signin')}
-                  className="text-[#CFA5C1] font-semibold hover:underline cursor-pointer"
+                  className="text-[#F59E0B] font-semibold hover:underline cursor-pointer"
                 >
                   Sign In
                 </button>
@@ -321,7 +321,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
                 onAuthenticate('Guest Borrower');
                 onClose();
               }}
-              className="text-[11px] font-medium text-neutral-400 hover:text-[#CFA5C1] transition-colors cursor-pointer"
+              className="text-[11px] font-medium text-neutral-400 hover:text-[#F59E0B] transition-colors cursor-pointer"
             >
               Continue as Guest (100% In-Browser Memory) →
             </button>

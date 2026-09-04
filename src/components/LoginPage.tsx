@@ -242,7 +242,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({
               <button
                 type="button"
                 onClick={onNavigateToSignup}
-                className="text-[#CFA5C1] font-semibold hover:underline cursor-pointer ml-1"
+                className="text-[#F59E0B] font-semibold hover:underline cursor-pointer ml-1"
               >
                 Sign Up →
               </button>
@@ -254,7 +254,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({
             <button
               type="button"
               onClick={() => onAuthenticate('Guest Borrower')}
-              className="text-[11px] font-medium text-neutral-400 hover:text-[#CFA5C1] transition-colors cursor-pointer"
+              className="text-[11px] font-medium text-neutral-400 hover:text-[#F59E0B] transition-colors cursor-pointer"
             >
               Continue as Guest (100% In-Browser Memory) →
             </button>
