@@ -77,7 +77,7 @@ export const PersonaDossier: React.FC<PersonaDossierProps> = ({ onSelectAndLaunc
           bankOfferedAmount: '₹1.50 Lakhs (Instant Digital Micro-Credit Rollover)',
           bankProcessingFee: '4.50% + GST (₹7,965 upfront fee)',
           bankTrapTitle: 'The Compounding Digital Micro-Credit Trap',
-          bankTrapNarrative: 'Anita earns ₹32,000/month making deliveries and wants ₹1.5L for an electric scooter. She is already servicing high-cost 32-36% instant app loans and had 1 NACH bounce last month due to delayed weekly payouts. Taking another app loan triggers a compounding debt spiral where monthly payments exceed 65% of her earnings.',
+          bankTrapNarrative: 'Anita earns ₹28,000/month making deliveries and home tailoring, needing ₹1.5L for an electric scooter. She is already servicing high-cost 32-36% instant app loans and had 1 NACH bounce last month due to delayed weekly payouts. Taking another app loan triggers a compounding debt spiral where monthly payments exceed 65% of her earnings.',
           defenseHeadline: 'Hard Stop: Halt Unsecured Borrowing, Apply via Mudra Shishu',
           defenseStrategy: 'Trigger DONT BORROW verdict. Consolidate and close 36% app debt immediately. For the EV scooter, apply exclusively through Priority Sector / Pradhan Mantri Mudra Yojana (PMMY) or PM SVANidhi with statutory collateral-free interest caps.',
           projectedSavings: 'Averts structural default and legal recovery harassment'
