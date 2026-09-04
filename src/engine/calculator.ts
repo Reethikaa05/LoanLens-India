@@ -1,4 +1,4 @@
-﻿import {
+import {
   BorrowerProfile,
   CopilotResult,
   VerdictOutput,

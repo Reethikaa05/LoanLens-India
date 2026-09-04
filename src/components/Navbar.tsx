@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 import { Shield, Sparkles, Moon, Sun, UserCheck, LogIn, Compass, FileSpreadsheet, TrendingUp, Sliders, BookOpen, Award } from 'lucide-react';
 import { PRESET_PROFILES } from '../engine/scenarios';
 import { BorrowerProfile } from '../engine/types';

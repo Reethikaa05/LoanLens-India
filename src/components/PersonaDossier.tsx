@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { UserCheck, ShieldAlert, Award, ChevronRight, CheckCircle2, ArrowRight } from 'lucide-react';
 import { PRESET_PROFILES } from '../engine/scenarios';
 import { evaluateCopilot } from '../engine/calculator';

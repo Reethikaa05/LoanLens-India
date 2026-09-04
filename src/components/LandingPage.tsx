@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 import { ArrowRight, ShieldCheck, Scale, AlertOctagon, TrendingDown, Percent, Sparkles, CheckCircle2, ChevronRight, Lock, EyeOff, UserCheck } from 'lucide-react';
 import { PRESET_PROFILES } from '../engine/scenarios';
 import { BorrowerProfile } from '../engine/types';

@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { TrendingUp, Percent, Calculator, ArrowUpRight, ShieldCheck, AlertCircle } from 'lucide-react';
 import { calculateAllInApr } from '../engine/calculator';
 

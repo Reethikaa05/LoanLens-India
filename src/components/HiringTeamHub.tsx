@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { Award, FileText, CheckCircle2, BookOpen, Layers, Terminal, Sparkles } from 'lucide-react';
 import { DOMAIN_RULES_TABLE } from '../engine/rules';
 

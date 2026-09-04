@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { HelpCircle, ChevronDown, ChevronUp, Sparkles, AlertCircle, CheckCircle2, TrendingDown, ArrowRight, RotateCcw } from 'lucide-react';
 import { BorrowerProfile, EmploymentType, LoanPurpose, CreditScoreBand, CollateralType } from '../engine/types';
 

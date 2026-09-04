@@ -1,4 +1,4 @@
-﻿# Lokta · Borrower Copilot 🧭
+# Lokta · Borrower Copilot 🧭
 
 > **The Anti-Lender Self-Assessment Engine for Indian Borrowers.**  
 > Built for the Lokta Take-Home Build Challenge (September 2026).

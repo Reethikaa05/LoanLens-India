@@ -1,4 +1,4 @@
-﻿// Standalone runner using Node.js to verify calculation accuracy
+// Standalone runner using Node.js to verify calculation accuracy
 import { evaluateCopilot } from "./src/engine/calculator.ts";
 import { PRIYA_PROFILE, RAVI_PROFILE, ANITA_PROFILE } from "./src/engine/scenarios.ts";
 

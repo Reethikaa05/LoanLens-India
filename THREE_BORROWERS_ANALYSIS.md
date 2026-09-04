@@ -1,4 +1,4 @@
-﻿# THREE_BORROWERS_ANALYSIS.md · Lokta Borrower Copilot
+# THREE_BORROWERS_ANALYSIS.md · Lokta Borrower Copilot
 
 > **Comprehensive Case Studies for Priya, Ravi, and Anita.**  
 > Built for the Lokta Take-Home Build Challenge (September 2026).

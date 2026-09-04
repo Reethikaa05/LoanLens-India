@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { Sliders, RotateCcw, ShieldAlert, Sparkles, CheckCircle2, Code } from 'lucide-react';
 import { DOMAIN_RULES_TABLE, RuleDefinition } from '../engine/rules';
 import { BorrowerProfile } from '../engine/types';

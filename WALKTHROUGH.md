@@ -1,4 +1,4 @@
-﻿# WALKTHROUGH.md · Lokta Borrower Copilot
+# WALKTHROUGH.md · Lokta Borrower Copilot
 
 > **Five-Minute Product & Technical Walkthrough**  
 > Written presentation script, engineering architecture, and strategic roadmap.  

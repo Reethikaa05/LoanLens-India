@@ -1,4 +1,4 @@
-﻿# RULES.md · Lokta Borrower Copilot
+# RULES.md · Lokta Borrower Copilot
 
 > **Every rule, threshold, band, and assumption in the Borrower Copilot engine.**  
 > Built for the Lokta Take-Home Build Challenge (September 2026).

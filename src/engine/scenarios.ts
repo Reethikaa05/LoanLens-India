@@ -1,4 +1,4 @@
-﻿import { BorrowerProfile } from './types';
+import { BorrowerProfile } from './types';
 
 export const PRIYA_PROFILE: BorrowerProfile = {
   id: 'priya-bengaluru',
