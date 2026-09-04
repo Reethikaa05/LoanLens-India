@@ -1,6 +1,7 @@
 # LoanLens India 🧭
 ### *The Sovereign Anti-Lender Self-Assessment & Counter-Underwriting Engine for Indian Retail Borrowers*
 
+[![Live Demo](https://img.shields.io/badge/Live_Demo-loanlens--india.vercel.app-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://loanlens-india.vercel.app/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-purple.svg)](https://opensource.org/licenses/MIT)
 [![React](https://img.shields.io/badge/React-18.3-blue.svg)](https://reactjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.6-blue.svg)](https://www.typescriptlang.org/)
@@ -10,6 +11,13 @@
 [![Benchmark](https://img.shields.io/badge/Benchmark-RBI_Repo_6.50%25-blue.svg)](#)
 [![Privacy](https://img.shields.io/badge/Privacy-100%25_In--Browser_Memory-brightgreen.svg)](#)
 [![Domain Tests](https://img.shields.io/badge/Domain_Tests-100%25_Passing-success.svg)](#)
+
+---
+
+### 🌐 Live Production Deployment
+
+> **🔗 Live URL:** **[https://loanlens-india.vercel.app/](https://loanlens-india.vercel.app/)**  
+> *Deployed on Vercel with automated continuous delivery. Zero signup required. Select any 1-Click Demo Persona (Priya, Ravi, or Anita) to run counter-underwriting simulations instantly.*
 
 ---
 
