@@ -17,14 +17,7 @@ import {
   ShieldCheck,
   Award,
   TrendingUp,
-  FileText,
-  Play,
-  Pause,
-  Volume2,
-  VolumeX,
-  Maximize2,
-  Sliders,
-  Shield
+  FileText
 } from 'lucide-react';
 import { PRESET_PROFILES } from '../engine/scenarios';
 import { BorrowerProfile } from '../engine/types';
@@ -382,17 +375,18 @@ export const LandingPage: React.FC<LandingPageProps> = ({
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
             
             {/* ------------------------------------------------------------------- */}
-            {/* LEFT CARD: Feature Bento (100% Borrower Protected)                  */}
+            {/* LEFT CARD: Institutional Counter-Model (VIBRANT JEWEL-TONE CARD)    */}
             {/* ------------------------------------------------------------------- */}
-            <div className="rounded-[2.5rem] bg-[#0C0B10] border border-neutral-800/90 p-8 sm:p-12 flex flex-col justify-between shadow-2xl relative overflow-hidden group hover:border-[#CFA5C1]/40 transition-all duration-500 min-h-[520px]">
-              {/* Radial gradient background highlight */}
-              <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-[#CFA5C1]/10 via-purple-500/5 to-transparent rounded-full blur-3xl pointer-events-none" />
+            <div className="rounded-[2.5rem] border-2 border-purple-500/40 bg-gradient-to-br from-[#1B0A26] via-[#0E0B1F] to-[#041A14] p-8 sm:p-12 flex flex-col justify-between shadow-[0_0_60px_rgba(168,85,247,0.18)] relative overflow-hidden group hover:border-purple-400/60 transition-all duration-500 min-h-[520px]">
+              {/* Radial gradient background highlights */}
+              <div className="absolute -top-24 -left-24 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl pointer-events-none" />
+              <div className="absolute -bottom-24 -right-24 w-96 h-96 bg-emerald-500/15 rounded-full blur-3xl pointer-events-none" />
 
               <div className="relative z-10 space-y-6">
-                {/* Top Badge */}
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-neutral-900/90 border border-neutral-800 text-[11px] font-mono text-[#CFA5C1]">
-                  <ShieldCheck className="w-3.5 h-3.5 text-[#CFA5C1]" />
-                  <span>Institutional Counter-Model</span>
+                {/* Top Glowing Badge */}
+                <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-purple-950/80 border border-purple-500/50 text-xs font-mono text-purple-300 shadow-lg">
+                  <ShieldCheck className="w-4 h-4 text-purple-300" />
+                  <span className="font-bold uppercase tracking-wider">Institutional Counter-Model</span>
                 </div>
 
                 {/* Editorial Title */}
@@ -403,7 +397,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
                   >
                     100% Borrower Protected
                   </h3>
-                  <p className="text-neutral-400 text-sm sm:text-base font-light leading-relaxed">
+                  <p className="text-neutral-300 text-sm sm:text-base font-light leading-relaxed">
                     No more predatory fee traps, aggressive 60% gross FOIR debt ceilings, or point quote illusions. Borrower Copilot protects your true disposable free cashflow.
                   </p>
                 </div>
@@ -419,8 +413,8 @@ export const LandingPage: React.FC<LandingPageProps> = ({
                           onClick={() => setActiveTab(key)}
                           className={`px-4 py-2 rounded-full text-xs font-medium transition-all duration-200 cursor-pointer ${
                             isActive
-                              ? 'bg-white text-black font-semibold shadow-md scale-105'
-                              : 'bg-neutral-900 text-neutral-400 border border-neutral-800 hover:text-white hover:bg-neutral-800/80'
+                              ? 'bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400 text-black font-bold shadow-[0_0_20px_rgba(52,211,153,0.35)] scale-105'
+                              : 'bg-purple-950/40 text-purple-200 border border-purple-500/30 hover:text-white hover:bg-purple-900/60'
                           }`}
                         >
                           {TAB_DATA[key].label}
@@ -430,35 +424,35 @@ export const LandingPage: React.FC<LandingPageProps> = ({
                   </div>
 
                   {/* Active Tab Dynamic Description & Metrics Box */}
-                  <div className="p-5 rounded-2xl bg-neutral-900/80 border border-neutral-800/80 backdrop-blur-md space-y-4">
+                  <div className="p-5 rounded-2xl bg-black/50 border border-purple-500/30 backdrop-blur-md space-y-4 shadow-inner">
                     <div>
                       <div className="flex items-center justify-between mb-1">
                         <span className="font-semibold text-white text-sm">
                           {TAB_DATA[activeTab].title}
                         </span>
-                        <span className="font-mono text-[11px] px-2.5 py-0.5 rounded-full bg-neutral-800 text-[#CFA5C1] border border-neutral-700 font-bold">
+                        <span className="font-mono text-[11px] px-2.5 py-0.5 rounded-full bg-purple-900/60 text-[#CFA5C1] border border-purple-500/40 font-bold">
                           {TAB_DATA[activeTab].tagline}
                         </span>
                       </div>
-                      <p className="text-xs text-neutral-400 leading-relaxed font-light">
+                      <p className="text-xs text-neutral-300 leading-relaxed font-light">
                         {TAB_DATA[activeTab].description}
                       </p>
                     </div>
 
-                    <div className="grid grid-cols-2 gap-3 pt-2 border-t border-neutral-800 font-mono text-xs">
-                      <div className="p-3 rounded-xl bg-neutral-800/50 border border-neutral-700/50">
-                        <span className="text-[10px] text-neutral-500 block">
+                    <div className="grid grid-cols-2 gap-3 pt-2 border-t border-purple-900/40 font-mono text-xs">
+                      <div className="p-3 rounded-xl bg-rose-950/40 border border-rose-500/30">
+                        <span className="text-[10px] text-rose-400/90 block">
                           {TAB_DATA[activeTab].metric1.label}
                         </span>
-                        <span className="font-bold text-neutral-300 text-sm">
+                        <span className="font-bold text-neutral-200 text-sm">
                           {TAB_DATA[activeTab].metric1.value}
                         </span>
                       </div>
-                      <div className="p-3 rounded-xl bg-[#2A1F2C]/60 border border-[#4B2440]">
-                        <span className="text-[10px] text-[#CFA5C1] block font-bold">
+                      <div className="p-3 rounded-xl bg-emerald-950/50 border border-emerald-500/40 shadow-[0_0_15px_rgba(16,185,129,0.15)]">
+                        <span className="text-[10px] text-emerald-300 block font-bold">
                           ★ {TAB_DATA[activeTab].metric2.label}
                         </span>
-                        <span className="font-bold text-emerald-400 text-sm">
+                        <span className="font-bold text-emerald-300 text-sm">
                           {TAB_DATA[activeTab].metric2.value}
                         </span>
                       </div>
@@ -471,7 +465,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
               <div className="relative z-10 pt-8 mt-auto">
                 <button
                   onClick={onStartAssessment}
-                  className="w-full sm:w-auto px-8 py-3.5 rounded-full bg-neutral-900 hover:bg-neutral-800 text-white border border-neutral-700 hover:border-white/40 text-sm font-medium transition-all shadow-lg hover:shadow-xl flex items-center justify-center gap-2 group/btn"
+                  className="w-full sm:w-auto px-8 py-3.5 rounded-full bg-gradient-to-r from-purple-500 via-pink-500 to-emerald-400 text-white font-semibold text-sm transition-all shadow-[0_0_30px_rgba(168,85,247,0.3)] hover:scale-105 active:scale-95 flex items-center justify-center gap-2 group/btn cursor-pointer"
                 >
                   <span>Explore Borrower Flow</span>
                   <ArrowRight className="w-4 h-4 transition-transform group-hover/btn:translate-x-1" />
@@ -483,7 +477,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
             {/* RIGHT CARD: Card-Sized Video (PURE VIDEO ONLY - NO WORDS)           */}
             {/* Seamless, full-card video matching the reference screenshot          */}
             {/* ------------------------------------------------------------------- */}
-            <div className="rounded-[2.5rem] border border-neutral-800/90 overflow-hidden relative shadow-2xl min-h-[520px] bg-[#07060A] flex items-center justify-center group hover:border-[#CFA5C1]/40 transition-all duration-500">
+            <div className="rounded-[2.5rem] border-2 border-neutral-800/90 overflow-hidden relative shadow-2xl min-h-[520px] bg-[#07060A] flex items-center justify-center group hover:border-[#CFA5C1]/50 transition-all duration-500">
               <video
                 src="/showcase-people.mp4"
                 autoPlay
@@ -560,7 +554,9 @@ export const LandingPage: React.FC<LandingPageProps> = ({
             </div>
           </div>
 
-          {/* Section 1: The 4 Core Decisions (Institutional Architecture) */}
+          {/* ========================================================================= */}
+          {/* SECTION 1: INSTITUTIONAL ARCHITECTURE (VIBRANT JEWEL-TONE CARDS)          */}
+          {/* ========================================================================= */}
           <div>
             <div className="flex items-center justify-between mb-8">
               <div>
@@ -573,7 +569,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
               </div>
               <button
                 onClick={onStartAssessment}
-                className="hidden sm:flex items-center gap-1.5 text-xs font-semibold text-[#CFA5C1] hover:underline"
+                className="hidden sm:flex items-center gap-1.5 text-xs font-semibold text-[#CFA5C1] hover:underline cursor-pointer"
               >
                 <span>Launch Assessment Engine</span>
                 <ArrowRight className="w-4 h-4" />
@@ -581,46 +577,51 @@ export const LandingPage: React.FC<LandingPageProps> = ({
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {/* Card O1 */}
-              <div className="group relative rounded-3xl p-8 bg-neutral-900/60 border border-neutral-800 hover:border-[#CFA5C1]/50 transition-all duration-300 shadow-xl hover:shadow-2xl overflow-hidden">
-                <div className="absolute top-0 right-0 w-32 h-32 bg-amber-500/10 rounded-full blur-2xl group-hover:bg-amber-500/20 transition-all" />
-                <div className="flex items-center justify-between mb-5">
-                  <span className="font-mono text-xs font-bold px-3 py-1 rounded-full bg-neutral-800 text-[#CFA5C1] border border-neutral-700">
+              
+              {/* Card O1: Amber / Fire Theme */}
+              <div className="group relative rounded-3xl p-8 border-2 border-amber-500/40 bg-gradient-to-br from-[#291304] via-[#140A1A] to-[#200508] hover:border-amber-400/70 transition-all duration-300 shadow-[0_0_40px_rgba(245,158,11,0.15)] overflow-hidden">
+                <div className="absolute -top-16 -right-16 w-48 h-48 bg-amber-500/20 rounded-full blur-3xl pointer-events-none" />
+                <div className="flex items-center justify-between mb-5 relative z-10">
+                  <span className="font-mono text-xs font-bold px-3 py-1 rounded-full bg-amber-950/80 text-amber-300 border border-amber-500/40">
                     Decision O1
                   </span>
-                  <AlertOctagon className="w-6 h-6 text-amber-500" />
+                  <div className="w-10 h-10 rounded-xl bg-amber-500/20 border border-amber-500/40 flex items-center justify-center text-amber-400 shadow-sm">
+                    <AlertOctagon className="w-5 h-5" />
+                  </div>
                 </div>
-                <h4 className="text-2xl font-semibold text-white mb-2 font-display">
+                <h4 className="text-2xl font-semibold text-white mb-2 font-display relative z-10">
                   Honest Verdict: Borrow / Don't / Borrow Less
                 </h4>
-                <p className="text-sm text-neutral-400 leading-relaxed mb-6">
+                <p className="text-sm text-neutral-300 leading-relaxed mb-6 relative z-10 font-light">
                   "Don't borrow" is a legitimate and often life-saving outcome. When a borrower carries 30%+ instant app loans with recent payment bounces, taking another personal loan is an existential trap.
                 </p>
-                <div className="flex items-center gap-2 text-xs font-mono">
-                  <span className="px-2.5 py-1 rounded-lg bg-emerald-950/60 text-emerald-300 border border-emerald-800/50 font-bold">BORROW</span>
-                  <span className="px-2.5 py-1 rounded-lg bg-amber-950/60 text-amber-300 border border-amber-800/50 font-bold">BORROW LESS</span>
-                  <span className="px-2.5 py-1 rounded-lg bg-rose-950/60 text-rose-300 border border-rose-800/50 font-bold">DONT BORROW</span>
+                <div className="flex items-center gap-2 text-xs font-mono relative z-10">
+                  <span className="px-3 py-1.5 rounded-xl bg-emerald-950/80 text-emerald-300 border border-emerald-500/50 font-bold shadow-sm">BORROW</span>
+                  <span className="px-3 py-1.5 rounded-xl bg-amber-950/80 text-amber-300 border border-amber-500/50 font-bold shadow-sm">BORROW LESS</span>
+                  <span className="px-3 py-1.5 rounded-xl bg-rose-950/80 text-rose-300 border border-rose-500/50 font-bold shadow-sm">DONT BORROW</span>
                 </div>
               </div>
 
-              {/* Card O2 */}
-              <div className="group relative rounded-3xl p-8 bg-neutral-900/60 border border-neutral-800 hover:border-[#CFA5C1]/50 transition-all duration-300 shadow-xl hover:shadow-2xl overflow-hidden">
-                <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500/10 rounded-full blur-2xl group-hover:bg-emerald-500/20 transition-all" />
-                <div className="flex items-center justify-between mb-5">
-                  <span className="font-mono text-xs font-bold px-3 py-1 rounded-full bg-neutral-800 text-[#CFA5C1] border border-neutral-700">
+              {/* Card O2: Emerald / Jade Theme */}
+              <div className="group relative rounded-3xl p-8 border-2 border-emerald-500/40 bg-gradient-to-br from-[#042016] via-[#0A0D1F] to-[#1E0824] hover:border-emerald-400/70 transition-all duration-300 shadow-[0_0_40px_rgba(16,185,129,0.15)] overflow-hidden">
+                <div className="absolute -top-16 -right-16 w-48 h-48 bg-emerald-500/20 rounded-full blur-3xl pointer-events-none" />
+                <div className="flex items-center justify-between mb-5 relative z-10">
+                  <span className="font-mono text-xs font-bold px-3 py-1 rounded-full bg-emerald-950/80 text-emerald-300 border border-emerald-500/40">
                     Decision O2
                   </span>
-                  <Scale className="w-6 h-6 text-emerald-400" />
+                  <div className="w-10 h-10 rounded-xl bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-400 shadow-sm">
+                    <Scale className="w-5 h-5" />
+                  </div>
                 </div>
-                <h4 className="text-2xl font-semibold text-white mb-2 font-display">
+                <h4 className="text-2xl font-semibold text-white mb-2 font-display relative z-10">
                   Dual Capacity: Sanction vs Safe Carry
                 </h4>
-                <p className="text-sm text-neutral-400 leading-relaxed mb-6">
+                <p className="text-sm text-neutral-300 leading-relaxed mb-6 relative z-10 font-light">
                   Lenders calculate 55-65% gross FOIR because they only care if their EMI clears. Borrower Copilot computes real free cash flow after rent, school fees, and a 20% untouchable living buffer.
                 </p>
-                <div className="p-3.5 rounded-xl bg-neutral-800/60 border border-neutral-700/60 flex items-center justify-between text-xs font-mono">
+                <div className="p-3.5 rounded-xl bg-black/50 border border-emerald-500/30 flex items-center justify-between text-xs font-mono relative z-10">
                   <div>
-                    <span className="text-neutral-500 block text-[10px]">Lender Aggressive FOIR</span>
+                    <span className="text-rose-400 block text-[10px] font-bold">Lender Aggressive FOIR</span>
                     <span className="font-bold text-neutral-300">₹18.5L – ₹22.0L</span>
                   </div>
                   <div className="text-right">
@@ -630,78 +631,84 @@ export const LandingPage: React.FC<LandingPageProps> = ({
                 </div>
               </div>
 
-              {/* Card O3 */}
-              <div className="group relative rounded-3xl p-8 bg-neutral-900/60 border border-neutral-800 hover:border-[#CFA5C1]/50 transition-all duration-300 shadow-xl hover:shadow-2xl overflow-hidden">
-                <div className="absolute top-0 right-0 w-32 h-32 bg-purple-500/10 rounded-full blur-2xl group-hover:bg-purple-500/20 transition-all" />
-                <div className="flex items-center justify-between mb-5">
-                  <span className="font-mono text-xs font-bold px-3 py-1 rounded-full bg-neutral-800 text-[#CFA5C1] border border-neutral-700">
+              {/* Card O3: Royal Amethyst Theme */}
+              <div className="group relative rounded-3xl p-8 border-2 border-purple-500/40 bg-gradient-to-br from-[#240A28] via-[#0E061A] to-[#041922] hover:border-purple-400/70 transition-all duration-300 shadow-[0_0_40px_rgba(168,85,247,0.15)] overflow-hidden">
+                <div className="absolute -top-16 -right-16 w-48 h-48 bg-purple-500/20 rounded-full blur-3xl pointer-events-none" />
+                <div className="flex items-center justify-between mb-5 relative z-10">
+                  <span className="font-mono text-xs font-bold px-3 py-1 rounded-full bg-purple-950/80 text-purple-300 border border-purple-500/40">
                     Decision O3
                   </span>
-                  <Percent className="w-6 h-6 text-[#CFA5C1]" />
+                  <div className="w-10 h-10 rounded-xl bg-purple-500/20 border border-purple-500/40 flex items-center justify-center text-purple-300 shadow-sm">
+                    <Percent className="w-5 h-5" />
+                  </div>
                 </div>
-                <h4 className="text-2xl font-semibold text-white mb-2 font-display">
+                <h4 className="text-2xl font-semibold text-white mb-2 font-display relative z-10">
                   Fair Rate Bands & True All-In APR
                 </h4>
-                <p className="text-sm text-neutral-400 leading-relaxed mb-6">
+                <p className="text-sm text-neutral-300 leading-relaxed mb-6 relative z-10 font-light">
                   Never accept a point quote. We benchmark every loan to RBI Repo (6.50%) + fair spread, unmasking 2% processing fees and 18% GST into true annualized borrowing cost.
                 </p>
-                <div className="p-3.5 rounded-xl bg-neutral-800/60 border border-neutral-700/60 flex items-center justify-between text-xs font-mono">
-                  <span className="text-neutral-400">RBI KFS Effective APR:</span>
-                  <span className="font-bold text-white text-sm">10.94% – 12.19%</span>
+                <div className="p-3.5 rounded-xl bg-black/50 border border-purple-500/30 flex items-center justify-between text-xs font-mono relative z-10">
+                  <span className="text-neutral-300">RBI KFS Effective APR:</span>
+                  <span className="font-bold text-purple-300 text-sm shadow-sm">10.94% – 12.19%</span>
                 </div>
               </div>
 
-              {/* Card O4 */}
-              <div className="group relative rounded-3xl p-8 bg-neutral-900/60 border border-neutral-800 hover:border-[#CFA5C1]/50 transition-all duration-300 shadow-xl hover:shadow-2xl overflow-hidden">
-                <div className="absolute top-0 right-0 w-32 h-32 bg-indigo-500/10 rounded-full blur-2xl group-hover:bg-indigo-500/20 transition-all" />
-                <div className="flex items-center justify-between mb-5">
-                  <span className="font-mono text-xs font-bold px-3 py-1 rounded-full bg-neutral-800 text-[#CFA5C1] border border-neutral-700">
+              {/* Card O4: Electric Cyan Theme */}
+              <div className="group relative rounded-3xl p-8 border-2 border-cyan-500/40 bg-gradient-to-br from-[#041926] via-[#0B0920] to-[#200A25] hover:border-cyan-400/70 transition-all duration-300 shadow-[0_0_40px_rgba(6,182,212,0.15)] overflow-hidden">
+                <div className="absolute -top-16 -right-16 w-48 h-48 bg-cyan-500/20 rounded-full blur-3xl pointer-events-none" />
+                <div className="flex items-center justify-between mb-5 relative z-10">
+                  <span className="font-mono text-xs font-bold px-3 py-1 rounded-full bg-cyan-950/80 text-cyan-300 border border-cyan-500/40">
                     Decision O4
                   </span>
-                  <TrendingDown className="w-6 h-6 text-indigo-400" />
+                  <div className="w-10 h-10 rounded-xl bg-cyan-500/20 border border-cyan-500/40 flex items-center justify-center text-cyan-300 shadow-sm">
+                    <TrendingDown className="w-5 h-5" />
+                  </div>
                 </div>
-                <h4 className="text-2xl font-semibold text-white mb-2 font-display">
+                <h4 className="text-2xl font-semibold text-white mb-2 font-display relative z-10">
                   Monthly Ceiling & 3 Financial Stress Tests
                 </h4>
-                <p className="text-sm text-neutral-400 leading-relaxed mb-6">
+                <p className="text-sm text-neutral-300 leading-relaxed mb-6 relative z-10 font-light">
                   We test your monthly budget against three realistic financial shocks before you sign: an income slump (-20%), a floating repo hike (+200 bps), or a ₹40,000 sudden medical expense.
                 </p>
-                <div className="grid grid-cols-3 gap-2 text-center text-[10px] font-mono">
-                  <div className="p-2 rounded-lg bg-neutral-800 border border-neutral-700">
+                <div className="grid grid-cols-3 gap-2 text-center text-[10px] font-mono relative z-10">
+                  <div className="p-2.5 rounded-xl bg-cyan-950/60 border border-cyan-500/40">
                     <span className="text-neutral-400 block">-20% Income</span>
-                    <span className="text-emerald-400 font-bold">Survives</span>
+                    <span className="text-cyan-300 font-bold">Survives</span>
                   </div>
-                  <div className="p-2 rounded-lg bg-neutral-800 border border-neutral-700">
+                  <div className="p-2.5 rounded-xl bg-purple-950/60 border border-purple-500/40">
                     <span className="text-neutral-400 block">+2% Repo Hike</span>
-                    <span className="text-emerald-400 font-bold">Absorbed</span>
+                    <span className="text-purple-300 font-bold">Absorbed</span>
                   </div>
-                  <div className="p-2 rounded-lg bg-neutral-800 border border-neutral-700">
+                  <div className="p-2.5 rounded-xl bg-emerald-950/60 border border-emerald-500/40">
                     <span className="text-neutral-400 block">Medical Shock</span>
-                    <span className="text-emerald-400 font-bold">Buffered</span>
+                    <span className="text-emerald-300 font-bold">Buffered</span>
                   </div>
                 </div>
               </div>
+
             </div>
           </div>
 
           {/* Section 2: Interactive Fast Loan Health Simulator Card */}
-          <div className="p-8 sm:p-10 rounded-3xl bg-neutral-900/80 border border-neutral-800 shadow-2xl backdrop-blur-xl relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-96 h-96 bg-[#CFA5C1]/10 rounded-full blur-3xl pointer-events-none" />
+          <div className="p-8 sm:p-12 rounded-[2.5rem] border-2 border-teal-500/40 bg-gradient-to-br from-[#041D1A] via-[#0E0C22] to-[#250821] shadow-[0_0_50px_rgba(20,184,166,0.16)] backdrop-blur-xl relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-96 h-96 bg-teal-500/15 rounded-full blur-3xl pointer-events-none" />
+            <div className="absolute bottom-0 left-0 w-80 h-80 bg-pink-500/10 rounded-full blur-3xl pointer-events-none" />
             
-            <div className="max-w-4xl mx-auto space-y-8">
-              <div className="flex flex-wrap items-center justify-between gap-4 border-b border-neutral-800 pb-6">
+            <div className="max-w-4xl mx-auto space-y-8 relative z-10">
+              <div className="flex flex-wrap items-center justify-between gap-4 border-b border-teal-500/20 pb-6">
                 <div>
                   <div className="flex items-center gap-2 mb-1">
-                    <Zap className="w-5 h-5 text-[#CFA5C1]" />
+                    <Zap className="w-5 h-5 text-teal-300" />
                     <h3 className="text-2xl sm:text-3xl font-semibold text-white font-display">
                       Interactive 5-Second Affordability Gauge
                     </h3>
                   </div>
-                  <p className="text-xs sm:text-sm text-neutral-400">
+                  <p className="text-xs sm:text-sm text-neutral-300 font-light">
                     Adjust your monthly income and requested amount to see how bank FOIR diverges from safe carry.
                   </p>
                 </div>
-                <span className="font-mono text-xs px-3 py-1 rounded-full bg-[#2A1F2C] text-[#CFA5C1] border border-[#4B2440] font-bold">
+                <span className="font-mono text-xs px-3.5 py-1.5 rounded-full bg-teal-950/80 text-teal-300 border border-teal-500/50 font-bold shadow-md">
                   Instant Preview
                 </span>
               </div>
@@ -721,9 +728,9 @@ export const LandingPage: React.FC<LandingPageProps> = ({
                     step="5000"
                     value={simIncome}
                     onChange={(e) => setSimIncome(Number(e.target.value))}
-                    className="w-full accent-[#CFA5C1] cursor-pointer"
+                    className="w-full accent-teal-400 cursor-pointer"
                   />
-                  <div className="flex justify-between text-[10px] text-neutral-500 font-mono">
+                  <div className="flex justify-between text-[10px] text-neutral-400 font-mono">
                     <span>₹30,000/mo</span>
                     <span>₹1,00,000/mo</span>
                     <span>₹2,00,000/mo</span>
@@ -734,7 +741,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
                 <div className="space-y-3">
                   <div className="flex justify-between items-center">
                     <span className="font-semibold text-neutral-300">Requested Loan Principal:</span>
-                    <span className="font-mono font-bold text-lg text-[#CFA5C1]">₹{(simLoanAsk / 100000).toFixed(1)} Lakhs</span>
+                    <span className="font-mono font-bold text-lg text-teal-300">₹{(simLoanAsk / 100000).toFixed(1)} Lakhs</span>
                   </div>
                   <input
                     type="range"
@@ -743,9 +750,9 @@ export const LandingPage: React.FC<LandingPageProps> = ({
                     step="50000"
                     value={simLoanAsk}
                     onChange={(e) => setSimLoanAsk(Number(e.target.value))}
-                    className="w-full accent-[#CFA5C1] cursor-pointer"
+                    className="w-full accent-teal-400 cursor-pointer"
                   />
-                  <div className="flex justify-between text-[10px] text-neutral-500 font-mono">
+                  <div className="flex justify-between text-[10px] text-neutral-400 font-mono">
                     <span>₹1.0 Lakh</span>
                     <span>₹12.0 Lakhs</span>
                     <span>₹25.0 Lakhs</span>
@@ -754,33 +761,33 @@ export const LandingPage: React.FC<LandingPageProps> = ({
               </div>
 
               {/* Results Comparison Strip */}
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4 border-t border-neutral-800">
-                <div className="p-4 rounded-2xl bg-neutral-800/50 border border-neutral-700/60 text-xs">
-                  <span className="text-neutral-400 block mb-1">What Lender Aggressively Sanctions</span>
-                  <div className="font-mono text-2xl font-bold text-neutral-300">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4 border-t border-teal-500/20">
+                <div className="p-4 rounded-2xl bg-rose-950/40 border border-rose-500/30 text-xs">
+                  <span className="text-rose-400/90 block mb-1">What Lender Aggressively Sanctions</span>
+                  <div className="font-mono text-2xl font-bold text-neutral-200">
                     ₹{(simBankSanction / 100000).toFixed(1)} Lakhs
                   </div>
-                  <span className="text-[10px] text-neutral-500">Gross 60% FOIR limit</span>
+                  <span className="text-[10px] text-neutral-400">Gross 60% FOIR limit</span>
                 </div>
 
-                <div className="p-4 rounded-2xl bg-[#2A1F2C]/60 border border-[#4B2440] text-xs">
-                  <span className="text-[#CFA5C1] block mb-1 font-bold">★ What You Can Safely Carry</span>
-                  <div className="font-mono text-2xl font-bold text-emerald-400">
+                <div className="p-4 rounded-2xl bg-emerald-950/60 border border-emerald-500/50 shadow-[0_0_20px_rgba(16,185,129,0.2)] text-xs">
+                  <span className="text-emerald-300 block mb-1 font-bold">★ What You Can Safely Carry</span>
+                  <div className="font-mono text-2xl font-bold text-emerald-300">
                     ₹{(simSafeCarry / 100000).toFixed(1)} Lakhs
                   </div>
-                  <span className="text-[10px] text-neutral-400">With living expenses & buffer protected</span>
+                  <span className="text-[10px] text-neutral-300">With living expenses & buffer protected</span>
                 </div>
 
-                <div className="p-4 rounded-2xl bg-neutral-800/50 border border-neutral-700/60 text-xs flex flex-col justify-between">
+                <div className="p-4 rounded-2xl bg-teal-950/40 border border-teal-500/30 text-xs flex flex-col justify-between">
                   <div>
-                    <span className="text-neutral-400 block mb-1">Fair Interest Band (p.a.)</span>
+                    <span className="text-teal-300 block mb-1">Fair Interest Band (p.a.)</span>
                     <div className="font-mono text-xl font-bold text-white">
                       {simFairMinRate}% – {simFairMaxRate}%
                     </div>
                   </div>
                   <button
                     onClick={onStartAssessment}
-                    className="mt-2 text-left text-xs font-semibold text-[#CFA5C1] hover:underline flex items-center gap-1"
+                    className="mt-2 text-left text-xs font-semibold text-teal-300 hover:underline flex items-center gap-1 cursor-pointer"
                   >
                     <span>Run Deep Assessment →</span>
                   </button>
@@ -789,7 +796,9 @@ export const LandingPage: React.FC<LandingPageProps> = ({
             </div>
           </div>
 
-          {/* Section 3: Three Canonical Case Studies (Cards Design) */}
+          {/* ========================================================================= */}
+          {/* SECTION 3: THREE CANONICAL CASE STUDIES (VIBRANT JEWEL-TONE CARDS)        */}
+          {/* ========================================================================= */}
           <div id="case-studies-section" className="space-y-8">
             <div className="text-center max-w-2xl mx-auto">
               <span className="font-mono text-xs font-semibold uppercase tracking-widest text-[#CFA5C1] block mb-1">
@@ -804,54 +813,56 @@ export const LandingPage: React.FC<LandingPageProps> = ({
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {PRESET_PROFILES.map((p) => {
+              
+              {/* Case 1: Priya - Sapphire & Violet Theme */}
+              {PRESET_PROFILES.slice(0, 1).map((p) => {
                 const profile = p.profile;
                 return (
                   <div
                     key={p.id}
-                    className="group rounded-3xl bg-neutral-900/80 border border-neutral-800 p-7 flex flex-col justify-between hover:border-[#CFA5C1]/50 hover:shadow-2xl transition-all duration-300 relative overflow-hidden"
+                    className="group rounded-[2rem] border-2 border-indigo-500/40 bg-gradient-to-br from-[#0B122C] via-[#110B24] to-[#200722] p-7 flex flex-col justify-between hover:border-indigo-400/70 hover:shadow-[0_0_40px_rgba(99,102,241,0.2)] transition-all duration-300 relative overflow-hidden"
                   >
-                    <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-white/5 to-transparent rounded-full blur-xl" />
-                    <div>
+                    <div className="absolute -top-16 -right-16 w-36 h-36 bg-indigo-500/20 rounded-full blur-2xl pointer-events-none" />
+                    <div className="relative z-10">
                       <div className="flex items-center justify-between mb-4">
-                        <span className="font-mono text-xs font-bold uppercase tracking-wider text-neutral-400">
+                        <span className="font-mono text-xs font-bold uppercase tracking-wider text-indigo-300">
                           {profile.city} · {profile.employmentType.replace('_', ' ')}
                         </span>
-                        <span className="font-mono text-xs font-semibold px-2.5 py-0.5 rounded-full bg-neutral-800 text-[#CFA5C1] border border-neutral-700">
+                        <span className="font-mono text-xs font-semibold px-2.5 py-0.5 rounded-full bg-indigo-950/80 text-indigo-200 border border-indigo-500/40">
                           Age {profile.age}
                         </span>
                       </div>
                       
                       <h4 className="font-display text-3xl font-semibold mb-1 text-white">{profile.name}</h4>
-                      <p className="text-xs text-neutral-400 mb-5">{profile.occupation}</p>
+                      <p className="text-xs text-neutral-300 mb-5 font-light">{profile.occupation}</p>
                       
-                      <div className="space-y-2.5 text-xs py-4 border-y border-neutral-800 mb-5 font-mono">
+                      <div className="space-y-2.5 text-xs py-4 border-y border-indigo-500/20 mb-5 font-mono">
                         <div className="flex justify-between">
-                          <span className="text-neutral-500">Net Monthly Inflow:</span>
+                          <span className="text-neutral-400">Net Monthly Inflow:</span>
                           <span className="font-medium text-white">₹{profile.netMonthlyIncome.toLocaleString('en-IN')}</span>
                         </div>
                         <div className="flex justify-between">
-                          <span className="text-neutral-500">Existing EMIs:</span>
+                          <span className="text-neutral-400">Existing EMIs:</span>
                           <span className="font-medium text-white">{profile.existingMonthlyEmis > 0 ? `₹${profile.existingMonthlyEmis.toLocaleString('en-IN')}` : 'None'}</span>
                         </div>
                         <div className="flex justify-between">
-                          <span className="text-neutral-500">Credit Score:</span>
-                          <span className="font-medium text-white">{profile.creditScoreBand.replace('_', ' ')}</span>
+                          <span className="text-neutral-400">Credit Score:</span>
+                          <span className="font-medium text-indigo-300">{profile.creditScoreBand.replace('_', ' ')}</span>
                         </div>
                         <div className="flex justify-between">
-                          <span className="text-neutral-500">Requested Loan:</span>
-                          <span className="font-semibold text-[#CFA5C1]">₹{(profile.requestedAmount / 100000).toFixed(1)} Lakhs</span>
+                          <span className="text-neutral-400">Requested Loan:</span>
+                          <span className="font-semibold text-pink-300">₹{(profile.requestedAmount / 100000).toFixed(1)} Lakhs</span>
                         </div>
                       </div>
 
-                      <div className="p-3 rounded-xl bg-neutral-800/40 border border-neutral-700/50 text-xs text-neutral-300 mb-6 italic">
-                        <strong>The Dilemma:</strong> Wants loan for {profile.loanPurpose.replace('_', ' ')}.
+                      <div className="p-3.5 rounded-xl bg-indigo-950/50 border border-indigo-500/30 text-xs text-indigo-200 mb-6 italic">
+                        <strong>Dilemma:</strong> Wants loan for {profile.loanPurpose.replace('_', ' ')}. Bank sanctions ₹20.3L gross FOIR; Copilot caps safe carry at ₹4.95L.
                       </div>
                     </div>
 
                     <button
                       onClick={() => onSelectProfile(profile)}
-                      className="w-full py-3 px-4 rounded-xl bg-[#2A1F2C] text-[#CFA5C1] font-semibold text-xs hover:bg-[#CFA5C1] hover:text-black transition-all flex items-center justify-center gap-1.5 shadow-md group-hover:scale-[1.02]"
+                      className="w-full py-3.5 px-4 rounded-xl bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white font-semibold text-xs transition-all flex items-center justify-center gap-1.5 shadow-[0_0_20px_rgba(99,102,241,0.3)] hover:scale-105 active:scale-95 cursor-pointer relative z-10"
                     >
                       <span>Evaluate {profile.name}'s Case</span>
                       <ChevronRight className="w-4 h-4" />
@@ -859,6 +870,121 @@ export const LandingPage: React.FC<LandingPageProps> = ({
                   </div>
                 );
               })}
+
+              {/* Case 2: Ravi - Amber & Emerald Theme (LAP Redirection) */}
+              {PRESET_PROFILES.slice(1, 2).map((p) => {
+                const profile = p.profile;
+                return (
+                  <div
+                    key={p.id}
+                    className="group rounded-[2rem] border-2 border-amber-500/40 bg-gradient-to-br from-[#291503] via-[#140E1B] to-[#041F15] p-7 flex flex-col justify-between hover:border-amber-400/70 hover:shadow-[0_0_40px_rgba(245,158,11,0.2)] transition-all duration-300 relative overflow-hidden"
+                  >
+                    <div className="absolute -top-16 -right-16 w-36 h-36 bg-amber-500/20 rounded-full blur-2xl pointer-events-none" />
+                    <div className="relative z-10">
+                      <div className="flex items-center justify-between mb-4">
+                        <span className="font-mono text-xs font-bold uppercase tracking-wider text-amber-300">
+                          {profile.city} · {profile.employmentType.replace('_', ' ')}
+                        </span>
+                        <span className="font-mono text-xs font-semibold px-2.5 py-0.5 rounded-full bg-amber-950/80 text-amber-200 border border-amber-500/40">
+                          Age {profile.age}
+                        </span>
+                      </div>
+                      
+                      <h4 className="font-display text-3xl font-semibold mb-1 text-white">{profile.name}</h4>
+                      <p className="text-xs text-neutral-300 mb-5 font-light">{profile.occupation}</p>
+                      
+                      <div className="space-y-2.5 text-xs py-4 border-y border-amber-500/20 mb-5 font-mono">
+                        <div className="flex justify-between">
+                          <span className="text-neutral-400">Net Monthly Inflow:</span>
+                          <span className="font-medium text-white">₹{profile.netMonthlyIncome.toLocaleString('en-IN')}</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span className="text-neutral-400">Existing EMIs:</span>
+                          <span className="font-medium text-white">{profile.existingMonthlyEmis > 0 ? `₹${profile.existingMonthlyEmis.toLocaleString('en-IN')}` : 'None'}</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span className="text-neutral-400">Credit Score:</span>
+                          <span className="font-medium text-amber-300">{profile.creditScoreBand.replace('_', ' ')}</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span className="text-neutral-400">Requested Loan:</span>
+                          <span className="font-semibold text-emerald-300">₹{(profile.requestedAmount / 100000).toFixed(1)} Lakhs</span>
+                        </div>
+                      </div>
+
+                      <div className="p-3.5 rounded-xl bg-amber-950/50 border border-amber-500/30 text-xs text-amber-200 mb-6 italic">
+                        <strong>Dilemma:</strong> Bank pushes 18% unsecured business loan. Copilot redirects to 9.5% LAP with shop asset, saving <strong>₹8.4 Lakhs</strong>.
+                      </div>
+                    </div>
+
+                    <button
+                      onClick={() => onSelectProfile(profile)}
+                      className="w-full py-3.5 px-4 rounded-xl bg-gradient-to-r from-amber-400 via-orange-400 to-emerald-400 text-black font-semibold text-xs transition-all flex items-center justify-center gap-1.5 shadow-[0_0_20px_rgba(245,158,11,0.3)] hover:scale-105 active:scale-95 cursor-pointer relative z-10"
+                    >
+                      <span>Evaluate {profile.name}'s Case</span>
+                      <ChevronRight className="w-4 h-4" />
+                    </button>
+                  </div>
+                );
+              })}
+
+              {/* Case 3: Anita - Rose & Coral Theme (Debt Trap Defense) */}
+              {PRESET_PROFILES.slice(2, 3).map((p) => {
+                const profile = p.profile;
+                return (
+                  <div
+                    key={p.id}
+                    className="group rounded-[2rem] border-2 border-rose-500/40 bg-gradient-to-br from-[#2C0717] via-[#140A1F] to-[#081829] p-7 flex flex-col justify-between hover:border-rose-400/70 hover:shadow-[0_0_40px_rgba(244,63,94,0.2)] transition-all duration-300 relative overflow-hidden"
+                  >
+                    <div className="absolute -top-16 -right-16 w-36 h-36 bg-rose-500/20 rounded-full blur-2xl pointer-events-none" />
+                    <div className="relative z-10">
+                      <div className="flex items-center justify-between mb-4">
+                        <span className="font-mono text-xs font-bold uppercase tracking-wider text-rose-300">
+                          {profile.city} · {profile.employmentType.replace('_', ' ')}
+                        </span>
+                        <span className="font-mono text-xs font-semibold px-2.5 py-0.5 rounded-full bg-rose-950/80 text-rose-200 border border-rose-500/40">
+                          Age {profile.age}
+                        </span>
+                      </div>
+                      
+                      <h4 className="font-display text-3xl font-semibold mb-1 text-white">{profile.name}</h4>
+                      <p className="text-xs text-neutral-300 mb-5 font-light">{profile.occupation}</p>
+                      
+                      <div className="space-y-2.5 text-xs py-4 border-y border-rose-500/20 mb-5 font-mono">
+                        <div className="flex justify-between">
+                          <span className="text-neutral-400">Net Monthly Inflow:</span>
+                          <span className="font-medium text-white">₹{profile.netMonthlyIncome.toLocaleString('en-IN')}</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span className="text-neutral-400">Existing EMIs:</span>
+                          <span className="font-medium text-white">{profile.existingMonthlyEmis > 0 ? `₹${profile.existingMonthlyEmis.toLocaleString('en-IN')}` : 'None'}</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span className="text-neutral-400">Credit Score:</span>
+                          <span className="font-medium text-rose-300">{profile.creditScoreBand.replace('_', ' ')}</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span className="text-neutral-400">Requested Loan:</span>
+                          <span className="font-semibold text-rose-300">₹{(profile.requestedAmount / 100000).toFixed(1)} Lakhs</span>
+                        </div>
+                      </div>
+
+                      <div className="p-3.5 rounded-xl bg-rose-950/50 border border-rose-500/30 text-xs text-rose-200 mb-6 italic">
+                        <strong>Verdict: DONT BORROW.</strong> 30%+ app loans and payment bounce detect high risk. Routes to Mudra Shishu instead of high-cost debt.
+                      </div>
+                    </div>
+
+                    <button
+                      onClick={() => onSelectProfile(profile)}
+                      className="w-full py-3.5 px-4 rounded-xl bg-gradient-to-r from-rose-500 via-pink-500 to-purple-500 text-white font-semibold text-xs transition-all flex items-center justify-center gap-1.5 shadow-[0_0_20px_rgba(244,63,94,0.3)] hover:scale-105 active:scale-95 cursor-pointer relative z-10"
+                    >
+                      <span>Evaluate {profile.name}'s Case</span>
+                      <ChevronRight className="w-4 h-4" />
+                    </button>
+                  </div>
+                );
+              })}
+
             </div>
           </div>
 
