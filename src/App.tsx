@@ -191,10 +191,10 @@ export function App() {
 
         {currentTab === 'landing' && (
           <LandingPage
-            onStartAssessment={() => navigateTo('dashboard')}
+            onStartAssessment={() => navigateTo('login')}
             onSelectProfile={(p) => {
               handleSelectProfile(p);
-              navigateTo('dashboard');
+              navigateTo('login');
             }}
             onOpenAuth={handleOpenAuth}
           />

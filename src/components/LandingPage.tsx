@@ -235,15 +235,15 @@ export const LandingPage: React.FC<LandingPageProps> = ({
 
               {/* Center Links */}
               <nav className="hidden md:flex items-center gap-8">
-                <a href="#features" onClick={(e) => { e.preventDefault(); scrollToContent(); }} className="text-white/80 hover:text-white transition-colors text-sm font-medium">
+                <button onClick={() => onOpenAuth('signin')} className="text-white/80 hover:text-white transition-colors text-sm font-medium cursor-pointer">
                   Features
-                </a>
-                <a href="#pricing" onClick={(e) => { e.preventDefault(); scrollToContent(); }} className="text-white/80 hover:text-white transition-colors text-sm font-medium">
+                </button>
+                <button onClick={() => onOpenAuth('signin')} className="text-white/80 hover:text-white transition-colors text-sm font-medium cursor-pointer">
                   Pricing
-                </a>
-                <a href="#about" onClick={(e) => { e.preventDefault(); scrollToContent(); }} className="text-white/80 hover:text-white transition-colors text-sm font-medium">
+                </button>
+                <button onClick={() => onOpenAuth('signin')} className="text-white/80 hover:text-white transition-colors text-sm font-medium cursor-pointer">
                   About
-                </a>
+                </button>
               </nav>
             </div>
 
@@ -1236,10 +1236,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
             </button>
 
             <button
-              onClick={() => {
-                const el = document.getElementById('case-studies-section');
-                if (el) el.scrollIntoView({ behavior: 'smooth' });
-              }}
+              onClick={onStartAssessment}
               className="liquid-glass px-8 py-4 rounded-full text-white text-sm font-medium hover:bg-white/10 transition-all flex items-center gap-2 shadow-lg cursor-pointer"
             >
               <span>Explore Case Studies</span>
@@ -1262,9 +1259,9 @@ export const LandingPage: React.FC<LandingPageProps> = ({
           </div>
 
           <div className="flex items-center gap-6">
-            <a href="#features" onClick={(e) => { e.preventDefault(); scrollToContent(); }} className="hover:text-white transition-colors">Architecture</a>
-            <a href="#cases" onClick={(e) => { e.preventDefault(); document.getElementById('case-studies-section')?.scrollIntoView({ behavior: 'smooth' }); }} className="hover:text-white transition-colors">Case Studies</a>
-            <button onClick={() => onOpenAuth('signin')} className="hover:text-white transition-colors">Account Access</button>
+            <button onClick={() => onOpenAuth('signin')} className="hover:text-white transition-colors cursor-pointer">Architecture</button>
+            <button onClick={() => onOpenAuth('signin')} className="hover:text-white transition-colors cursor-pointer">Case Studies</button>
+            <button onClick={() => onOpenAuth('signin')} className="hover:text-white transition-colors cursor-pointer">Account Access</button>
             <span className="text-neutral-700">•</span>
             <span className="text-neutral-400">Compliant with RBI Master Directions 2024</span>
           </div>

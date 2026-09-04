@@ -1,5 +1,5 @@
-# Borrower Copilot 🧭
-### *The Anti-Lender Self-Assessment Engine for Indian Retail Borrowers*
+# LoanLens India 🧭
+### *The Sovereign Anti-Lender Self-Assessment & Counter-Underwriting Engine for Indian Retail Borrowers*
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-purple.svg)](https://opensource.org/licenses/MIT)
 [![React](https://img.shields.io/badge/React-18.3-blue.svg)](https://reactjs.org/)
@@ -15,53 +15,81 @@
 
 ## 📌 Executive Summary
 
-Every commercial bank and NBFC in India operates a proprietary algorithmic credit engine designed to maximize lender yield and fee origination. Borrowers typically walk into bank branches blind, take the first sanction letter offered, and discover years later that they paid **400 basis points over fair** while stretched to **65% of their net income**.
+Every commercial bank and NBFC in India operates proprietary algorithmic credit underwriting engines designed to maximize lender gross yield and fee origination. Retail borrowers typically enter bank branches blind, accept the first pre-approved sanction letter offered, and discover years later that they paid **400 basis points over fair** while stretched to **65% of their net household income**.
 
-**Borrower Copilot** flips this asymmetric dynamic. It acts as an **independent counter-underwriting platform** that arms Indian citizens with institutional-grade financial intelligence before they ever speak with a loan officer.
+**LoanLens India** (Borrower Copilot) fundamentally levels this asymmetrical power dynamic. It acts as an **independent counter-underwriting platform** that arms Indian citizens with institutional-grade financial intelligence before they speak with a loan officer.
 
-- **Zero Bureau Pulls:** Zero hard inquiries that damage your credit score.
-- **Zero Data Retention:** 100% computed in local browser memory; no backend database, no lead sales to DSA telecallers.
-- **RBI Aligned:** Integrates Master Directions on External Benchmark Lending Rates (EBLR), Key Fact Statements (KFS April 2024), and Microfinance Affordability Norms.
-
----
-
-## ⚡ Quickstart (Under 30 Seconds)
-
-```bash
-# 1. Clone the repository
-git clone https://github.com/your-org/borrower-copilot.git
-cd borrower-copilot
-
-# 2. Install dependencies
-npm install
-
-# 3. Launch local development platform
-npm run dev
-```
-
-Visit **`http://localhost:3000`** in your browser.
-
-To execute the automated mathematical domain test suite:
-```bash
-npm test
-```
-
-To build for production:
-```bash
-npm run build
-```
+- **Zero Bureau Pulls:** Zero hard inquiries that damage your CIBIL/Experian score.
+- **100% Ephemeral Client-Side Memory:** Zero data retention, zero database leaks, zero lead sales to DSA telecallers.
+- **Sovereign RBI Regulatory Enforcement:** Strict integration with RBI Master Directions on External Benchmark Lending Rates (EBLR), Key Fact Statements (KFS April 2024), Fair Practices Code, and Microfinance Affordability Norms.
 
 ---
 
-## 🏛️ Comprehensive System Architecture
+## 🏛️ System Architecture Diagram
+
+### 1. Interactive Flow & Decision Graph (Mermaid)
+
+```mermaid
+flowchart TD
+    subgraph UI[Client Presentation Layer - React 18 & Tailwind]
+        LP[Landing Page & Auth Gate] --> DL[Executive Dashboard Layout]
+        DL --> OV[Overview & AI Cashflow Equalizer]
+        DL --> CE[Copilot Engine - Adaptive Flow]
+        DL --> NC[Official Battle Card with Photo ID]
+        DL --> RR[Market Rates Radar - Repo 6.50%]
+        DL --> RS[Rule Sandbox - Policy Shocks]
+        DL --> BD[3 Borrowers In-Situ Dossier]
+    end
+
+    subgraph Router[Adaptive Question Router]
+        Q1[Tier-1: 8 Core Financial Inflows] --> CM{Confidence Evaluator}
+        CM -- Low Confidence --> Q2[Tier-2: Dynamic Branching]
+        Q2 --> |ITR vs Cash| H1[Informal Haircut Matrix]
+        Q2 --> |Unencumbered Asset| H2[Collateral LAP Router]
+        Q2 --> |Bounce History| H3[NACH Distress Flag]
+    end
+
+    subgraph Engine[Deterministic Mathematical Engine - src/engine/]
+        BR[RBI Benchmark Registry
+Repo 6.50% · SDF 6.25% · MSF 6.75%]
+        DCA[Dual Capacity Analyzer
+Lender FOIR 50-60% vs Safe Carry Buffer]
+        KFS[All-In APR & Fee Drag Terminal
+Nominal Rate + Upfront Fee + 18% GST]
+        STR[3-Way Stress Tester
+-20% Income · +200 bps Hike · ₹40k Emergency]
+    end
+
+    subgraph Outputs[The Four Core Decisions]
+        O1[O1: Honest Verdict
+BORROW / BORROW LESS / DONT BORROW]
+        O2[O2: Safe Capacity Gap
+Lender Sanction Max vs Borrower Safe Carry]
+        O3[O3: Fair Rate & APR Band
+Repo Indexed Spread + KFS Cost Ceiling]
+        O4[O4: Safe Monthly EMI Outgo
+Preserves Inviolable 20% Living Cushion]
+    end
+
+    CE --> Router
+    Router --> Engine
+    Engine --> BR & DCA & KFS & STR
+    BR & DCA & KFS & STR --> Outputs
+    Outputs --> NC
+    Outputs --> DL
+```
+
+---
+
+### 2. High-Level Modular Layering (ASCII)
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────────────────────┐
 │                                CLIENT PRESENTATION LAYER                                    │
-│  [ Newsreader Serif / Source Sans / IBM Plex Mono ]  •  [ Dark / Light Mode ]  •  [ Mobile ] │
+│  [ Instrument Serif / Instrument Sans / IBM Plex Mono ]  •  [ Dark Obsidian ]  •  [ Mobile ]│
 ├─────────────────────────────────────────────────────────────────────────────────────────────┤
 │   Landing Page   │   2-Tier Questionnaire   │   4 Core Outputs   │   Branch Battle Card     │
-│   Overview & CTA │   Adaptive Branch Engine │   O1, O2, O3, O4   │   Printable / Scripts    │
+│   Auth & Routing │   Live Dynamic Sliders   │   O1, O2, O3, O4   │   Verified Avatar & ID   │
 └──────────────┬──────────────────────────────┴───────────┬───────────────────────────────────┘
                │                                          │
                ▼                                          ▼
@@ -81,7 +109,7 @@ npm run build
 │  ┌──────────────────────────┐  ┌──────────────────────────┐  ┌───────────────────────────┐  │
 │  │   BENCHMARK REGISTRY     │  │  DUAL CAPACITY ANALYZER  │  │   RISK PRICING & APR      │  │
 │  │ • RBI Policy Repo: 6.50% │  │ • Lender Gross FOIR Max  │  │ • Risk Spread Formula     │  │
-│  │ • Commercial LAP: 50% LTV│  │ • Real Free Cashflow     │  │ • 1-2% Processing Fee     │  │
+│  │ • Commercial LAP: 50% LTV│  │ • Real Free Cashflow     │  │ • 0.50% Fair Statutory Cap│  │
 │  │ • Residential: 75% LTV   │  │ • 20% Living Buffer Cap  │  │ • 18% GST Annualized Drag │  │
 │  │ • MFI Debt Cap: 50%      │  │ • Discretionary Pruning  │  │ • RBI KFS Effective APR   │  │
 │  └──────────────────────────┘  └──────────────────────────┘  └───────────────────────────┘  │
@@ -98,116 +126,110 @@ npm run build
 │                               FOUR STANDARDIZED CORE OUTPUTS                                │
 │                                                                                             │
 │   [O1: The Honest Verdict]       [O2: Capacity Numbers]      [O3: Fair Rate & APR]          │
-│   • BORROW                       • Lender Sanction (FOIR)    • Fair Band [Min% – Max%]      │
-│   • BORROW LESS (Downsized)      • Safe Carry (Use This!)    • Effective All-In APR         │
-│   • DONT BORROW (Debt Trap)      • Clear Rupee Delta Gap     • KFS Itemized Fee Summary     │
+│   • BORROW                       • Lender Sanction Max       • Fair Rate Band (Min-Max)     │
+│   • DONT BORROW                  • Borrower Safe Carry       • Key Fact Statement APR       │
+│   • BORROW LESS                  • Safe Borrowing Gap (L)    • Upfront Fee Cap (Statutory)  │
 │                                                                                             │
-│   [O4: Monthly EMI Ceiling & Stress Matrix]      [The Branch Negotiation Battle Card]       │
-│   • Max Monthly Outflow Ceiling                  • Spoken Word-for-Word Objection Scripts   │
-│   • 12m to 84m Tenure Interest Drag Curve        • Product Redirection Alert (LAP Savings)  │
-│   • Live Pass/Fail Stress Resilience Status      • Statutory 0% Foreclosure Fee Protection  │
+│   [O4: Monthly Cashflow Outgo]   [Tactical Branch Shield]    [Pre-Closing Battle Card]      │
+│   • Safe EMI Ceiling             • Word-for-Word Scripts     • Verified Borrower ID         │
+│   • 20% Living Floor Cushion     • Product Redirection Alert • Printable PDF Format         │
 └─────────────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
 ---
 
-## 🎯 The Four Core Decisions Answered
+## ⚡ Quickstart (Under 30 Seconds)
 
-### Output O1: The Honest Verdict
-*Verdicts: `BORROW` | `BORROW_LESS` | `DONT_BORROW`*
-- **"Don't Borrow" is a legitimate and reachable answer:** When an applicant carries high-cost 30%+ instant app loans with recent payment bounces, fresh unsecured debt is an existential trap.
-- **Discretionary Borrowing Pruning:** Non-yielding consumption loans (e.g. ₹8 Lakhs for a wedding) are automatically downsized to safe carry thresholds to prevent multi-year balance sheet impairment.
-- **Single-Sentence Traceability:** Every verdict provides an immediate, plain-English explanation.
+### 1. Clone & Install
+```bash
+# Clone the repository
+git clone https://github.com/Reethikaa05/LoanLens-India.git
+cd LoanLens-India
 
-### Output O2: Maximum Amount (Lender Sanction vs. Safe Carry)
-Lenders and borrowers optimize for completely opposing outcomes:
-- **Lender Sanction (Aggressive FOIR):** Uses gross income heuristics (50–60%) to maximize fee origination and principal size.
-- **Borrower Safe Carry (Recommended):** Net Inflow minus Actual Rent/Living Expenses minus an untouchable **20% emergency survival cushion** minus existing EMIs.
-- The platform explicitly tags **Safe Carry** with the badge: **`USE THIS NUMBER`**, explaining that lenders will not pay your rent or fund your medical emergencies.
-
-### Output O3: Fair Interest Rate & All-In APR
-- **External Benchmark Anchoring:** Every rate is calculated as `RBI Repo (6.50%) + Profile Risk Spread`.
-- **Honest All-In APR Disclosure (RBI KFS Standard):** Lenders advertise 11% nominal rates while deducting ₹15,000 upfront in processing fees + 18% GST. The Copilot unmasks this by annualizing total upfront costs into a true effective APR.
-- **Honesty on Unknowns:** When a user does not know their credit score, the engine **never assumes 300 (subprime)**. Instead, it widens the fair band (+150 to +250 bps) and explicitly explains why the band is wide.
-
-### Output O4: Monthly EMI Ceiling & 3 Stress Tests
-- **Monthly Outflow Ceiling:** The maximum monthly payment the household can commit without breaching living buffers.
-- **Interactive 12m – 84m Tenure Matrix:** Real-time visibility into total interest paid versus principal.
-- **Three Financial Shocks Tested Live:**
-  1. *Income Shock:* Household income drops by 20% due to business contraction or bonus loss.
-  2. *Floating Rate Spike:* RBI raises Repo by 200 bps, pushing floating interest higher.
-  3. *Emergency Shock:* Unforeseen ₹40,000 medical emergency cash outlay.
-
----
-
-## 🛡️ The Branch Negotiation Battle Card
-
-A high-contrast, printable, mobile-optimized screen designed to be held up directly in front of a branch loan officer:
-- **Fair Rate Demand Banner:** Highlighting the target band and APR ceiling.
-- **Product Redirection Alert:** Pushing self-employed business owners with real estate away from 19% unsecured MSME debt into 9.5% Loan Against Property (saving ₹3L–₹8L in interest).
-- **Conversational Scripts:** Word-for-word spoken responses with legal and regulatory citations:
-  - *If loan manager says:* `"14% is our fixed corporate rack rate this month."`
-  - *You respond:* `"My CIBIL is 780 and I work with a Category-A MNC with 5 years stable vintage. Top tier banks offer 10.75% for 780+ scores. Match 11.25% or I will proceed with my pre-approved offer."`
-- **Statutory Rights Table:** 0% prepayment penalties on floating loans (RBI Circular DBOD.Dir.BC.107/13.03.00/2013-14) and prohibition of mandatory insurance bundling.
-
----
-
-## 👥 Three Canonical Case Studies
-
-| Persona | Profile Summary | Key Dilemma | Copilot Intervention & Outcome |
-| :--- | :--- | :--- | :--- |
-| **Priya** *(29, Bengaluru)* | Salaried MNC Software Engineer, Net ₹1,10,000/mo, 780 CIBIL, ₹14k car EMI, ₹28k rent. | Wants ₹8,00,000 personal loan for wedding. | Bank sanctions ₹20.3L on FOIR. Copilot fires **`BORROW_LESS`**, capping loan at **₹4.95 Lakhs** to prevent 4-year discretionary drag. Arms her with **10.50% – 11.75%** rate card. |
-| **Ravi** *(42, Mysuru)* | Kirana Store Owner for 14 years, Cash ₹40k–80k, ITR ₹4.2L, No credit score, owns **₹45L unencumbered shop**. | Wants ₹15,00,000 for stock & delivery vehicle. | NBFCs quote 19.5% unsecured. Copilot issues **`PRODUCT REDIRECTION ALERT`** to commercial LAP at **9.25% – 11.25%** with schoolteacher wife as co-applicant. **Saves ₹8,40,000 in interest!** |
-| **Anita** *(35, Hubballi)* | Delivery Rider & Home Tailor, ₹28,000/mo, 2 children, unemployed husband, **₹35k in 30%+ app debt with 1 bounce**. | Wants ₹1,50,000 for EV scooter to double runs. | Personal loan from app leads to debt trap. Copilot issues **`DONT_BORROW`** for unsecured debt. Reroutes EV request to **Mudra Shishu (<11%)** with vehicle hypothecation. |
-
----
-
-## 🔬 Directory Structure & Modular Engineering
-
-```
-borrower-copilot/
-├── README.md                   # System documentation & architectural guide
-├── RULES.md                    # 19 declarative domain rules, thresholds & justifications
-├── THREE_BORROWERS_ANALYSIS.md # Detailed run-throughs and transcripts for Priya, Ravi, Anita
-├── WALKTHROUGH.md              # 5-minute presentation script & product roadmap
-├── test_domain_cases.mjs       # Automated domain test runner for all personas
-├── index.html                  # HTML entry point with Newsreader & IBM Plex Mono fonts
-├── vite.config.ts              # Vite configuration with relative base deployment
-├── tailwind.config.js          # Custom typography and palette extensions
-└── src/
-    ├── main.tsx                # Application bootstrap
-    ├── App.tsx                 # Root component with navigation & modal controls
-    ├── index.css               # Print stylesheets & design tokens
-    ├── engine/                 # 100% Decoupled Pure Mathematical Core
-    │   ├── types.ts            # Complete domain models & calculation interfaces
-    │   ├── rules.ts            # Declarative parameter registry & RBI references
-    │   ├── calculator.ts       # Pure reducing-balance EMI, APR, and stress functions
-    │   └── scenarios.ts        # Canonical profiles (Priya, Ravi, Anita, Custom)
-    └── components/             # React 18 UI Modules
-        ├── Navbar.tsx          # Scenario switcher & dark/light theme controls
-        ├── LandingPage.tsx     # Public consumer overview & comparison table
-        ├── QuestionFlow.tsx    # 2-Tier adaptive questionnaire & confidence meter
-        ├── OutputsDashboard.tsx# Core outputs O1–O4 with interactive tenure matrix
-        ├── NegotiationCard.tsx # Printable branch battle card with spoken scripts
-        ├── MarketRadar.tsx     # Live lending benchmarks & RBI KFS APR simulator
-        ├── RuleSandbox.tsx     # Live parameter inspector for interviewer testing
-        ├── PersonaDossier.tsx  # Interactive deep-dive case viewer
-        ├── HiringTeamHub.tsx   # Embedded deliverables and rubric reader
-        └── AuthModal.tsx       # 1-Click persona quick-auth & guest bypass
+# Install dependencies
+npm install
 ```
 
+### 2. Run Development Server
+```bash
+npm run dev
+```
+Open **`http://localhost:3000`** in your browser to experience the platform.
+
+### 3. Run Automated Domain Invariant Tests
+```bash
+npm test -- --run
+```
+Verifies mathematical domain invariants across Priya, Ravi, and Anita test cases.
+
+### 4. Build for Production
+```bash
+npm run build
+```
+Produces an optimized, minified bundle in the `dist/` directory.
+
 ---
 
-## 📜 Regulatory Standards & Circular References
+## 🎯 The Four Standardized Core Outputs
 
-- **RBI Repo Benchmark (EBLR):** *RBI/2019-20/54 DBR.DIR.BC.No.14/13.03.00/2019-20*
-- **Key Fact Statement (KFS) & All-In APR Mandate:** *RBI/2024-25/18 DOR.STR.REC.13/13.03.00/2024-25 (Effective April 2024)*
-- **Ban on Foreclosure / Prepayment Charges:** *RBI Circular DBOD.Dir.BC.107/13.03.00/2013-14 & RBI/2019-20/38*
-- **Regulatory Framework for Microfinance Loans:** *RBI/2021-22/185 DOR.FIN.REC.95/03.10.038/2021-22 (Cap on household debt obligations at 50%)*
-- **Digital Lending Guidelines:** *RBI/2022-23/111 DOR.CRE.REC.66/21.07.001/2022-23*
+| Output Symbol | Metric Name | Definition & Consumer Defense |
+| :--- | :--- | :--- |
+| **O1** | **The Honest Verdict** | Categorical decision: `BORROW`, `BORROW LESS`, or `DONT BORROW`. Never incentives debt when structural failure is detected. |
+| **O2** | **Safe Borrowing Gap** | Direct comparison between **Lender Sanction Max** (calculated on gross FOIR) vs **Borrower Safe Carry** (derived from free cashflow). |
+| **O3** | **Fair Pricing & APR Band** | Statutory rate band anchored to the **RBI Repo Rate (6.50%)** plus fair risk spread, disclosing all-in APR with 18% GST and upfront fee drag. |
+| **O4** | **Safe Monthly EMI Outgo** | The hard rupee limit on total monthly debt outgo that guarantees an inviolable **20% living buffer** and preserves household liquidity. |
 
 ---
 
-## 📄 License
+## 👥 The Three Canonical Indian Case Archetypes
 
-Distributed under the **MIT License**. Free and open for public educational and borrower self-assessment use.
+LoanLens India tests every algorithmic decision against three real-world Indian borrower archetypes:
+
+### 1. Priya (Bengaluru) · Salaried MNC Engineer
+- **Profile:** Net income ₹1,10,000/mo, CIBIL 780, existing car EMI ₹14,000, wedding ask ₹8,00,000.
+- **The Trap:** Bank pushes **₹20.31 Lakhs** at 14.0% p.a., consuming 51% of her salary for a 1-day wedding.
+- **Copilot Action:** Enforces `BORROW LESS`. Restricts discretionary borrowing to **₹4.95 Lakhs** (4x monthly income) and demands prime corporate salaried rates (10.50% - 11.75%).
+
+### 2. Ravi (Mysuru) · 14-Year Kirana Merchant
+- **Profile:** Cash-heavy income ₹60,000/mo, zero CIBIL history, ₹15,00,000 ask for inventory & delivery van.
+- **The Trap:** NBFC agents push an **Unsecured Business Loan at 19.5%** with ₹53,100 upfront fees to maximize commission.
+- **Copilot Action:** Enforces `BORROW`. Detects Ravi's **₹45 Lakh unencumbered commercial shop** and redirects him to **Secured LAP at 9.25% - 10.25%**, saving **₹8,40,000 in interest**.
+
+### 3. Anita (Pune) · Gig Economy Delivery Partner
+- **Profile:** Net income ₹32,000/mo, multiple 32-36% instant app loans, 1 recent NACH bounce, ₹1.5L EV scooter ask.
+- **The Trap:** Digital fintech apps offer instant credit rollover, creating a compounding debt spiral exceeding 65% of her income.
+- **Copilot Action:** Enforces `DONT BORROW`. Triggers hard stop on unsecured personal borrowing. Prescribes debt consolidation and redirects EV financing to **Pradhan Mantri Mudra Yojana (PMMY Shishu)**.
+
+---
+
+## ⚖️ Statutory RBI Regulations Enforced
+
+1. **Mandatory External Benchmark Lending Rate (EBLR):**
+   - *Reference:* RBI Circular RBI/2019-20/54.
+   - All floating retail and MSME loans must link to an external benchmark (Repo Rate 6.50%). Banks cannot hide rate cuts.
+2. **Zero Foreclosure & Prepayment Penalty:**
+   - *Reference:* RBI Circular DBOD.No.Dir.BC.107/13.03.00/2011-12 & RBI/2019-20/38.
+   - Lenders cannot penalize individual retail borrowers for prepaying or foreclosing floating-rate loans.
+3. **Mandatory Standardized Key Fact Statement (KFS):**
+   - *Reference:* RBI Notification RBI/2024-25/112 (April 2024).
+   - Lenders must provide a 1-page standardized KFS before sanction disclosing the exact all-in APR, recovery agents, and cooling-off period.
+4. **Prohibition of Negative Amortization:**
+   - *Reference:* RBI Circular DOR.MCS.REC.32/01.01.001/2023-24.
+   - Lenders cannot extend tenure upon rate hikes so far that monthly interest exceeds EMI without explicit consent.
+
+---
+
+## 🛠️ Technology Stack
+
+- **Framework:** React 18 with TypeScript
+- **Bundler:** Vite 5.4 (sub-second HMR and production minification)
+- **Styling:** Tailwind CSS 3.4 with custom dark obsidian palette (`#0E0B12`, `#120D1A`) and typography (`Instrument Serif`, `Newsreader`, `IBM Plex Mono`)
+- **Icons:** Lucide React
+- **Testing:** Tsx test runner with mathematical domain invariant assertions
+- **Privacy:** 100% In-Browser Client-Side Evaluation (zero network telemetry)
+
+---
+
+## 📄 License & Attribution
+
+Distributed under the **MIT License**. Created for the citizens and retail borrowers of India to counter structural financial asymmetry.
