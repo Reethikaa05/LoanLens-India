@@ -5,14 +5,15 @@ import {
   Shield, 
   TrendingUp, 
   Sliders, 
-  User, 
+  BookOpen,
+  Award,
+  Settings, 
   LogOut, 
   Sparkles, 
   AlertTriangle, 
   CheckCircle2, 
   ArrowUpRight, 
   Info, 
-  Settings, 
   Layers, 
   Zap, 
   RotateCcw,
@@ -20,33 +21,52 @@ import {
   DollarSign,
   PieChart,
   Activity,
-  Award,
   ChevronRight,
-  ShieldCheck
+  ChevronLeft,
+  PanelLeftClose,
+  PanelLeftOpen,
+  Menu,
+  ShieldCheck,
+  FileText
 } from 'lucide-react';
 import { BorrowerProfile, CopilotResult } from '../engine/types';
 import { evaluateCopilot } from '../engine/calculator';
 import { PRESET_PROFILES } from '../engine/scenarios';
 import { QuestionFlow } from './QuestionFlow';
 import { OutputsDashboard } from './OutputsDashboard';
+import { NegotiationCard } from './NegotiationCard';
+import { MarketRadar } from './MarketRadar';
+import { RuleSandbox } from './RuleSandbox';
+import { PersonaDossier } from './PersonaDossier';
+import { HiringTeamHub } from './HiringTeamHub';
 import { ProfileSettingsModal } from './ProfileSettingsModal';
+
+export type DashboardSubView = 
+  | 'overview' 
+  | 'engine' 
+  | 'card' 
+  | 'radar' 
+  | 'sandbox' 
+  | 'cases' 
+  | 'reviewer';
 
 interface DashboardLayoutProps {
   activeProfile: BorrowerProfile;
   onChangeProfile: (profile: BorrowerProfile) => void;
-  onOpenCard: () => void;
+  onOpenCard?: () => void;
   onNavigateTab?: (tab: string) => void;
   onLogout?: () => void;
+  initialView?: DashboardSubView;
 }
 
 export const DashboardLayout: React.FC<DashboardLayoutProps> = ({
   activeProfile,
   onChangeProfile,
-  onOpenCard,
-  onNavigateTab,
-  onLogout
+  onLogout,
+  initialView = 'overview'
 }) => {
-  const [activeSubTab, setActiveSubTab] = useState<'overview' | 'engine' | 'card'>('overview');
+  const [activeSubTab, setActiveSubTab] = useState<DashboardSubView>(initialView);
+  const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(true);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const [requestedAmountSlider, setRequestedAmountSlider] = useState<number>(activeProfile.requestedAmount);
 
@@ -79,113 +99,211 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({
     }
   };
 
+  // Sidebar navigation menu items with detailed descriptions
+  const menuItems = [
+    {
+      id: 'overview' as DashboardSubView,
+      label: 'Dashboard Overview',
+      subtitle: 'Bento Telemetry & FOIR Gauge',
+      icon: Home,
+      badge: 'Live',
+      color: 'text-orange-400'
+    },
+    {
+      id: 'engine' as DashboardSubView,
+      label: 'Copilot Engine',
+      subtitle: 'Adaptive Underwriting (O1–O4)',
+      icon: Compass,
+      badge: 'Interactive',
+      color: 'text-amber-400'
+    },
+    {
+      id: 'card' as DashboardSubView,
+      label: 'Negotiation Card',
+      subtitle: 'Branch Scripts & Fee Caps',
+      icon: Shield,
+      badge: 'Essential',
+      color: 'text-emerald-400'
+    },
+    {
+      id: 'radar' as DashboardSubView,
+      label: 'Rates Radar',
+      subtitle: 'Repo 6.50% & APR Simulator',
+      icon: TrendingUp,
+      badge: '2026 RBI',
+      color: 'text-cyan-400'
+    },
+    {
+      id: 'sandbox' as DashboardSubView,
+      label: 'Rule Sandbox',
+      subtitle: 'Decoupled Rules & Shocks',
+      icon: Sliders,
+      badge: 'Engine',
+      color: 'text-purple-400'
+    },
+    {
+      id: 'cases' as DashboardSubView,
+      label: '3 Borrowers',
+      subtitle: 'Priya, Ravi & Anita Case Runs',
+      icon: BookOpen,
+      badge: 'Cases',
+      color: 'text-rose-400'
+    },
+    {
+      id: 'reviewer' as DashboardSubView,
+      label: 'Reviewer Hub',
+      subtitle: 'Evaluation Rubric & Alignment',
+      icon: Award,
+      badge: 'Scoring',
+      color: 'text-yellow-400'
+    }
+  ];
+
   return (
-    <div className="min-h-screen bg-[#0E0B12] text-[#EEE6EA] flex flex-col md:flex-row antialiased">
+    <div className="min-h-screen bg-[#0E0B12] text-[#EEE6EA] flex flex-col md:flex-row antialiased select-none">
       
       {/* ===================================================================== */}
-      {/* 1. LEFT SLIM ICON SIDEBAR (MATCHING REFERENCE SCREENSHOT)              */}
+      {/* 1. COLLAPSIBLE LEFT SIDE MENU WITH OPEN / CLOSE TOGGLE                */}
       {/* ===================================================================== */}
-      <aside className="w-full md:w-20 bg-[#140F18]/90 border-r border-white/5 flex md:flex-col items-center justify-between p-3 sm:p-4 z-40 shrink-0 backdrop-blur-xl">
-        
-        {/* Top Monogram Logo */}
-        <div className="flex md:flex-col items-center gap-3">
-          <button 
-            onClick={() => setActiveSubTab('overview')}
-            className="w-12 h-12 rounded-2xl bg-gradient-to-br from-orange-500 via-amber-500 to-orange-600 flex items-center justify-center text-white font-display font-bold text-lg shadow-[0_0_25px_rgba(249,115,22,0.4)] cursor-pointer hover:scale-105 transition-all"
-            title="Borrower Copilot"
-          >
-            Bc
-          </button>
-
-          {/* Navigation Icon Rail */}
-          <nav className="flex md:flex-col items-center gap-2 mt-0 md:mt-6">
-            {/* Overview / Home */}
-            <button
+      <aside 
+        className={`bg-[#140F18]/95 border-r border-white/5 flex flex-col justify-between shrink-0 backdrop-blur-xl transition-all duration-300 z-40 ${
+          isSidebarOpen ? 'w-full md:w-64 lg:w-72 p-4 sm:p-5' : 'w-full md:w-20 p-3 sm:p-4'
+        }`}
+      >
+        {/* Top Header & Brand */}
+        <div className="space-y-4">
+          
+          {/* Logo & Open/Close Toggle Button */}
+          <div className="flex items-center justify-between pb-3 border-b border-white/5">
+            <button 
               onClick={() => setActiveSubTab('overview')}
-              className={`p-3 rounded-2xl transition-all cursor-pointer relative group ${
-                activeSubTab === 'overview'
-                  ? 'bg-orange-500/20 text-orange-400 shadow-[0_0_15px_rgba(249,115,22,0.25)] border border-orange-500/30'
-                  : 'text-neutral-400 hover:text-white hover:bg-white/5'
-              }`}
-              title="Dashboard Overview"
+              className="flex items-center gap-3 cursor-pointer group text-left"
             >
-              <Home className="w-5 h-5" />
-              <span className="sr-only">Dashboard</span>
+              <div className="w-11 h-11 rounded-2xl bg-gradient-to-br from-orange-500 via-amber-500 to-orange-600 flex items-center justify-center text-white font-display font-bold text-lg shadow-[0_0_20px_rgba(249,115,22,0.45)] group-hover:scale-105 transition-all">
+                Bc
+              </div>
+              {isSidebarOpen && (
+                <div className="leading-tight animate-fadeIn">
+                  <div className="font-display font-semibold text-white text-base tracking-tight">
+                    Borrower <em className="italic text-orange-400">Copilot</em>
+                  </div>
+                  <div className="text-[10px] text-neutral-400 font-mono">Anti-Lender Protocol</div>
+                </div>
+              )}
             </button>
 
-            {/* Copilot Engine */}
+            {/* Open / Close Toggle Button */}
             <button
-              onClick={() => setActiveSubTab('engine')}
-              className={`p-3 rounded-2xl transition-all cursor-pointer relative group ${
-                activeSubTab === 'engine'
-                  ? 'bg-orange-500/20 text-orange-400 shadow-[0_0_15px_rgba(249,115,22,0.25)] border border-orange-500/30'
-                  : 'text-neutral-400 hover:text-white hover:bg-white/5'
-              }`}
-              title="Adaptive Counter-Underwriting Engine"
+              onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+              className="p-2 rounded-xl text-neutral-400 hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
+              title={isSidebarOpen ? "Collapse sidebar (compact view)" : "Expand sidebar (see all descriptions)"}
+              aria-label={isSidebarOpen ? "Collapse sidebar" : "Expand sidebar"}
             >
-              <Compass className="w-5 h-5" />
-              <span className="sr-only">Engine</span>
+              {isSidebarOpen ? (
+                <PanelLeftClose className="w-4 h-4 text-orange-400" />
+              ) : (
+                <PanelLeftOpen className="w-4 h-4 text-neutral-400 hover:text-orange-400" />
+              )}
             </button>
+          </div>
 
-            {/* Negotiation Card */}
-            <button
-              onClick={onOpenCard}
-              className="p-3 rounded-2xl text-neutral-400 hover:text-white hover:bg-white/5 transition-all cursor-pointer"
-              title="Negotiation Card (Download & Branch Script)"
-            >
-              <Shield className="w-5 h-5" />
-              <span className="sr-only">Negotiation Card</span>
-            </button>
+          {/* Section Header when Open */}
+          {isSidebarOpen && (
+            <div className="px-2 pt-1 flex items-center justify-between text-[10px] font-mono uppercase tracking-wider text-neutral-500 animate-fadeIn">
+              <span>Navigation & Tools</span>
+              <span>v1.0</span>
+            </div>
+          )}
 
-            {/* Rates Radar */}
-            {onNavigateTab && (
-              <button
-                onClick={() => onNavigateTab('radar')}
-                className="p-3 rounded-2xl text-neutral-400 hover:text-white hover:bg-white/5 transition-all cursor-pointer"
-                title="Repo Radar & Spreads"
-              >
-                <TrendingUp className="w-5 h-5" />
-                <span className="sr-only">Radar</span>
-              </button>
-            )}
+          {/* Navigation Items */}
+          <nav className="space-y-1.5">
+            {menuItems.map((item) => {
+              const Icon = item.icon;
+              const isActive = activeSubTab === item.id;
+              return (
+                <button
+                  key={item.id}
+                  onClick={() => setActiveSubTab(item.id)}
+                  className={`w-full flex items-center gap-3 p-2.5 rounded-2xl transition-all cursor-pointer relative group text-left ${
+                    isActive
+                      ? 'bg-orange-500/20 text-white border border-orange-500/40 shadow-[0_0_15px_rgba(249,115,22,0.2)]'
+                      : 'text-neutral-400 hover:text-white hover:bg-white/[0.04]'
+                  }`}
+                  title={!isSidebarOpen ? `${item.label} — ${item.subtitle}` : undefined}
+                >
+                  <div className={`p-1.5 rounded-xl transition-colors ${
+                    isActive ? 'bg-orange-500 text-black' : 'bg-white/5 text-neutral-300 group-hover:text-white'
+                  }`}>
+                    <Icon className="w-4 h-4" />
+                  </div>
 
-            {/* Rule Sandbox */}
-            {onNavigateTab && (
-              <button
-                onClick={() => onNavigateTab('sandbox')}
-                className="p-3 rounded-2xl text-neutral-400 hover:text-white hover:bg-white/5 transition-all cursor-pointer"
-                title="Rule Sandbox"
-              >
-                <Sliders className="w-5 h-5" />
-                <span className="sr-only">Sandbox</span>
-              </button>
-            )}
+                  {isSidebarOpen && (
+                    <div className="flex-1 min-w-0 animate-fadeIn">
+                      <div className="flex items-center justify-between">
+                        <span className={`text-xs font-semibold truncate ${isActive ? 'text-white' : 'text-neutral-300 group-hover:text-white'}`}>
+                          {item.label}
+                        </span>
+                        {item.badge && (
+                          <span className="text-[9px] font-mono px-1.5 py-0.2 rounded bg-white/5 text-neutral-400">
+                            {item.badge}
+                          </span>
+                        )}
+                      </div>
+                      <p className="text-[10px] text-neutral-400 truncate font-light mt-0.5">
+                        {item.subtitle}
+                      </p>
+                    </div>
+                  )}
+                </button>
+              );
+            })}
           </nav>
+
         </div>
 
-        {/* Bottom Actions: Settings & Logout */}
-        <div className="flex md:flex-col items-center gap-2">
-          {/* Settings Modal Trigger */}
+        {/* Bottom Section: Profile Settings & Sign Out */}
+        <div className="pt-4 border-t border-white/5 space-y-1.5">
+          
+          {/* Profile Settings Trigger */}
           <button
             onClick={() => setIsSettingsOpen(true)}
-            className="p-3 rounded-2xl text-neutral-400 hover:text-orange-400 hover:bg-orange-500/10 transition-all cursor-pointer"
+            className={`w-full flex items-center gap-3 p-2.5 rounded-2xl text-neutral-400 hover:text-orange-300 hover:bg-white/[0.04] transition-all cursor-pointer text-left ${
+              !isSidebarOpen ? 'justify-center' : ''
+            }`}
             title="Profile & Underwriting Settings"
           >
-            <Settings className="w-5 h-5" />
-            <span className="sr-only">Settings</span>
+            <div className="p-1.5 rounded-xl bg-white/5 text-neutral-300">
+              <Settings className="w-4 h-4" />
+            </div>
+            {isSidebarOpen && (
+              <div className="flex-1 min-w-0 animate-fadeIn">
+                <div className="text-xs font-semibold text-neutral-200">Profile Settings</div>
+                <div className="text-[10px] text-neutral-400 font-light truncate">Edit cashflow & photo</div>
+              </div>
+            )}
           </button>
 
-          {/* Logout */}
+          {/* Sign Out Button */}
           {onLogout && (
             <button
               onClick={onLogout}
-              className="p-3 rounded-2xl text-neutral-400 hover:text-rose-400 hover:bg-rose-500/10 transition-all cursor-pointer"
-              title="Sign Out"
+              className={`w-full flex items-center gap-3 p-2.5 rounded-2xl text-neutral-400 hover:text-rose-300 hover:bg-rose-950/20 transition-all cursor-pointer text-left ${
+                !isSidebarOpen ? 'justify-center' : ''
+              }`}
+              title="Sign Out (Return to Guest)"
             >
-              <LogOut className="w-5 h-5" />
-              <span className="sr-only">Sign Out</span>
+              <div className="p-1.5 rounded-xl bg-white/5 text-neutral-300">
+                <LogOut className="w-4 h-4" />
+              </div>
+              {isSidebarOpen && (
+                <div className="flex-1 min-w-0 animate-fadeIn">
+                  <div className="text-xs font-semibold text-neutral-200">Sign Out</div>
+                  <div className="text-[10px] text-neutral-400 font-light truncate">Switch to guest</div>
+                </div>
+              )}
             </button>
           )}
+
         </div>
       </aside>
 
@@ -194,7 +312,7 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({
       {/* ===================================================================== */}
       <div className="flex-1 flex flex-col min-w-0 overflow-y-auto">
         
-        {/* Top Bar: Personalized Greeting + Pill Tabs + Avatar Profile */}
+        {/* Top Header Bar: Personalized Greeting + Pill Tabs + Real Avatar */}
         <header className="px-6 py-5 border-b border-white/5 bg-[#140F18]/50 backdrop-blur-md flex flex-wrap items-center justify-between gap-4 sticky top-0 z-30">
           
           {/* Greeting (Matching Reference Screenshot) */}
@@ -216,11 +334,11 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({
             </p>
           </div>
 
-          {/* Center Pill Switchers */}
-          <div className="flex items-center gap-1.5 p-1 rounded-2xl bg-neutral-900/90 border border-white/5 text-xs font-medium">
+          {/* Center Pill Switchers (All Views Accessible Inside New Design) */}
+          <div className="flex items-center gap-1 p-1 rounded-2xl bg-neutral-900/90 border border-white/5 text-xs font-medium overflow-x-auto max-w-full">
             <button
               onClick={() => setActiveSubTab('overview')}
-              className={`px-3.5 py-1.5 rounded-xl transition-all cursor-pointer ${
+              className={`px-3 py-1.5 rounded-xl transition-all cursor-pointer whitespace-nowrap ${
                 activeSubTab === 'overview'
                   ? 'bg-orange-500 text-black font-semibold shadow-[0_0_12px_rgba(249,115,22,0.4)]'
                   : 'text-neutral-400 hover:text-white'
@@ -230,27 +348,71 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({
             </button>
             <button
               onClick={() => setActiveSubTab('engine')}
-              className={`px-3.5 py-1.5 rounded-xl transition-all cursor-pointer ${
+              className={`px-3 py-1.5 rounded-xl transition-all cursor-pointer whitespace-nowrap ${
                 activeSubTab === 'engine'
                   ? 'bg-orange-500 text-black font-semibold shadow-[0_0_12px_rgba(249,115,22,0.4)]'
                   : 'text-neutral-400 hover:text-white'
               }`}
             >
-              Adaptive Engine
+              Copilot Engine
             </button>
             <button
-              onClick={onOpenCard}
-              className="px-3.5 py-1.5 rounded-xl text-neutral-400 hover:text-white transition-all cursor-pointer flex items-center gap-1.5"
+              onClick={() => setActiveSubTab('card')}
+              className={`px-3 py-1.5 rounded-xl transition-all cursor-pointer whitespace-nowrap flex items-center gap-1 ${
+                activeSubTab === 'card'
+                  ? 'bg-orange-500 text-black font-semibold shadow-[0_0_12px_rgba(249,115,22,0.4)]'
+                  : 'text-neutral-400 hover:text-white'
+              }`}
             >
               <Shield className="w-3.5 h-3.5" />
               <span>Negotiation Card</span>
+            </button>
+            <button
+              onClick={() => setActiveSubTab('radar')}
+              className={`px-3 py-1.5 rounded-xl transition-all cursor-pointer whitespace-nowrap ${
+                activeSubTab === 'radar'
+                  ? 'bg-orange-500 text-black font-semibold shadow-[0_0_12px_rgba(249,115,22,0.4)]'
+                  : 'text-neutral-400 hover:text-white'
+              }`}
+            >
+              Rates Radar
+            </button>
+            <button
+              onClick={() => setActiveSubTab('sandbox')}
+              className={`px-3 py-1.5 rounded-xl transition-all cursor-pointer whitespace-nowrap ${
+                activeSubTab === 'sandbox'
+                  ? 'bg-orange-500 text-black font-semibold shadow-[0_0_12px_rgba(249,115,22,0.4)]'
+                  : 'text-neutral-400 hover:text-white'
+              }`}
+            >
+              Rule Sandbox
+            </button>
+            <button
+              onClick={() => setActiveSubTab('cases')}
+              className={`px-3 py-1.5 rounded-xl transition-all cursor-pointer whitespace-nowrap ${
+                activeSubTab === 'cases'
+                  ? 'bg-orange-500 text-black font-semibold shadow-[0_0_12px_rgba(249,115,22,0.4)]'
+                  : 'text-neutral-400 hover:text-white'
+              }`}
+            >
+              3 Borrowers
+            </button>
+            <button
+              onClick={() => setActiveSubTab('reviewer')}
+              className={`px-3 py-1.5 rounded-xl transition-all cursor-pointer whitespace-nowrap ${
+                activeSubTab === 'reviewer'
+                  ? 'bg-orange-500 text-black font-semibold shadow-[0_0_12px_rgba(249,115,22,0.4)]'
+                  : 'text-neutral-400 hover:text-white'
+              }`}
+            >
+              Reviewer Hub
             </button>
           </div>
 
           {/* Right Status & Profile Pill */}
           <div className="flex items-center gap-3">
             {/* Live Benchmark Pill */}
-            <div className="hidden lg:flex items-center gap-2 px-3 py-1.5 rounded-xl bg-white/[0.03] border border-white/10 text-xs font-mono">
+            <div className="hidden xl:flex items-center gap-2 px-3 py-1.5 rounded-xl bg-white/[0.03] border border-white/10 text-xs font-mono">
               <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
               <span className="text-neutral-400">Repo Rate:</span>
               <span className="text-white font-bold">6.50%</span>
@@ -260,7 +422,7 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({
             <button
               onClick={() => setIsSettingsOpen(true)}
               className="flex items-center gap-2.5 p-1.5 pl-3 rounded-2xl bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 transition-all cursor-pointer group"
-              title="Click to view/edit profile"
+              title="Click to view/edit profile & settings"
             >
               <div className="text-right hidden sm:block">
                 <div className="text-xs font-medium text-white group-hover:text-orange-300 transition-colors">
@@ -282,14 +444,14 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({
         </header>
 
         {/* =================================================================== */}
-        {/* SUBTAB CONTENT                                                      */}
+        {/* SUBTAB VIEWS (ALL RENDERED RIGHT INSIDE THIS LUXURY DASHBOARD)      */}
         {/* =================================================================== */}
         
-        {/* 1. OVERVIEW: Warm Amber Bento Grid (Matching Screenshot) */}
+        {/* VIEW 1: OVERVIEW BENTO GRID (Matching Screenshot) */}
         {activeSubTab === 'overview' && (
-          <div className="p-6 sm:p-8 space-y-6 max-w-7xl mx-auto w-full">
+          <div className="p-6 sm:p-8 space-y-6 max-w-7xl mx-auto w-full animate-fadeIn">
             
-            {/* Bento Grid Row 1: AI Copilot Advisory + Live Underwriting Rates */}
+            {/* Bento Grid Row 1: AI Copilot Advisory + FOIR Arc Meter */}
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
               
               {/* Card 1: AI Copilot Advisory (Matching Ambient Card in Screenshot) */}
@@ -512,10 +674,10 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({
                     <span>Edit Profile Settings</span>
                   </button>
                   <button
-                    onClick={onOpenCard}
+                    onClick={() => setActiveSubTab('card')}
                     className="py-3 px-4 rounded-xl bg-gradient-to-r from-orange-500 to-amber-500 text-black font-semibold text-xs transition-all shadow-[0_0_15px_rgba(249,115,22,0.4)] hover:scale-105 cursor-pointer flex items-center gap-1"
                   >
-                    <span>Card</span>
+                    <span>Negotiation Card</span>
                     <ChevronRight className="w-3.5 h-3.5" />
                   </button>
                 </div>
@@ -587,9 +749,9 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({
           </div>
         )}
 
-        {/* 2. ADAPTIVE ENGINE SUBTAB (QuestionFlow + Outputs) */}
+        {/* VIEW 2: COPILOT ENGINE (QuestionFlow + Outputs) */}
         {activeSubTab === 'engine' && (
-          <div className="p-6 sm:p-8 max-w-7xl mx-auto w-full">
+          <div className="p-6 sm:p-8 max-w-7xl mx-auto w-full animate-fadeIn">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
               <div className="lg:col-span-5">
                 <QuestionFlow
@@ -602,10 +764,53 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({
               <div className="lg:col-span-7">
                 <OutputsDashboard
                   result={result}
-                  onOpenNegotiationCard={onOpenCard}
+                  onOpenNegotiationCard={() => setActiveSubTab('card')}
                 />
               </div>
             </div>
+          </div>
+        )}
+
+        {/* VIEW 3: NEGOTIATION CARD (INSIDE NEW LUXURY DASHBOARD) */}
+        {activeSubTab === 'card' && (
+          <div className="p-6 sm:p-8 max-w-5xl mx-auto w-full animate-fadeIn">
+            <NegotiationCard
+              result={result}
+              onBack={() => setActiveSubTab('overview')}
+            />
+          </div>
+        )}
+
+        {/* VIEW 4: RATES RADAR (INSIDE NEW LUXURY DASHBOARD) */}
+        {activeSubTab === 'radar' && (
+          <div className="p-6 sm:p-8 max-w-5xl mx-auto w-full animate-fadeIn">
+            <MarketRadar />
+          </div>
+        )}
+
+        {/* VIEW 5: RULE SANDBOX (INSIDE NEW LUXURY DASHBOARD) */}
+        {activeSubTab === 'sandbox' && (
+          <div className="p-6 sm:p-8 max-w-5xl mx-auto w-full animate-fadeIn">
+            <RuleSandbox activeProfile={activeProfile} />
+          </div>
+        )}
+
+        {/* VIEW 6: 3 BORROWERS DOSSIER (INSIDE NEW LUXURY DASHBOARD) */}
+        {activeSubTab === 'cases' && (
+          <div className="p-6 sm:p-8 max-w-5xl mx-auto w-full animate-fadeIn">
+            <PersonaDossier
+              onSelectAndLaunch={(p) => {
+                onChangeProfile(p);
+                setActiveSubTab('overview');
+              }}
+            />
+          </div>
+        )}
+
+        {/* VIEW 7: REVIEWER HUB (INSIDE NEW LUXURY DASHBOARD) */}
+        {activeSubTab === 'reviewer' && (
+          <div className="p-6 sm:p-8 max-w-5xl mx-auto w-full animate-fadeIn">
+            <HiringTeamHub />
           </div>
         )}
 
