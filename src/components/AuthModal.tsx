@@ -333,9 +333,9 @@ export const AuthModal: React.FC<AuthModalProps> = ({
         {/* ================================================================= */}
         <div className="hidden md:flex md:w-1/2 p-4 sm:p-5 relative items-stretch">
           <div className="relative w-full h-full min-h-[540px] rounded-[2rem] overflow-hidden border border-white/10 shadow-2xl bg-neutral-950 flex flex-col justify-between">
-            {/* Auto-playing Looping Background Video */}
+            {/* Auto-playing Looping Financial Interface Video */}
             <video
-              src="/showcase-people.mp4"
+              src="/showcase-interface.mp4"
               autoPlay
               loop
               muted

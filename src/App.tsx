@@ -9,6 +9,8 @@ import { RuleSandbox } from './components/RuleSandbox';
 import { PersonaDossier } from './components/PersonaDossier';
 import { HiringTeamHub } from './components/HiringTeamHub';
 import { AuthModal } from './components/AuthModal';
+import { LoginPage } from './components/LoginPage';
+import { SignupPage } from './components/SignupPage';
 import { PRIYA_PROFILE } from './engine/scenarios';
 import { BorrowerProfile, CopilotResult } from './engine/types';
 import { evaluateCopilot } from './engine/calculator';
@@ -30,6 +32,40 @@ export function App() {
 
   const showToast = (message: string, type: 'success' | 'info' = 'success') => {
     setToast({ message, type });
+  };
+
+  // Synchronize route with URL pathname & hash (/login, /signup, etc.)
+  useEffect(() => {
+    const handleUrlSync = () => {
+      const raw = window.location.pathname.replace(/^\/+/, '') || window.location.hash.replace(/^#\/?/, '');
+      const clean = raw.toLowerCase().trim();
+      if (clean === 'login' || clean === 'signin') {
+        setCurrentTab('login');
+      } else if (clean === 'signup' || clean === 'register') {
+        setCurrentTab('signup');
+      } else if (['copilot', 'card', 'radar', 'sandbox', 'cases', 'reviewer'].includes(clean)) {
+        setCurrentTab(clean);
+      } else if (clean === '' || clean === 'landing' || clean === 'home') {
+        setCurrentTab('landing');
+      }
+    };
+
+    handleUrlSync();
+    window.addEventListener('popstate', handleUrlSync);
+    window.addEventListener('hashchange', handleUrlSync);
+    return () => {
+      window.removeEventListener('popstate', handleUrlSync);
+      window.removeEventListener('hashchange', handleUrlSync);
+    };
+  }, []);
+
+  // Safe navigation helper that keeps URL clean
+  const navigateTo = (tab: string) => {
+    setCurrentTab(tab);
+    const targetUrl = tab === 'landing' ? '/' : `/${tab}`;
+    if (window.location.pathname !== targetUrl) {
+      window.history.pushState(null, '', targetUrl);
+    }
   };
 
   // Toast auto-dismiss after 3.5s
@@ -56,8 +92,7 @@ export function App() {
   };
 
   const handleOpenAuth = (tab: 'signin' | 'signup' = 'signin') => {
-    setAuthInitialTab(tab);
-    setIsAuthOpen(true);
+    navigateTo(tab === 'signup' ? 'signup' : 'login');
   };
 
   const handleAuthenticate = (name: string) => {
@@ -74,6 +109,8 @@ export function App() {
 
   const copilotResult: CopilotResult = evaluateCopilot(activeProfile);
 
+  const isStandaloneAuthRoute = currentTab === 'login' || currentTab === 'signup';
+
   return (
     <div className="min-h-screen flex flex-col bg-[#FBF9FA] dark:bg-[#17121A] text-[#221A20] dark:text-[#EEE6EA] font-body transition-colors relative">
       {/* Floating Toast Notification */}
@@ -87,7 +124,7 @@ export function App() {
           <span className="text-xs font-medium tracking-wide">{toast.message}</span>
           <button
             onClick={() => setToast(null)}
-            className="ml-2 text-neutral-400 hover:text-white transition-colors"
+            className="ml-2 text-neutral-400 hover:text-white transition-colors cursor-pointer"
             aria-label="Close notification"
           >
             <X className="w-4 h-4" />
@@ -95,19 +132,19 @@ export function App() {
         </div>
       )}
 
-      {/* Navbar (Only rendered outside landing or seamlessly present) */}
-      {currentTab !== 'landing' && (
+      {/* Navbar (Rendered on standard app tabs, omitted on landing & auth routes) */}
+      {currentTab !== 'landing' && !isStandaloneAuthRoute && (
         <Navbar
           currentTab={currentTab}
-          onSelectTab={setCurrentTab}
+          onSelectTab={navigateTo}
           activeProfile={activeProfile}
           onSelectProfile={(p) => {
             handleSelectProfile(p);
-            if (currentTab === 'landing') setCurrentTab('copilot');
+            navigateTo('copilot');
           }}
           darkMode={darkMode}
           onToggleDarkMode={() => setDarkMode(!darkMode)}
-          onOpenAuth={() => handleOpenAuth('signin')}
+          onOpenAuth={() => navigateTo('login')}
           onLogout={handleLogout}
           isAuthenticated={isAuthenticated}
           userName={userName}
@@ -116,12 +153,44 @@ export function App() {
 
       {/* Main Tab Content */}
       <main className="flex-1">
-        {currentTab === 'landing' && (
-          <LandingPage
-            onStartAssessment={() => setCurrentTab('copilot')}
+        {/* Dedicated Route: /login */}
+        {currentTab === 'login' && (
+          <LoginPage
+            onBackToHome={() => navigateTo('landing')}
+            onNavigateToSignup={() => navigateTo('signup')}
             onSelectProfile={(p) => {
               handleSelectProfile(p);
-              setCurrentTab('copilot');
+              navigateTo('copilot');
+            }}
+            onAuthenticate={(name) => {
+              handleAuthenticate(name);
+              navigateTo('copilot');
+            }}
+          />
+        )}
+
+        {/* Dedicated Route: /signup */}
+        {currentTab === 'signup' && (
+          <SignupPage
+            onBackToHome={() => navigateTo('landing')}
+            onNavigateToLogin={() => navigateTo('login')}
+            onSelectProfile={(p) => {
+              handleSelectProfile(p);
+              navigateTo('copilot');
+            }}
+            onAuthenticate={(name) => {
+              handleAuthenticate(name);
+              navigateTo('copilot');
+            }}
+          />
+        )}
+
+        {currentTab === 'landing' && (
+          <LandingPage
+            onStartAssessment={() => navigateTo('copilot')}
+            onSelectProfile={(p) => {
+              handleSelectProfile(p);
+              navigateTo('copilot');
             }}
             onOpenAuth={handleOpenAuth}
           />
@@ -131,7 +200,7 @@ export function App() {
           <DashboardLayout
             activeProfile={activeProfile}
             onChangeProfile={setActiveProfile}
-            onOpenCard={() => setCurrentTab('card')}
+            onOpenCard={() => navigateTo('card')}
           />
         )}
 
@@ -139,7 +208,7 @@ export function App() {
           <div className="py-8 px-4 sm:px-6 lg:px-8">
             <NegotiationCard
               result={copilotResult}
-              onBack={() => setCurrentTab('copilot')}
+              onBack={() => navigateTo('copilot')}
             />
           </div>
         )}
@@ -161,7 +230,7 @@ export function App() {
             <PersonaDossier
               onSelectAndLaunch={(p) => {
                 handleSelectProfile(p);
-                setCurrentTab('copilot');
+                navigateTo('copilot');
               }}
             />
           </div>
@@ -174,8 +243,8 @@ export function App() {
         )}
       </main>
 
-      {/* Footer (Rendered outside landing) */}
-      {currentTab !== 'landing' && (
+      {/* Footer (Rendered outside landing and standalone auth routes) */}
+      {currentTab !== 'landing' && !isStandaloneAuthRoute && (
         <footer className="border-t border-[#E2D9DE] dark:border-[#33293A] bg-white dark:bg-neutral-900 py-8 px-4 sm:px-6 lg:px-8 text-xs text-[#6E6069] dark:text-[#A99DA5] transition-colors">
           <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
             <div className="flex items-center gap-2">
@@ -193,7 +262,7 @@ export function App() {
               <span>·</span>
               <span>100% In-Browser Memory</span>
               <span>·</span>
-              <button onClick={() => setCurrentTab('landing')} className="hover:underline text-[#4B2440] dark:text-[#CFA5C1] font-bold">
+              <button onClick={() => navigateTo('landing')} className="hover:underline text-[#4B2440] dark:text-[#CFA5C1] font-bold cursor-pointer">
                 Return to Home
               </button>
             </div>
@@ -201,17 +270,17 @@ export function App() {
         </footer>
       )}
 
-      {/* Authentication Modal */}
+      {/* Authentication Modal (Available for fallback/modal usage) */}
       <AuthModal
         isOpen={isAuthOpen}
         onClose={() => setIsAuthOpen(false)}
         onSelectProfile={(p) => {
           handleSelectProfile(p);
-          setCurrentTab('copilot');
+          navigateTo('copilot');
         }}
         onAuthenticate={(name) => {
           handleAuthenticate(name);
-          setCurrentTab('copilot');
+          navigateTo('copilot');
         }}
         onLogout={handleLogout}
         isAuthenticated={isAuthenticated}
