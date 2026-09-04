@@ -44,35 +44,35 @@ export const OverviewFitnessInspiredGrid: React.FC<OverviewFitnessInspiredGridPr
   // Search input state
   const [searchQuery, setSearchQuery] = useState('');
 
-  // Hero Slides Data with Real High-Res Photography
+  // Hero Slides Data with Custom Generated 3D Institutional Visuals (Zero Humans)
   const heroSlides = [
     {
       id: 1,
-      image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=1400&q=90",
+      image: "/hero/slide1.jpg",
       tag: "INSTITUTIONAL COUNTER-MODEL",
-      headline: "Your Debt-Free Journey Starts Here!",
-      subtitle: "Stop accepting predatory bank gross FOIR limits. Discover your true safe discretionary ceiling before signing branch sanctions.",
-      members: "5.8K+ Borrowers Protected",
+      headline: "Institutional Counter-Model Architecture",
+      subtitle: "Defend your balance sheet with algorithmic telemetry. Unmask hidden bank spreads, discover true discretionary surplus, and reject predatory FOIR ceilings.",
+      members: "5.8K+ Portfolios Shielded",
       ctaText: "Launch Negotiation Script",
       targetAction: onNavigateToCard
     },
     {
       id: 2,
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=1400&q=90",
-      tag: "COMMERCIAL LAP DEFENSE",
-      headline: "Stop Bank Mis-Selling: Secured LAP vs Unsecured",
-      subtitle: "Banks divert eligible SME business owners into 19% unsecured books to extract high broker fees. Lock in 9.25% secured capital.",
+      image: "/hero/slide2.jpg",
+      tag: "COMMERCIAL COLLATERAL VAULT",
+      headline: "Unencumbered Asset Defense: 9.25% Secured LAP",
+      subtitle: "Halt lender diversion into 19% unsecured books. Lock in prime 9.25% secured capital by pledging eligible commercial and residential title deeds.",
       members: "₹8.4L Avg Interest Saved",
       ctaText: "Explore Collateral Shield",
       targetAction: onNavigateToCard
     },
     {
       id: 3,
-      image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=1400&q=90",
-      tag: "APP DEBT INTERVENTION",
-      headline: "Break Free From 30%+ Fast App Traps",
-      subtitle: "High-velocity instant app loans trigger compounding bounce fees. Switch to RBI-compliant priority micro-enterprise schemes.",
-      members: "Zero Hidden Penalties",
+      image: "/hero/slide3.jpg",
+      tag: "CREDIT DEFENSE ALGORITHM",
+      headline: "Instant Debt Shockwave & Predatory Interceptor",
+      subtitle: "Crystalline mathematical algorithms intercepting predatory compounding interest, balloon fee escalations, and velocity credit traps.",
+      members: "Zero Predatory Traps",
       ctaText: "Run Underwriting Engine",
       targetAction: onNavigateToEngine
     }
@@ -179,15 +179,15 @@ export const OverviewFitnessInspiredGrid: React.FC<OverviewFitnessInspiredGridPr
         {/* COMPONENT 1: HERO CARD WITH BRIGHT VISIBLE FULL-BLEED REAL IMAGE SLIDESHOW */}
         <div className="lg:col-span-7 rounded-[2.5rem] bg-[#0A1624] border border-cyan-500/40 overflow-hidden relative shadow-2xl min-h-[400px] flex flex-col justify-between group">
           
-          {/* Background Real Image - BRIGHT, VIBRANT, CLEARLY VISIBLE (No dark mix-blend) */}
+          {/* Background Generated 3D Institutional Visual - BRIGHT, VIBRANT, HIGH RESOLUTION (No Humans) */}
           <div className="absolute inset-0 z-0 overflow-hidden">
             <img 
               src={heroSlides[currentHeroSlide].image} 
-              alt="Borrower Consultation" 
-              className="w-full h-full object-cover object-right sm:object-center opacity-85 group-hover:scale-105 transition-all duration-700 brightness-110 contrast-105"
+              alt="Institutional Credit Architecture" 
+              className="w-full h-full object-cover object-center opacity-90 group-hover:scale-105 transition-all duration-700 brightness-110 contrast-110"
             />
-            {/* Scrim only behind the text on the left to ensure crisp readability while leaving the photo clearly visible */}
-            <div className="absolute inset-0 bg-gradient-to-r from-[#071320]/95 via-[#071320]/65 sm:via-[#071320]/35 to-transparent" />
+            {/* Scrim prioritizing left text legibility while keeping the 3D holographic graphics bright and clearly visible on the right */}
+            <div className="absolute inset-0 bg-gradient-to-r from-[#071320]/95 via-[#071320]/60 sm:via-[#071320]/30 to-transparent" />
             <div className="absolute inset-0 bg-gradient-to-t from-[#071320]/90 via-transparent to-black/20" />
           </div>
 
@@ -250,27 +250,21 @@ export const OverviewFitnessInspiredGrid: React.FC<OverviewFitnessInspiredGridPr
             </button>
           </div>
 
-          {/* Bottom Social Proof Avatars & CTA Button */}
+          {/* Bottom Defense Badges & CTA Button (No Human Photos) */}
           <div className="relative z-10 p-6 sm:p-8 pt-4 flex flex-wrap items-center justify-between gap-4 border-t border-white/15 mt-4 bg-black/30 backdrop-blur-md">
             
-            {/* Real Avatar Pile */}
+            {/* Real Security & Metric Badges */}
             <div className="flex items-center gap-3">
-              <div className="flex -space-x-2.5 overflow-hidden">
-                <img 
-                  className="inline-block h-8 w-8 rounded-full ring-2 ring-[#0A1624] object-cover" 
-                  src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=150&q=80" 
-                  alt="Borrower Priya" 
-                />
-                <img 
-                  className="inline-block h-8 w-8 rounded-full ring-2 ring-[#0A1624] object-cover" 
-                  src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80" 
-                  alt="Borrower Ravi" 
-                />
-                <img 
-                  className="inline-block h-8 w-8 rounded-full ring-2 ring-[#0A1624] object-cover" 
-                  src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=150&q=80" 
-                  alt="Borrower Anita" 
-                />
+              <div className="flex -space-x-1.5 overflow-hidden">
+                <div className="w-8 h-8 rounded-full bg-cyan-500/20 border border-cyan-400/50 flex items-center justify-center text-cyan-300 shadow-sm backdrop-blur-sm">
+                  <ShieldCheck className="w-4 h-4" />
+                </div>
+                <div className="w-8 h-8 rounded-full bg-amber-500/20 border border-amber-400/50 flex items-center justify-center text-amber-300 shadow-sm backdrop-blur-sm">
+                  <Zap className="w-4 h-4" />
+                </div>
+                <div className="w-8 h-8 rounded-full bg-emerald-500/20 border border-emerald-400/50 flex items-center justify-center text-emerald-300 shadow-sm backdrop-blur-sm">
+                  <Sparkles className="w-4 h-4" />
+                </div>
               </div>
               <div className="text-[11px] font-mono text-cyan-200">
                 <span className="font-bold text-white">{heroSlides[currentHeroSlide].members}</span>
@@ -386,26 +380,20 @@ export const OverviewFitnessInspiredGrid: React.FC<OverviewFitnessInspiredGridPr
         <div className="rounded-[2.5rem] bg-[#140F18]/90 border border-white/10 p-6 sm:p-7 flex flex-col justify-between shadow-xl">
           
           <div>
-            {/* Real Avatar Group */}
+            {/* Institutional Defense Badges (No Humans) */}
             <div className="flex items-center gap-2 mb-4">
-              <div className="flex -space-x-2">
-                <img 
-                  className="w-7 h-7 rounded-full ring-2 ring-[#140F18] object-cover" 
-                  src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80" 
-                  alt="Advisor" 
-                />
-                <img 
-                  className="w-7 h-7 rounded-full ring-2 ring-[#140F18] object-cover" 
-                  src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=150&q=80" 
-                  alt="Counselor" 
-                />
-                <img 
-                  className="w-7 h-7 rounded-full ring-2 ring-[#140F18] object-cover" 
-                  src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=150&q=80" 
-                  alt="Advocate" 
-                />
+              <div className="flex -space-x-1.5">
+                <div className="w-7 h-7 rounded-full bg-cyan-500/20 border border-cyan-400/40 flex items-center justify-center text-cyan-300 shadow-sm backdrop-blur-sm">
+                  <Shield className="w-3.5 h-3.5" />
+                </div>
+                <div className="w-7 h-7 rounded-full bg-amber-500/20 border border-amber-400/40 flex items-center justify-center text-amber-300 shadow-sm backdrop-blur-sm">
+                  <Award className="w-3.5 h-3.5" />
+                </div>
+                <div className="w-7 h-7 rounded-full bg-emerald-500/20 border border-emerald-400/40 flex items-center justify-center text-emerald-300 shadow-sm backdrop-blur-sm">
+                  <Sparkles className="w-3.5 h-3.5" />
+                </div>
               </div>
-              <span className="text-[10px] font-mono text-neutral-400">Credit Defense Circle</span>
+              <span className="text-[10px] font-mono text-neutral-400">Credit Defense Intelligence</span>
             </div>
 
             {/* Headline */}
