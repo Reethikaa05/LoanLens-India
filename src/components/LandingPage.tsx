@@ -17,7 +17,20 @@ import {
   ShieldCheck,
   Award,
   TrendingUp,
-  FileText
+  FileText,
+  Play,
+  Pause,
+  Volume2,
+  VolumeX,
+  Maximize2,
+  Video,
+  Sliders,
+  Shield,
+  Layers,
+  Check,
+  ExternalLink,
+  Eye,
+  RefreshCw
 } from 'lucide-react';
 import { PRESET_PROFILES } from '../engine/scenarios';
 import { BorrowerProfile } from '../engine/types';
@@ -61,6 +74,58 @@ export const LandingPage: React.FC<LandingPageProps> = ({
   const simSafeCarry = Math.round(simIncome * 0.35 * 32);
   const simFairMinRate = 10.50;
   const simFairMaxRate = 12.00;
+
+  // Interactive Feature Tab State (Matching Left Card in screenshot)
+  const [activeTab, setActiveTab] = useState<'safecarry' | 'reporate' | 'zeroprepay' | 'kfsapr' | 'stresstest'>('safecarry');
+
+  // Video Container Interactive State (The empty box ready for adding video)
+  const [videoUrl, setVideoUrl] = useState<string>('');
+  const [showUrlInput, setShowUrlInput] = useState<boolean>(false);
+  const [customVideoInput, setCustomVideoInput] = useState<string>('');
+
+  // Feature pill definitions matching "100% Electric" style card
+  const TAB_DATA = {
+    safecarry: {
+      label: 'Safe Carry',
+      title: 'Free Cashflow Safe Carry',
+      tagline: 'Living Costs Protected',
+      description: 'Lenders aggressively push 60% gross FOIR because their balance-sheet risk is diversified over millions of accounts. We counter-underwrite from your disposable cash flow after rent, school fees, and a 20% untouchable reserve.',
+      metric1: { label: 'Bank Gross FOIR', value: '₹18.5L – ₹22.0L' },
+      metric2: { label: 'Borrower Safe Carry', value: '₹6.5L – ₹8.5L' }
+    },
+    reporate: {
+      label: 'Repo Spread',
+      title: 'Repo Rate Anchored Spread',
+      tagline: 'Transparent Markups',
+      description: 'Never accept an arbitrary point quote. Retail credit must be indexed to RBI Repo rate (6.50%) + a justified risk spread, unmasking when a bank levies an unfair 450 bps spread on prime borrowers.',
+      metric1: { label: 'RBI Repo Anchor', value: '6.50% Base' },
+      metric2: { label: 'Prime Fair Spread', value: '+3.80% to +4.20%' }
+    },
+    zeroprepay: {
+      label: '0% Foreclosure',
+      title: 'Statutory Prepayment Freedom',
+      tagline: 'RBI Master Direction',
+      description: 'Per RBI Master Directions, floating rate retail term loans to individual borrowers cannot carry foreclosure charges or partial prepayment penalties. We enforce this clause in your pre-closing battle card.',
+      metric1: { label: 'Floating Penalty', value: '0.00% Statutory' },
+      metric2: { label: 'Borrower Liquidity', value: '100% Flexible' }
+    },
+    kfsapr: {
+      label: 'KFS APR',
+      title: 'True All-In Annual Cost',
+      tagline: 'Zero Hidden Fees',
+      description: 'A 10.50% point quote conceals 2.5% processing fees, documentation charges, and 18% GST. Copilot computes your true annualized borrowing cost per mandatory RBI Key Fact Statement guidelines.',
+      metric1: { label: 'Advertised Rate', value: '10.50% p.a.' },
+      metric2: { label: 'True KFS APR', value: '12.19% p.a.' }
+    },
+    stresstest: {
+      label: 'Stress Shield',
+      title: '3-Factor Financial Resilience',
+      tagline: 'Triple Shock Tested',
+      description: 'Before taking on debt, Copilot tests your monthly obligations against an unexpected 20% income reduction, a 200 bps floating repo spike, or a ₹40,000 emergency medical expense.',
+      metric1: { label: 'Income Shock (-20%)', value: 'Solvent & Stable' },
+      metric2: { label: 'Repo Spike (+200bps)', value: 'EMI Buffered' }
+    }
+  };
 
   // Custom JavaScript fade system with requestAnimationFrame (500ms duration)
   const fadeTo = (targetOpacity: number, duration: number, onComplete?: () => void) => {
@@ -301,9 +366,272 @@ export const LandingPage: React.FC<LandingPageProps> = ({
       </section>
 
       {/* ========================================================================= */}
-      {/* EXTENDED IMPRESSIVE PLATFORM DESIGN (BELOW THE VIDEO)                     */}
+      {/* EDITORIAL TRANSITION STATEMENT (MATCHING REFERENCE SCREENSHOT)             */}
       {/* ========================================================================= */}
-      <div id="platform-overview" className="bg-[#0B090E] text-[#EEE6EA] border-t border-neutral-800/80 transition-colors py-24 relative overflow-hidden">
+      <section id="platform-overview" className="bg-black pt-28 pb-20 px-6 text-center relative overflow-hidden">
+        {/* Subtle Ambient Glow */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[300px] bg-gradient-to-r from-purple-900/10 via-[#CFA5C1]/10 to-amber-900/10 blur-3xl pointer-events-none" />
+
+        <div className="max-w-4xl mx-auto relative z-10 space-y-6">
+          <h2 
+            className="text-4xl sm:text-6xl md:text-7xl lg:text-[76px] text-white font-normal tracking-tight leading-[1.12]"
+            style={{ fontFamily: "'Instrument Serif', serif" }}
+          >
+            So you can borrow with leverage,<br /> anywhere.
+          </h2>
+          <p className="text-neutral-400 text-base sm:text-lg max-w-2xl mx-auto font-light leading-relaxed">
+            Lenders calibrate underwriting algorithms to maximize gross loan volume and fee margins. Borrower Copilot puts institutional counter-underwriting in your hands before you enter the branch.
+          </p>
+        </div>
+      </section>
+
+      {/* ========================================================================= */}
+      {/* 2-COLUMN BENTO SHOWCASE (MATCHING THE SCREENSHOT'S 2-CARD LAYOUT)         */}
+      {/* ========================================================================= */}
+      <section className="bg-black pb-28 px-4 sm:px-6 lg:px-8 relative">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
+            
+            {/* ------------------------------------------------------------------- */}
+            {/* LEFT CARD: Feature Bento (100% Borrower Protected)                  */}
+            {/* ------------------------------------------------------------------- */}
+            <div className="rounded-[2.5rem] bg-[#0C0B10] border border-neutral-800/90 p-8 sm:p-12 flex flex-col justify-between shadow-2xl relative overflow-hidden group hover:border-[#CFA5C1]/40 transition-all duration-500 min-h-[500px]">
+              {/* Radial gradient background highlight */}
+              <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-[#CFA5C1]/10 via-purple-500/5 to-transparent rounded-full blur-3xl pointer-events-none" />
+
+              <div className="relative z-10 space-y-6">
+                {/* Top Badge */}
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-neutral-900/90 border border-neutral-800 text-[11px] font-mono text-[#CFA5C1]">
+                  <ShieldCheck className="w-3.5 h-3.5 text-[#CFA5C1]" />
+                  <span>Institutional Counter-Model</span>
+                </div>
+
+                {/* Editorial Title */}
+                <div>
+                  <h3 
+                    className="text-4xl sm:text-5xl text-white font-normal tracking-tight mb-3"
+                    style={{ fontFamily: "'Instrument Serif', serif" }}
+                  >
+                    100% Borrower Protected
+                  </h3>
+                  <p className="text-neutral-400 text-sm sm:text-base font-light leading-relaxed">
+                    No more predatory fee traps, aggressive 60% gross FOIR debt ceilings, or point quote illusions. Borrower Copilot protects your true disposable free cashflow.
+                  </p>
+                </div>
+
+                {/* Interactive Filter / Pill Chips */}
+                <div className="pt-2">
+                  <div className="flex flex-wrap gap-2 mb-6">
+                    {(Object.keys(TAB_DATA) as Array<keyof typeof TAB_DATA>).map((key) => {
+                      const isActive = activeTab === key;
+                      return (
+                        <button
+                          key={key}
+                          onClick={() => setActiveTab(key)}
+                          className={`px-4 py-2 rounded-full text-xs font-medium transition-all duration-200 cursor-pointer ${
+                            isActive
+                              ? 'bg-white text-black font-semibold shadow-md scale-105'
+                              : 'bg-neutral-900 text-neutral-400 border border-neutral-800 hover:text-white hover:bg-neutral-800/80'
+                          }`}
+                        >
+                          {TAB_DATA[key].label}
+                        </button>
+                      );
+                    })}
+                  </div>
+
+                  {/* Active Tab Dynamic Description & Metrics Box */}
+                  <div className="p-5 rounded-2xl bg-neutral-900/80 border border-neutral-800/80 backdrop-blur-md space-y-4">
+                    <div>
+                      <div className="flex items-center justify-between mb-1">
+                        <span className="font-semibold text-white text-sm">
+                          {TAB_DATA[activeTab].title}
+                        </span>
+                        <span className="font-mono text-[11px] px-2.5 py-0.5 rounded-full bg-neutral-800 text-[#CFA5C1] border border-neutral-700 font-bold">
+                          {TAB_DATA[activeTab].tagline}
+                        </span>
+                      </div>
+                      <p className="text-xs text-neutral-400 leading-relaxed font-light">
+                        {TAB_DATA[activeTab].description}
+                      </p>
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-3 pt-2 border-t border-neutral-800 font-mono text-xs">
+                      <div className="p-3 rounded-xl bg-neutral-800/50 border border-neutral-700/50">
+                        <span className="text-[10px] text-neutral-500 block">
+                          {TAB_DATA[activeTab].metric1.label}
+                        </span>
+                        <span className="font-bold text-neutral-300 text-sm">
+                          {TAB_DATA[activeTab].metric1.value}
+                        </span>
+                      </div>
+                      <div className="p-3 rounded-xl bg-[#2A1F2C]/60 border border-[#4B2440]">
+                        <span className="text-[10px] text-[#CFA5C1] block font-bold">
+                          ★ {TAB_DATA[activeTab].metric2.label}
+                        </span>
+                        <span className="font-bold text-emerald-400 text-sm">
+                          {TAB_DATA[activeTab].metric2.value}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Action Button at Bottom */}
+              <div className="relative z-10 pt-8 mt-auto">
+                <button
+                  onClick={onStartAssessment}
+                  className="w-full sm:w-auto px-8 py-3.5 rounded-full bg-neutral-900 hover:bg-neutral-800 text-white border border-neutral-700 hover:border-white/40 text-sm font-medium transition-all shadow-lg hover:shadow-xl flex items-center justify-center gap-2 group/btn"
+                >
+                  <span>Explore Borrower Flow</span>
+                  <ArrowRight className="w-4 h-4 transition-transform group-hover/btn:translate-x-1" />
+                </button>
+              </div>
+            </div>
+
+            {/* ------------------------------------------------------------------- */}
+            {/* RIGHT CARD: Dedicated Video Showcase Box                            */}
+            {/* (Empty Box Ready for Video Embed as specifically requested)         */}
+            {/* ------------------------------------------------------------------- */}
+            <div className="rounded-[2.5rem] bg-[#07060A] border border-neutral-800/90 overflow-hidden relative p-6 sm:p-10 flex flex-col justify-between shadow-2xl group hover:border-[#CFA5C1]/40 transition-all duration-500 min-h-[500px]">
+              
+              {/* Ethereal Twilight Sky + Warm Campfire Glow (Matching Screenshot Artwork) */}
+              <div className="absolute inset-0 pointer-events-none overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-b from-[#0C0A16] via-[#080710] to-[#140C0E]" />
+                {/* Radiant warm amber glow at bottom right */}
+                <div className="absolute -bottom-16 -right-16 w-96 h-96 bg-gradient-to-tl from-amber-500/25 via-orange-600/15 to-transparent rounded-full blur-3xl" />
+                {/* Subtle cosmic night stars */}
+                <div className="absolute top-8 left-12 w-1 h-1 bg-white/70 rounded-full blur-[0.5px]" />
+                <div className="absolute top-16 right-20 w-1.5 h-1.5 bg-white/80 rounded-full blur-[0.5px]" />
+                <div className="absolute top-24 left-1/2 w-1 h-1 bg-amber-200/60 rounded-full" />
+                <div className="absolute top-12 right-1/3 w-1 h-1 bg-purple-200/50 rounded-full" />
+                <div className="absolute bottom-28 left-20 w-1.5 h-1.5 bg-orange-300/40 rounded-full blur-[0.5px]" />
+              </div>
+
+              {/* Card Top Header */}
+              <div className="relative z-10 flex items-center justify-between gap-2 border-b border-neutral-800/80 pb-4">
+                <div className="flex items-center gap-2">
+                  <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse shrink-0" />
+                  <span className="font-mono text-xs font-bold text-neutral-300 uppercase tracking-wider">
+                    Video Showcase Frame
+                  </span>
+                  <span className="hidden sm:inline-block px-2 py-0.5 rounded-full bg-neutral-800/90 text-[10px] font-mono text-[#CFA5C1] border border-neutral-700">
+                    16:9 4K Ready
+                  </span>
+                </div>
+
+                <button
+                  onClick={() => setShowUrlInput(!showUrlInput)}
+                  className="text-[11px] font-mono text-neutral-400 hover:text-white px-3 py-1 rounded-full bg-neutral-800/70 hover:bg-neutral-800 border border-neutral-700/60 transition-colors flex items-center gap-1.5"
+                >
+                  <Video className="w-3.5 h-3.5 text-[#CFA5C1]" />
+                  <span>{showUrlInput ? 'Close' : 'Load Video URL'}</span>
+                </button>
+              </div>
+
+              {/* Optional Custom Video URL Input Bar */}
+              {showUrlInput && (
+                <div className="relative z-20 my-3 p-3 rounded-2xl bg-neutral-900/95 border border-neutral-700/80 shadow-2xl flex items-center gap-2">
+                  <input
+                    type="url"
+                    value={customVideoInput}
+                    onChange={(e) => setCustomVideoInput(e.target.value)}
+                    placeholder="Paste MP4 or video embed URL..."
+                    className="flex-1 bg-black/70 border border-neutral-700 rounded-xl px-3 py-2 text-xs text-white placeholder:text-neutral-500 outline-none focus:border-[#CFA5C1]"
+                  />
+                  <button
+                    onClick={() => {
+                      if (customVideoInput) setVideoUrl(customVideoInput);
+                      setShowUrlInput(false);
+                    }}
+                    className="px-4 py-2 rounded-xl bg-white text-black font-semibold text-xs hover:bg-neutral-200 transition-all shrink-0"
+                  >
+                    Embed
+                  </button>
+                </div>
+              )}
+
+              {/* ========================================================================= */}
+              {/* DEDICATED EMPTY VIDEO BOX: Slot for adding custom video files or embeds   */}
+              {/* Replace this placeholder with your <video> tag or video embed code        */}
+              {/* ========================================================================= */}
+              <div className="relative z-10 my-4 flex-1 flex flex-col justify-center">
+                {videoUrl ? (
+                  <div className="relative w-full aspect-video rounded-2xl overflow-hidden border border-neutral-700 shadow-2xl bg-black">
+                    <video 
+                      src={videoUrl} 
+                      controls 
+                      autoPlay 
+                      className="w-full h-full object-cover"
+                    />
+                    <button 
+                      onClick={() => setVideoUrl('')}
+                      className="absolute top-2 right-2 px-2.5 py-1 rounded-full bg-black/80 text-white text-[10px] font-mono hover:bg-black"
+                    >
+                      Clear Video
+                    </button>
+                  </div>
+                ) : (
+                  /* High-craft Empty Video Box */
+                  <div className="relative w-full aspect-video rounded-2xl border-2 border-dashed border-neutral-700/80 hover:border-[#CFA5C1]/70 bg-black/60 backdrop-blur-md overflow-hidden flex flex-col items-center justify-center p-6 text-center group/videobox transition-all duration-300">
+                    {/* Ambient subtle glow inside video box */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-amber-500/10 via-transparent to-transparent pointer-events-none" />
+
+                    {/* Prominent Liquid Glass Play Button */}
+                    <div 
+                      onClick={() => setShowUrlInput(true)}
+                      className="w-18 h-18 sm:w-20 sm:h-20 rounded-full bg-white/10 hover:bg-white/20 border border-white/30 backdrop-blur-xl flex items-center justify-center text-white shadow-[0_0_40px_rgba(207,165,193,0.3)] transition-all duration-300 group-hover/videobox:scale-110 cursor-pointer mb-3 relative z-10"
+                    >
+                      <Play className="w-8 h-8 fill-white text-white translate-x-0.5" />
+                    </div>
+
+                    <h4 
+                      className="text-2xl sm:text-3xl text-white font-medium mb-1 tracking-tight"
+                      style={{ fontFamily: "'Instrument Serif', serif" }}
+                    >
+                      Drop or Embed Your Video Here
+                    </h4>
+                    <p className="text-xs text-neutral-400 max-w-sm font-light leading-relaxed mb-4">
+                      Dedicated container configured for product walkthrough, customer case story, or engine demo.
+                    </p>
+
+                    {/* Video Slot Specs */}
+                    <div className="flex flex-wrap items-center justify-center gap-2 font-mono text-[10px] text-neutral-400">
+                      <span className="px-2.5 py-0.5 rounded-md bg-neutral-800/80 border border-neutral-700/60">MP4 / WebM</span>
+                      <span className="px-2.5 py-0.5 rounded-md bg-neutral-800/80 border border-neutral-700/60">1080p 60fps</span>
+                      <span className="px-2.5 py-0.5 rounded-md bg-neutral-800/80 border border-neutral-700/60">Stereo Sound</span>
+                      <span className="px-2.5 py-0.5 rounded-md bg-neutral-800/80 border border-neutral-700/60">Zero Latency</span>
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {/* Bottom Details Strip */}
+              <div className="relative z-10 pt-4 border-t border-neutral-800/80 flex flex-wrap items-center justify-between gap-3 text-xs">
+                <div>
+                  <span className="font-semibold text-white block text-sm">Underwriting Walkthrough</span>
+                  <span className="text-neutral-400 text-[11px]">How the counter-model reverses bank FOIR traps</span>
+                </div>
+                <button
+                  onClick={onStartAssessment}
+                  className="px-5 py-2.5 rounded-full bg-[#2A1F2C] hover:bg-[#3D2C40] text-[#CFA5C1] font-semibold text-xs border border-[#4B2440] transition-all flex items-center gap-1.5 shadow-md hover:scale-105"
+                >
+                  <span>Run Live Simulator</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </button>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      {/* ========================================================================= */}
+      {/* EXTENDED IMPRESSIVE PLATFORM DESIGN (COMPREHENSIVE FINANCIAL ENGINE)      */}
+      {/* ========================================================================= */}
+      <div className="bg-[#0B090E] text-[#EEE6EA] border-t border-neutral-800/80 transition-colors py-24 relative overflow-hidden">
         
         {/* Subtle Ambient Radial Gradients */}
         <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-gradient-to-b from-[#4B2440]/25 via-[#CFA5C1]/5 to-transparent blur-3xl pointer-events-none" />
@@ -329,25 +657,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
             </div>
           </div>
 
-          {/* Section 1: Section Header */}
-          <div className="text-center max-w-3xl mx-auto space-y-4">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-neutral-900/90 border border-neutral-800 text-xs font-semibold text-[#CFA5C1] shadow-inner">
-              <Sparkles className="w-3.5 h-3.5 text-[#CFA5C1]" />
-              <span>Independent Retail Credit Intelligence</span>
-            </div>
-            <h2 
-              className="text-4xl sm:text-5xl lg:text-6xl text-white tracking-tight leading-[1.1]"
-              style={{ fontFamily: "'Instrument Serif', serif" }}
-            >
-              Every lender has an algorithm. <br />
-              <span className="italic text-[#CFA5C1]">Now you have a Copilot.</span>
-            </h2>
-            <p className="text-neutral-400 text-base sm:text-lg leading-relaxed font-light max-w-2xl mx-auto">
-              Lenders optimize for their origination commissions and yield spread. Borrower Copilot performs real-time counter-underwriting so you enter the branch with verified numbers.
-            </p>
-          </div>
-
-          {/* Section 2: The 4 Core Decisions */}
+          {/* Section 1: The 4 Core Decisions (Institutional Architecture) */}
           <div>
             <div className="flex items-center justify-between mb-8">
               <div>
@@ -471,7 +781,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
             </div>
           </div>
 
-          {/* Section 3: Interactive Fast Loan Health Simulator Card */}
+          {/* Section 2: Interactive Fast Loan Health Simulator Card */}
           <div className="p-8 sm:p-10 rounded-3xl bg-neutral-900/80 border border-neutral-800 shadow-2xl backdrop-blur-xl relative overflow-hidden">
             <div className="absolute top-0 right-0 w-96 h-96 bg-[#CFA5C1]/10 rounded-full blur-3xl pointer-events-none" />
             
@@ -576,8 +886,8 @@ export const LandingPage: React.FC<LandingPageProps> = ({
             </div>
           </div>
 
-          {/* Section 4: Three Canonical Case Studies (Cards Design) */}
-          <div className="space-y-8">
+          {/* Section 3: Three Canonical Case Studies (Cards Design) */}
+          <div id="case-studies-section" className="space-y-8">
             <div className="text-center max-w-2xl mx-auto">
               <span className="font-mono text-xs font-semibold uppercase tracking-widest text-[#CFA5C1] block mb-1">
                 Verified Across Indian Credit Realities
@@ -649,7 +959,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
             </div>
           </div>
 
-          {/* Section 5: Comparison Table (Bank vs Copilot) */}
+          {/* Section 4: Comparison Table (Bank vs Copilot) */}
           <div className="p-8 sm:p-10 rounded-3xl bg-neutral-900/60 border border-neutral-800 space-y-6">
             <div className="text-center max-w-2xl mx-auto mb-6">
               <h3 
@@ -695,7 +1005,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
             </div>
           </div>
 
-          {/* Section 6: Institutional Privacy Guarantee */}
+          {/* Section 5: Institutional Privacy Guarantee */}
           <div className="max-w-3xl mx-auto text-center p-8 sm:p-10 rounded-3xl bg-neutral-900/80 border border-neutral-800 shadow-2xl relative overflow-hidden">
             <div className="inline-flex p-3.5 rounded-2xl bg-[#2A1F2C] text-[#CFA5C1] mb-4">
               <Lock className="w-7 h-7" />
@@ -709,18 +1019,80 @@ export const LandingPage: React.FC<LandingPageProps> = ({
             <p className="text-sm text-neutral-400 max-w-xl mx-auto leading-relaxed">
               Unlike lead aggregator websites that sell your phone number to DSA call centers, Borrower Copilot executes all calculations inside your browser memory. No bureau inquiry is logged, and nothing touches a remote server.
             </p>
-            <div className="mt-8">
-              <button
-                onClick={onStartAssessment}
-                className="px-8 py-4 rounded-full bg-white text-black font-semibold text-sm hover:bg-white/90 transition-all shadow-xl hover:scale-105 active:scale-95"
-              >
-                Start Free Self-Assessment
-              </button>
-            </div>
           </div>
 
         </div>
       </div>
+
+      {/* ========================================================================= */}
+      {/* CINEMATIC BOTTOM BANNER: "JOIN THE RIDE" (MATCHING SCREENSHOT AESTHETIC)   */}
+      {/* ========================================================================= */}
+      <section className="relative py-28 sm:py-36 px-6 overflow-hidden bg-black text-center border-t border-neutral-800/80">
+        {/* Ethereal Glowing Radiant Mesh (Volcanic amber & deep cosmos) */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#2D0F21] via-[#120815] to-black opacity-95 pointer-events-none" />
+        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[1100px] h-[450px] bg-gradient-to-t from-[#E05338]/30 via-[#9A2D87]/25 to-transparent blur-3xl pointer-events-none" />
+        <div className="absolute -bottom-24 left-1/2 -translate-x-1/2 w-[850px] h-[350px] bg-gradient-to-r from-amber-500/35 via-rose-500/25 to-purple-700/30 blur-2xl pointer-events-none rounded-full" />
+
+        <div className="relative z-10 max-w-4xl mx-auto space-y-6">
+          <span className="font-mono text-xs font-semibold uppercase tracking-[0.25em] text-[#E5B5D5] block">
+            STARTING WITH ZERO BUREAU INQUIRY
+          </span>
+
+          <h2 
+            className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-white font-normal tracking-tight leading-[1.08]"
+            style={{ fontFamily: "'Instrument Serif', serif" }}
+          >
+            Join the ride.
+          </h2>
+
+          <p className="text-neutral-300 text-sm sm:text-base md:text-lg max-w-2xl mx-auto font-light leading-relaxed opacity-90">
+            Run your credit counter-assessment today with 100% in-browser privacy. No hard credit inquiries, zero DSA sales spam, and instant RBI repo audits before you sign.
+          </p>
+
+          <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
+            <button
+              onClick={onStartAssessment}
+              className="px-8 py-4 rounded-full bg-white text-black font-semibold text-sm hover:bg-neutral-100 transition-all shadow-[0_0_30px_rgba(255,255,255,0.25)] hover:scale-105 active:scale-95 flex items-center gap-2"
+            >
+              <span>Launch Copilot Now</span>
+              <ArrowRight className="w-4 h-4" />
+            </button>
+
+            <button
+              onClick={() => {
+                const el = document.getElementById('case-studies-section');
+                if (el) el.scrollIntoView({ behavior: 'smooth' });
+              }}
+              className="liquid-glass px-8 py-4 rounded-full text-white text-sm font-medium hover:bg-white/10 transition-all flex items-center gap-2 shadow-lg"
+            >
+              <span>Explore Case Studies</span>
+              <ChevronRight className="w-4 h-4" />
+            </button>
+          </div>
+        </div>
+      </section>
+
+      {/* ========================================================================= */}
+      {/* PROFESSIONAL FOOTER                                                       */}
+      {/* ========================================================================= */}
+      <footer className="bg-black border-t border-neutral-900 py-12 px-6 text-xs text-neutral-500 font-mono">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+          <div className="flex items-center gap-3">
+            <Globe className="w-5 h-5 text-white" />
+            <span className="text-white font-semibold text-sm tracking-tight">Borrower Copilot</span>
+            <span className="text-neutral-600">|</span>
+            <span>Independent Retail Credit Intelligence</span>
+          </div>
+
+          <div className="flex items-center gap-6">
+            <a href="#features" onClick={(e) => { e.preventDefault(); scrollToContent(); }} className="hover:text-white transition-colors">Architecture</a>
+            <a href="#cases" onClick={(e) => { e.preventDefault(); document.getElementById('case-studies-section')?.scrollIntoView({ behavior: 'smooth' }); }} className="hover:text-white transition-colors">Case Studies</a>
+            <button onClick={() => onOpenAuth('signin')} className="hover:text-white transition-colors">Account Access</button>
+            <span className="text-neutral-700">•</span>
+            <span className="text-neutral-400">Compliant with RBI Master Directions 2024</span>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 };
