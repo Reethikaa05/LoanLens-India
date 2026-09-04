@@ -23,11 +23,8 @@ import {
   Volume2,
   VolumeX,
   Maximize2,
-  Video,
   Sliders,
-  Shield,
-  Layers,
-  Check
+  Shield
 } from 'lucide-react';
 import { PRESET_PROFILES } from '../engine/scenarios';
 import { BorrowerProfile } from '../engine/types';
@@ -75,14 +72,6 @@ export const LandingPage: React.FC<LandingPageProps> = ({
   // Interactive Feature Tab State (Left Bento Card)
   const [activeTab, setActiveTab] = useState<'safecarry' | 'reporate' | 'zeroprepay' | 'kfsapr' | 'stresstest'>('safecarry');
 
-  // Video Showcase Player State (Right Bento Card - Live Embedded Video)
-  const showcaseVideoRef = useRef<HTMLVideoElement>(null);
-  const [isShowcasePlaying, setIsShowcasePlaying] = useState<boolean>(true);
-  const [isShowcaseMuted, setIsShowcaseMuted] = useState<boolean>(true);
-  const [showcaseProgress, setShowcaseProgress] = useState<number>(0);
-  const [showcaseDuration, setShowcaseDuration] = useState<number>(0);
-  const [showcaseCurrentTime, setShowcaseCurrentTime] = useState<number>(0);
-
   // Feature pill definitions matching "100% Electric" style card
   const TAB_DATA = {
     safecarry: {
@@ -125,48 +114,6 @@ export const LandingPage: React.FC<LandingPageProps> = ({
       metric1: { label: 'Income Shock (-20%)', value: 'Solvent & Stable' },
       metric2: { label: 'Repo Spike (+200bps)', value: 'EMI Buffered' }
     }
-  };
-
-  // Video Showcase Player Controls
-  const toggleShowcasePlay = () => {
-    if (!showcaseVideoRef.current) return;
-    if (showcaseVideoRef.current.paused) {
-      showcaseVideoRef.current.play();
-      setIsShowcasePlaying(true);
-    } else {
-      showcaseVideoRef.current.pause();
-      setIsShowcasePlaying(false);
-    }
-  };
-
-  const toggleShowcaseMute = () => {
-    if (!showcaseVideoRef.current) return;
-    showcaseVideoRef.current.muted = !showcaseVideoRef.current.muted;
-    setIsShowcaseMuted(showcaseVideoRef.current.muted);
-  };
-
-  const handleShowcaseTimeUpdate = () => {
-    if (!showcaseVideoRef.current) return;
-    const current = showcaseVideoRef.current.currentTime;
-    const duration = showcaseVideoRef.current.duration || 1;
-    setShowcaseCurrentTime(current);
-    setShowcaseDuration(duration);
-    setShowcaseProgress((current / duration) * 100);
-  };
-
-  const handleShowcaseSeek = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (!showcaseVideoRef.current) return;
-    const seekPercent = Number(e.target.value);
-    const duration = showcaseVideoRef.current.duration || 1;
-    const seekTime = (seekPercent / 100) * duration;
-    showcaseVideoRef.current.currentTime = seekTime;
-    setShowcaseProgress(seekPercent);
-  };
-
-  const formatVideoTime = (seconds: number) => {
-    const mins = Math.floor(seconds / 60);
-    const secs = Math.floor(seconds % 60);
-    return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
   };
 
   // Custom JavaScript fade system with requestAnimationFrame (500ms duration)
@@ -533,149 +480,18 @@ export const LandingPage: React.FC<LandingPageProps> = ({
             </div>
 
             {/* ------------------------------------------------------------------- */}
-            {/* RIGHT CARD: Embedded Video Showcase Frame                           */}
-            {/* (Fully integrated video player with custom controls & HUD overlay)   */}
+            {/* RIGHT CARD: Card-Sized Video (PURE VIDEO ONLY - NO WORDS)           */}
+            {/* Seamless, full-card video matching the reference screenshot          */}
             {/* ------------------------------------------------------------------- */}
-            <div className="rounded-[2.5rem] bg-[#07060A] border border-neutral-800/90 overflow-hidden relative p-6 sm:p-8 flex flex-col justify-between shadow-2xl group hover:border-[#CFA5C1]/40 transition-all duration-500 min-h-[520px]">
-              
-              {/* Ethereal Twilight Sky + Warm Campfire Glow (Matching Screenshot Artwork) */}
-              <div className="absolute inset-0 pointer-events-none overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-b from-[#0C0A16] via-[#080710] to-[#140C0E]" />
-                {/* Radiant warm amber glow at bottom right */}
-                <div className="absolute -bottom-16 -right-16 w-96 h-96 bg-gradient-to-tl from-amber-500/25 via-orange-600/15 to-transparent rounded-full blur-3xl" />
-                {/* Subtle cosmic night stars */}
-                <div className="absolute top-8 left-12 w-1 h-1 bg-white/70 rounded-full blur-[0.5px]" />
-                <div className="absolute top-16 right-20 w-1.5 h-1.5 bg-white/80 rounded-full blur-[0.5px]" />
-                <div className="absolute top-24 left-1/2 w-1 h-1 bg-amber-200/60 rounded-full" />
-                <div className="absolute top-12 right-1/3 w-1 h-1 bg-purple-200/50 rounded-full" />
-                <div className="absolute bottom-28 left-20 w-1.5 h-1.5 bg-orange-300/40 rounded-full blur-[0.5px]" />
-              </div>
-
-              {/* Card Top Header */}
-              <div className="relative z-10 flex items-center justify-between gap-2 border-b border-neutral-800/80 pb-4">
-                <div className="flex items-center gap-2">
-                  <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse shrink-0" />
-                  <span className="font-mono text-xs font-bold text-neutral-300 uppercase tracking-wider">
-                    Showcase Walkthrough
-                  </span>
-                  <span className="px-2.5 py-0.5 rounded-full bg-neutral-800/90 text-[10px] font-mono text-[#CFA5C1] border border-neutral-700">
-                    4K UHD • 60 FPS
-                  </span>
-                </div>
-
-                <div className="flex items-center gap-2">
-                  <span className="text-[11px] font-mono text-neutral-400 px-2.5 py-1 rounded-full bg-neutral-900/80 border border-neutral-800">
-                    {formatVideoTime(showcaseCurrentTime)} / {formatVideoTime(showcaseDuration || 80)}
-                  </span>
-                </div>
-              </div>
-
-              {/* ========================================================================= */}
-              {/* EMBEDDED SHOWCASE VIDEO PLAYER                                            */}
-              {/* Note: To update this video, replace the src URL with your custom video     */}
-              {/* ========================================================================= */}
-              <div className="relative z-10 my-4 flex-1 flex flex-col justify-center">
-                <div className="relative w-full aspect-video rounded-2xl overflow-hidden border border-neutral-700/80 shadow-2xl bg-black group/player">
-                  
-                  {/* The Embedded Video Element */}
-                  <video
-                    ref={showcaseVideoRef}
-                    src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260328_115001_bcdaa3b4-03de-47e7-ad63-ae3e392c32d4.mp4"
-                    autoPlay
-                    loop
-                    muted={isShowcaseMuted}
-                    playsInline
-                    onTimeUpdate={handleShowcaseTimeUpdate}
-                    onClick={toggleShowcasePlay}
-                    className="w-full h-full object-cover cursor-pointer"
-                  />
-
-                  {/* Ambient HUD Telemetry Overlay on Video */}
-                  <div className="absolute top-3 left-3 pointer-events-none flex items-center gap-2">
-                    <span className="px-2.5 py-1 rounded-lg bg-black/65 backdrop-blur-md border border-white/10 font-mono text-[10px] text-white/90 flex items-center gap-1.5 shadow-lg">
-                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                      Counter-Underwriting Active
-                    </span>
-                  </div>
-
-                  <div className="absolute top-3 right-3 pointer-events-none">
-                    <span className="px-2 py-0.5 rounded-md bg-black/65 backdrop-blur-md border border-white/10 font-mono text-[10px] text-[#CFA5C1]">
-                      RBI Repo: 6.50%
-                    </span>
-                  </div>
-
-                  {/* Custom Glass Control Bar */}
-                  <div className="absolute bottom-0 inset-x-0 p-3 bg-gradient-to-t from-black/90 via-black/50 to-transparent flex flex-col gap-2 transition-opacity duration-300">
-                    {/* Scrub Progress Bar */}
-                    <div className="w-full flex items-center gap-2">
-                      <input
-                        type="range"
-                        min="0"
-                        max="100"
-                        value={showcaseProgress || 0}
-                        onChange={handleShowcaseSeek}
-                        className="w-full h-1 bg-white/20 hover:bg-white/40 rounded-lg appearance-none cursor-pointer accent-[#CFA5C1]"
-                      />
-                    </div>
-
-                    {/* Controls Row */}
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-3">
-                        <button
-                          onClick={toggleShowcasePlay}
-                          aria-label={isShowcasePlaying ? 'Pause Video' : 'Play Video'}
-                          className="w-8 h-8 rounded-full bg-white/20 hover:bg-white/30 backdrop-blur-md flex items-center justify-center text-white transition-all hover:scale-105 active:scale-95 cursor-pointer"
-                        >
-                          {isShowcasePlaying ? (
-                            <Pause className="w-3.5 h-3.5 fill-white text-white" />
-                          ) : (
-                            <Play className="w-3.5 h-3.5 fill-white text-white translate-x-0.5" />
-                          )}
-                        </button>
-
-                        <button
-                          onClick={toggleShowcaseMute}
-                          aria-label={isShowcaseMuted ? 'Unmute Audio' : 'Mute Audio'}
-                          className="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-md flex items-center justify-center text-white transition-all cursor-pointer"
-                        >
-                          {isShowcaseMuted ? (
-                            <VolumeX className="w-3.5 h-3.5 text-neutral-300" />
-                          ) : (
-                            <Volume2 className="w-3.5 h-3.5 text-white" />
-                          )}
-                        </button>
-
-                        <span className="font-mono text-[11px] text-neutral-300">
-                          {formatVideoTime(showcaseCurrentTime)}
-                        </span>
-                      </div>
-
-                      <div className="flex items-center gap-2">
-                        <span className="font-mono text-[10px] text-emerald-400 bg-emerald-950/60 border border-emerald-800/50 px-2 py-0.5 rounded">
-                          Safe Carry Mode
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-
-                </div>
-              </div>
-
-              {/* Bottom Details Strip */}
-              <div className="relative z-10 pt-4 border-t border-neutral-800/80 flex flex-wrap items-center justify-between gap-3 text-xs">
-                <div>
-                  <span className="font-semibold text-white block text-sm">Institutional Demo Playback</span>
-                  <span className="text-neutral-400 text-[11px]">Real-time counter-model reversing bank FOIR traps</span>
-                </div>
-                <button
-                  onClick={onStartAssessment}
-                  className="px-5 py-2.5 rounded-full bg-[#2A1F2C] hover:bg-[#3D2C40] text-[#CFA5C1] font-semibold text-xs border border-[#4B2440] transition-all flex items-center gap-1.5 shadow-md hover:scale-105"
-                >
-                  <span>Launch Live Engine</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
-                </button>
-              </div>
-
+            <div className="rounded-[2.5rem] border border-neutral-800/90 overflow-hidden relative shadow-2xl min-h-[520px] bg-[#07060A] flex items-center justify-center group hover:border-[#CFA5C1]/40 transition-all duration-500">
+              <video
+                src="/showcase-people.mp4"
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="w-full h-full object-cover rounded-[2.5rem] transition-transform duration-700 group-hover:scale-[1.02]"
+              />
             </div>
 
           </div>
@@ -694,20 +510,53 @@ export const LandingPage: React.FC<LandingPageProps> = ({
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-28">
           
-          {/* Section 0: Live Lending Rates Ticker */}
-          <div className="p-4 rounded-2xl bg-neutral-900/70 border border-neutral-800/80 backdrop-blur-md shadow-xl flex flex-wrap items-center justify-between gap-4 text-xs">
-            <div className="flex items-center gap-2">
+          {/* Section 0: Live Lending Rates Moving Line Ticker */}
+          <div className="rounded-2xl bg-neutral-900/80 border border-neutral-800/90 backdrop-blur-md shadow-xl py-3 px-4 overflow-hidden relative flex items-center">
+            {/* Stationary left indicator badge */}
+            <div className="flex items-center gap-2 pr-4 z-10 bg-neutral-900/95 shadow-md shrink-0 border-r border-neutral-800">
               <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse shrink-0" />
-              <span className="font-mono text-neutral-400 font-semibold uppercase tracking-wider text-[11px]">Live Market Spreads</span>
-              <span className="text-neutral-600">|</span>
-              <span className="font-mono font-bold text-[#CFA5C1]">RBI Repo Rate: 6.50%</span>
+              <span className="font-mono text-neutral-300 font-bold uppercase tracking-wider text-[11px] whitespace-nowrap">
+                Live Market Spreads
+              </span>
+              <span className="text-neutral-600 hidden sm:inline">|</span>
+              <span className="font-mono font-bold text-[#CFA5C1] text-[11px] hidden sm:inline">
+                RBI Repo: 6.50%
+              </span>
             </div>
-            <div className="flex items-center gap-6 overflow-x-auto font-mono text-[11px] text-neutral-300 pb-1 sm:pb-0">
-              <span className="whitespace-nowrap"><strong className="text-white">SBI:</strong> 10.30% <span className="text-emerald-400 text-[10px]">(+3.80% spread)</span></span>
-              <span className="whitespace-nowrap"><strong className="text-white">HDFC:</strong> 10.50% <span className="text-emerald-400 text-[10px]">(+4.00% spread)</span></span>
-              <span className="whitespace-nowrap"><strong className="text-white">Mortgage LAP:</strong> 9.15% <span className="text-emerald-400 text-[10px]">(Secured)</span></span>
-              <span className="whitespace-nowrap"><strong className="text-white">NBFC MSME:</strong> 17.50% <span className="text-amber-400 text-[10px]">(Unsecured)</span></span>
-              <span className="whitespace-nowrap"><strong className="text-white">Instant Apps:</strong> 32.00%+ <span className="text-rose-400 text-[10px]">(Usury Risk)</span></span>
+
+            {/* Continuous Infinite Moving Line */}
+            <div className="overflow-hidden flex-1 relative ml-4">
+              <div className="animate-marquee flex items-center gap-8 font-mono text-[11px] text-neutral-300 whitespace-nowrap">
+                <span><strong className="text-white">SBI Prime:</strong> 10.30% <span className="text-emerald-400 text-[10px]">(+3.80% spread)</span></span>
+                <span className="text-neutral-700">•</span>
+                <span><strong className="text-white">HDFC Retail:</strong> 10.50% <span className="text-emerald-400 text-[10px]">(+4.00% spread)</span></span>
+                <span className="text-neutral-700">•</span>
+                <span><strong className="text-white">Mortgage LAP:</strong> 9.15% <span className="text-emerald-400 text-[10px]">(Secured, saves ₹8.4L)</span></span>
+                <span className="text-neutral-700">•</span>
+                <span><strong className="text-white">NBFC MSME:</strong> 17.50% <span className="text-amber-400 text-[10px]">(Unsecured Markup)</span></span>
+                <span className="text-neutral-700">•</span>
+                <span><strong className="text-white">Instant Apps:</strong> 32.00%+ <span className="text-rose-400 text-[10px]">(Usury Trap Alert)</span></span>
+                <span className="text-neutral-700">•</span>
+                <span><strong className="text-white">10Y Benchmark:</strong> 7.02% <span className="text-neutral-400 text-[10px]">(G-Sec Yield)</span></span>
+                <span className="text-neutral-700">•</span>
+                <span><strong className="text-white">Foreclosure:</strong> 0.00% <span className="text-emerald-400 text-[10px]">(Statutory Freedom)</span></span>
+                <span className="text-neutral-700">•</span>
+
+                {/* Duplicated for smooth infinite loop */}
+                <span><strong className="text-white">SBI Prime:</strong> 10.30% <span className="text-emerald-400 text-[10px]">(+3.80% spread)</span></span>
+                <span className="text-neutral-700">•</span>
+                <span><strong className="text-white">HDFC Retail:</strong> 10.50% <span className="text-emerald-400 text-[10px]">(+4.00% spread)</span></span>
+                <span className="text-neutral-700">•</span>
+                <span><strong className="text-white">Mortgage LAP:</strong> 9.15% <span className="text-emerald-400 text-[10px]">(Secured, saves ₹8.4L)</span></span>
+                <span className="text-neutral-700">•</span>
+                <span><strong className="text-white">NBFC MSME:</strong> 17.50% <span className="text-amber-400 text-[10px]">(Unsecured Markup)</span></span>
+                <span className="text-neutral-700">•</span>
+                <span><strong className="text-white">Instant Apps:</strong> 32.00%+ <span className="text-rose-400 text-[10px]">(Usury Trap Alert)</span></span>
+                <span className="text-neutral-700">•</span>
+                <span><strong className="text-white">10Y Benchmark:</strong> 7.02% <span className="text-neutral-400 text-[10px]">(G-Sec Yield)</span></span>
+                <span className="text-neutral-700">•</span>
+                <span><strong className="text-white">Foreclosure:</strong> 0.00% <span className="text-emerald-400 text-[10px]">(Statutory Freedom)</span></span>
+              </div>
             </div>
           </div>
 
@@ -1059,20 +908,90 @@ export const LandingPage: React.FC<LandingPageProps> = ({
             </div>
           </div>
 
-          {/* Section 5: Institutional Privacy Guarantee */}
-          <div className="max-w-3xl mx-auto text-center p-8 sm:p-10 rounded-3xl bg-neutral-900/80 border border-neutral-800 shadow-2xl relative overflow-hidden">
-            <div className="inline-flex p-3.5 rounded-2xl bg-[#2A1F2C] text-[#CFA5C1] mb-4">
-              <Lock className="w-7 h-7" />
+          {/* ========================================================================= */}
+          {/* SECTION 5: ZERO BUREAU PRIVACY GUARANTEE (COLORFUL & IMPRESSIVE CARD)     */}
+          {/* ========================================================================= */}
+          <div className="relative rounded-[2.5rem] border-2 border-emerald-500/40 bg-gradient-to-br from-[#051F16] via-[#0E0C22] to-[#2B0B27] p-8 sm:p-14 shadow-[0_0_60px_rgba(16,185,129,0.18)] overflow-hidden">
+            
+            {/* Ambient Multi-Hue Lighting Spheres */}
+            <div className="absolute -top-24 -left-24 w-96 h-96 bg-emerald-500/20 rounded-full blur-3xl pointer-events-none" />
+            <div className="absolute -bottom-24 -right-24 w-96 h-96 bg-purple-500/25 rounded-full blur-3xl pointer-events-none" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none" />
+
+            <div className="relative z-10 max-w-4xl mx-auto text-center space-y-8">
+              
+              {/* Header Badge */}
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-950/80 border border-emerald-500/50 text-xs font-mono text-emerald-300 shadow-lg">
+                <ShieldCheck className="w-4 h-4 text-emerald-400" />
+                <span className="font-bold uppercase tracking-wider">100% Client-Side Ephemeral Architecture</span>
+              </div>
+
+              {/* Title */}
+              <div>
+                <h4 
+                  className="text-3xl sm:text-5xl lg:text-6xl text-white font-normal tracking-tight mb-4"
+                  style={{ fontFamily: "'Instrument Serif', serif" }}
+                >
+                  Zero Bureau Hard Pulls. <br />
+                  <span className="italic text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 via-[#CFA5C1] to-cyan-300">
+                    100% In-Browser Privacy.
+                  </span>
+                </h4>
+                <p className="text-neutral-300 text-sm sm:text-base max-w-2xl mx-auto font-light leading-relaxed">
+                  Unlike lead aggregator websites that harvest your phone number and auction it to DSA call centers, Borrower Copilot executes all calculations inside your local browser memory. Zero bureau hits, zero spam calls.
+                </p>
+              </div>
+
+              {/* 3 Colorful Bento Micro-Cards */}
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2 text-left">
+                
+                {/* Micro-Card 1: Emerald (0 Inquiries) */}
+                <div className="p-5 rounded-2xl bg-emerald-950/40 border border-emerald-500/30 backdrop-blur-md relative overflow-hidden group hover:border-emerald-400/60 transition-all shadow-md">
+                  <div className="w-10 h-10 rounded-xl bg-emerald-500/20 text-emerald-300 flex items-center justify-center mb-3">
+                    <ShieldCheck className="w-5 h-5 text-emerald-400" />
+                  </div>
+                  <h5 className="font-bold text-white text-base mb-1">0 Hard Inquiries</h5>
+                  <p className="text-xs text-neutral-300 font-light leading-relaxed">
+                    No CIBIL, Experian, or CRIF hits logged. Your credit profile stays 100% clean and unharmed.
+                  </p>
+                </div>
+
+                {/* Micro-Card 2: Purple (Local Memory) */}
+                <div className="p-5 rounded-2xl bg-purple-950/40 border border-purple-500/30 backdrop-blur-md relative overflow-hidden group hover:border-purple-400/60 transition-all shadow-md">
+                  <div className="w-10 h-10 rounded-xl bg-purple-500/20 text-purple-300 flex items-center justify-center mb-3">
+                    <Lock className="w-5 h-5 text-purple-300" />
+                  </div>
+                  <h5 className="font-bold text-white text-base mb-1">In-Memory RAM</h5>
+                  <p className="text-xs text-neutral-300 font-light leading-relaxed">
+                    All counter-underwriting executes in your browser's local Web Worker. No database persistence.
+                  </p>
+                </div>
+
+                {/* Micro-Card 3: Cyan (Anti-DSA) */}
+                <div className="p-5 rounded-2xl bg-cyan-950/40 border border-cyan-500/30 backdrop-blur-md relative overflow-hidden group hover:border-cyan-400/60 transition-all shadow-md">
+                  <div className="w-10 h-10 rounded-xl bg-cyan-500/20 text-cyan-300 flex items-center justify-center mb-3">
+                    <Zap className="w-5 h-5 text-cyan-400" />
+                  </div>
+                  <h5 className="font-bold text-white text-base mb-1">Zero DSA Spam</h5>
+                  <p className="text-xs text-neutral-300 font-light leading-relaxed">
+                    We never ask for your mobile number or sell your lead to third-party commission brokers.
+                  </p>
+                </div>
+
+              </div>
+
+              {/* Action Button */}
+              <div className="pt-4">
+                <button
+                  onClick={onStartAssessment}
+                  className="px-8 py-4 rounded-full bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400 text-black font-semibold text-sm hover:opacity-95 transition-all shadow-[0_0_35px_rgba(52,211,153,0.35)] hover:scale-105 active:scale-95 flex items-center gap-2 mx-auto cursor-pointer"
+                >
+                  <Sparkles className="w-4 h-4 text-black" />
+                  <span>Start Free Self-Assessment</span>
+                </button>
+              </div>
+
             </div>
-            <h4 
-              className="text-3xl text-white mb-2 font-medium"
-              style={{ fontFamily: "'Instrument Serif', serif" }}
-            >
-              Zero Bureau Hard Pulls. 100% In-Browser Memory.
-            </h4>
-            <p className="text-sm text-neutral-400 max-w-xl mx-auto leading-relaxed">
-              Unlike lead aggregator websites that sell your phone number to DSA call centers, Borrower Copilot executes all calculations inside your browser memory. No bureau inquiry is logged, and nothing touches a remote server.
-            </p>
           </div>
 
         </div>
@@ -1106,7 +1025,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
           <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
             <button
               onClick={onStartAssessment}
-              className="px-8 py-4 rounded-full bg-white text-black font-semibold text-sm hover:bg-neutral-100 transition-all shadow-[0_0_30px_rgba(255,255,255,0.25)] hover:scale-105 active:scale-95 flex items-center gap-2"
+              className="px-8 py-4 rounded-full bg-white text-black font-semibold text-sm hover:bg-neutral-100 transition-all shadow-[0_0_30px_rgba(255,255,255,0.25)] hover:scale-105 active:scale-95 flex items-center gap-2 cursor-pointer"
             >
               <span>Launch Copilot Now</span>
               <ArrowRight className="w-4 h-4" />
@@ -1117,7 +1036,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
                 const el = document.getElementById('case-studies-section');
                 if (el) el.scrollIntoView({ behavior: 'smooth' });
               }}
-              className="liquid-glass px-8 py-4 rounded-full text-white text-sm font-medium hover:bg-white/10 transition-all flex items-center gap-2 shadow-lg"
+              className="liquid-glass px-8 py-4 rounded-full text-white text-sm font-medium hover:bg-white/10 transition-all flex items-center gap-2 shadow-lg cursor-pointer"
             >
               <span>Explore Case Studies</span>
               <ChevronRight className="w-4 h-4" />
