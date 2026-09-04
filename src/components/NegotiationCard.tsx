@@ -171,18 +171,63 @@ export const NegotiationCard: React.FC<NegotiationCardProps> = ({
             </div>
           </div>
 
-          <div className="relative z-10 flex flex-wrap items-end justify-between gap-6">
-            <div className="space-y-1.5">
-              <h2 className="font-display font-bold text-3xl sm:text-4xl text-white leading-tight tracking-tight">
-                {negotiationCard.borrowerName}
-              </h2>
-              <p className="text-xs sm:text-sm text-neutral-300 font-mono">
-                {negotiationCard.borrowerHeadline} · {profile.city}
-              </p>
-              <div className="flex items-center gap-2 pt-1 text-[11px] font-mono text-neutral-400">
-                <span>Safe Carry Ask: <strong className="text-white">₹{(amount.borrowerSafeCarryMax / 100000).toFixed(1)} Lakhs</strong></span>
-                <span>•</span>
-                <span>Bureau Tier: <strong className="text-emerald-400">{profile.creditScoreBand.replace('_', ' ')}</strong></span>
+          <div className="relative z-10 flex flex-wrap items-center justify-between gap-6">
+            
+            {/* Left: Verified Borrower Avatar & Institutional Bio */}
+            <div className="flex items-center gap-4 sm:gap-6">
+              <div className="relative group shrink-0">
+                <div className="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 rounded-2xl sm:rounded-3xl overflow-hidden border-2 border-amber-400/70 shadow-[0_0_25px_rgba(245,158,11,0.3)] bg-[#1A1224] relative">
+                  {profile.avatarUrl ? (
+                    <img 
+                      src={profile.avatarUrl} 
+                      alt={negotiationCard.borrowerName}
+                      className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                      onError={(e) => {
+                        (e.target as HTMLElement).style.display = 'none';
+                      }}
+                    />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center font-display font-bold text-3xl text-amber-400 bg-amber-950/40">
+                      {negotiationCard.borrowerName.charAt(0)}
+                    </div>
+                  )}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
+                </div>
+
+                {/* Verified Protocol Check Badge */}
+                <div 
+                  className="absolute -bottom-1.5 -right-1.5 bg-emerald-500 border-2 border-[#120D1A] rounded-full p-1.5 shadow-lg flex items-center justify-center text-white" 
+                  title="Verified Sovereign Borrower Protocol (RBI KFS Standards)"
+                >
+                  <ShieldCheck className="w-3.5 h-3.5 stroke-[2.5]" />
+                </div>
+
+                {/* Security Hologram Tag */}
+                <div className="absolute -top-2 -left-1.5 bg-black/90 border border-amber-400/60 rounded-md px-1.5 py-0.5 text-[9px] font-mono font-bold text-amber-300 shadow">
+                  ID-AUTH
+                </div>
+              </div>
+
+              <div className="space-y-1.5">
+                <div className="flex items-center gap-2">
+                  <h2 className="font-display font-bold text-2xl sm:text-3xl md:text-4xl text-white leading-tight tracking-tight">
+                    {negotiationCard.borrowerName}
+                  </h2>
+                  <span className="hidden sm:inline-flex items-center gap-1 text-[10px] font-mono uppercase font-bold tracking-wider px-2 py-0.5 rounded-md bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+                    <ShieldCheck className="w-3 h-3" />
+                    Verified Sovereign
+                  </span>
+                </div>
+                <p className="text-xs sm:text-sm text-neutral-300 font-mono">
+                  {negotiationCard.borrowerHeadline} · {profile.city}
+                </p>
+                <div className="flex flex-wrap items-center gap-2 pt-1 text-[11px] font-mono text-neutral-400">
+                  <span>Safe Carry Ask: <strong className="text-white">₹{(amount.borrowerSafeCarryMax / 100000).toFixed(1)} Lakhs</strong></span>
+                  <span>•</span>
+                  <span>Bureau Tier: <strong className="text-emerald-400">{profile.creditScoreBand.replace(/_/g, ' ')}</strong></span>
+                  <span>•</span>
+                  <span>Age: <strong className="text-neutral-200">{profile.age} yrs</strong></span>
+                </div>
               </div>
             </div>
 

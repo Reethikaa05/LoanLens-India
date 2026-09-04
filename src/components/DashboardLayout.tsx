@@ -283,7 +283,7 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({
               className={`w-full flex items-center gap-3 p-2.5 rounded-2xl text-neutral-400 hover:text-rose-300 hover:bg-rose-950/20 transition-all cursor-pointer text-left ${
                 !isSidebarOpen ? 'justify-center' : ''
               }`}
-              title="Sign Out (Return to Guest)"
+              title="Sign Out (Return to Home)"
             >
               <div className="p-1.5 rounded-xl bg-white/5 text-neutral-300">
                 <LogOut className="w-4 h-4" />
@@ -291,7 +291,7 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({
               {isSidebarOpen && (
                 <div className="flex-1 min-w-0 animate-fadeIn">
                   <div className="text-xs font-semibold text-neutral-200">Sign Out</div>
-                  <div className="text-[10px] text-neutral-400 font-light truncate">Switch to guest</div>
+                  <div className="text-[10px] text-neutral-400 font-light truncate">Return to home page</div>
                 </div>
               )}
             </button>

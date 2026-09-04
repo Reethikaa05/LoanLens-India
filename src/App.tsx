@@ -106,7 +106,8 @@ export function App() {
   const handleLogout = () => {
     setIsAuthenticated(false);
     setUserName('Guest Borrower');
-    showToast('Logged out successfully. Reverted to guest session.', 'info');
+    navigateTo('landing');
+    showToast('Signed out successfully. Returned to Home page.', 'info');
   };
 
   const copilotResult: CopilotResult = evaluateCopilot(activeProfile);
