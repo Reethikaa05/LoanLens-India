@@ -988,49 +988,127 @@ export const LandingPage: React.FC<LandingPageProps> = ({
             </div>
           </div>
 
-          {/* Section 4: Comparison Table (Bank vs Copilot) */}
-          <div className="p-8 sm:p-10 rounded-3xl bg-neutral-900/60 border border-neutral-800 space-y-6">
-            <div className="text-center max-w-2xl mx-auto mb-6">
-              <h3 
-                className="text-3xl text-white font-medium"
-                style={{ fontFamily: "'Instrument Serif', serif" }}
-              >
-                What the Bank Conceals vs What Copilot Reveals
-              </h3>
-            </div>
+          {/* ========================================================================= */}
+          {/* SECTION 4: WHAT THE BANK CONCEALS VS WHAT COPILOT REVEALS (JEWEL-TONE)     */}
+          {/* ========================================================================= */}
+          <div className="relative rounded-[2.5rem] border-2 border-fuchsia-500/40 bg-gradient-to-br from-[#1F0724] via-[#0E0C22] to-[#041A1F] p-8 sm:p-14 shadow-[0_0_60px_rgba(217,70,239,0.18)] overflow-hidden">
+            
+            {/* Ambient Multi-Hue Lighting Spheres */}
+            <div className="absolute -top-24 -left-24 w-96 h-96 bg-fuchsia-500/20 rounded-full blur-3xl pointer-events-none" />
+            <div className="absolute -bottom-24 -right-24 w-96 h-96 bg-cyan-500/20 rounded-full blur-3xl pointer-events-none" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-purple-500/15 rounded-full blur-3xl pointer-events-none" />
 
-            <div className="overflow-x-auto">
-              <table className="w-full text-left text-xs border-collapse">
-                <thead>
-                  <tr className="border-b border-neutral-800 font-mono text-[11px] uppercase tracking-wider text-neutral-500">
-                    <th className="p-3">Underwriting Parameter</th>
-                    <th className="p-3 text-rose-400">Lender Default Practice</th>
-                    <th className="p-3 text-emerald-400 font-bold">Borrower Copilot Counter-Model</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-neutral-800/60 font-sans">
-                  <tr>
-                    <td className="p-3.5 font-semibold text-white">Affordability</td>
-                    <td className="p-3.5 text-neutral-400">Aggressive 60% gross FOIR; pushes maximum debt principal for fees.</td>
-                    <td className="p-3.5 text-emerald-300 font-medium">Real free cashflow after living expenses, rent & 20% safety cushion.</td>
-                  </tr>
-                  <tr>
-                    <td className="p-3.5 font-semibold text-white">Interest Rate</td>
-                    <td className="p-3.5 text-neutral-400">Fixed point quote (e.g. "14% flat rack rate"), hiding upfront fee drag.</td>
-                    <td className="p-3.5 text-emerald-300 font-medium">Fair Repo-indexed band [Min%, Max%] + true RBI KFS All-In APR.</td>
-                  </tr>
-                  <tr>
-                    <td className="p-3.5 font-semibold text-white">Collateral Routing</td>
-                    <td className="p-3.5 text-neutral-400">Pushes 18-22% unsecured business loans for higher salesperson commissions.</td>
-                    <td className="p-3.5 text-emerald-300 font-medium">Redirects unencumbered property to 9.5% LAP, saving ₹8.4L in interest.</td>
-                  </tr>
-                  <tr>
-                    <td className="p-3.5 font-semibold text-white">Unknown Score</td>
-                    <td className="p-3.5 text-neutral-400">Assumes subprime or defaults to highest rack rate tier.</td>
-                    <td className="p-3.5 text-emerald-300 font-medium">Widens band honestly, preserves dignity, and explains how to tighten.</td>
-                  </tr>
-                </tbody>
-              </table>
+            <div className="relative z-10 space-y-8">
+              {/* Header Badge & Editorial Title */}
+              <div className="text-center max-w-3xl mx-auto space-y-3">
+                <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-fuchsia-950/80 border border-fuchsia-500/50 text-xs font-mono text-fuchsia-300 shadow-lg">
+                  <Scale className="w-4 h-4 text-fuchsia-300" />
+                  <span className="font-bold uppercase tracking-wider">Asymmetric Underwriting Transparency</span>
+                </div>
+
+                <h3 
+                  className="text-4xl sm:text-5xl lg:text-6xl text-white font-normal tracking-tight leading-tight"
+                  style={{ fontFamily: "'Instrument Serif', serif" }}
+                >
+                  What the Bank Conceals <br className="hidden sm:inline" />
+                  <span className="italic text-transparent bg-clip-text bg-gradient-to-r from-rose-400 via-fuchsia-300 to-emerald-300">
+                    vs What Copilot Reveals
+                  </span>
+                </h3>
+                
+                <p className="text-neutral-300 text-sm sm:text-base max-w-2xl mx-auto font-light leading-relaxed">
+                  Traditional retail lending is engineered around sales quotas and fee extraction. Borrower Copilot levels the playing field with transparent, institutional counter-math.
+                </p>
+              </div>
+
+              {/* Styled Comparison Presentation */}
+              <div className="overflow-hidden rounded-2xl border border-white/10 bg-black/40 backdrop-blur-md shadow-2xl">
+                <div className="overflow-x-auto">
+                  <table className="w-full text-left text-xs sm:text-sm border-collapse">
+                    <thead>
+                      <tr className="border-b border-white/10 bg-white/[0.04] font-mono text-[11px] uppercase tracking-wider">
+                        <th className="p-4 sm:p-5 text-neutral-300 font-semibold w-1/4">Underwriting Parameter</th>
+                        <th className="p-4 sm:p-5 text-rose-400 font-semibold w-[37.5%]">
+                          <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-rose-950/70 border border-rose-500/30 text-rose-300">
+                            Lender Default Practice
+                          </span>
+                        </th>
+                        <th className="p-4 sm:p-5 text-emerald-400 font-semibold w-[37.5%]">
+                          <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-950/70 border border-emerald-500/40 text-emerald-300 font-bold">
+                            Borrower Copilot Counter-Model
+                          </span>
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-white/5 font-sans">
+                      <tr className="hover:bg-white/[0.02] transition-colors">
+                        <td className="p-4 sm:p-5 font-semibold text-white align-top">
+                          <div className="font-display text-base">Affordability</div>
+                          <div className="text-[11px] text-neutral-400 font-normal mt-0.5">Capacity to pay</div>
+                        </td>
+                        <td className="p-4 sm:p-5 text-neutral-300 align-top">
+                          <div className="p-3 rounded-xl bg-rose-950/20 border border-rose-500/20 text-rose-200/90 text-xs sm:text-[13px] leading-relaxed">
+                            Aggressive 60% gross FOIR calculation; pushes maximum debt principal to generate upfront distributor fees.
+                          </div>
+                        </td>
+                        <td className="p-4 sm:p-5 align-top">
+                          <div className="p-3 rounded-xl bg-emerald-950/30 border border-emerald-500/30 text-emerald-200 text-xs sm:text-[13px] font-medium leading-relaxed shadow-xs">
+                            Real net free cashflow after living expenses, rent, school fees, and an inviolable 20% household emergency buffer.
+                          </div>
+                        </td>
+                      </tr>
+                      <tr className="hover:bg-white/[0.02] transition-colors">
+                        <td className="p-4 sm:p-5 font-semibold text-white align-top">
+                          <div className="font-display text-base">Interest Rate</div>
+                          <div className="text-[11px] text-neutral-400 font-normal mt-0.5">Pricing transparency</div>
+                        </td>
+                        <td className="p-4 sm:p-5 text-neutral-300 align-top">
+                          <div className="p-3 rounded-xl bg-rose-950/20 border border-rose-500/20 text-rose-200/90 text-xs sm:text-[13px] leading-relaxed">
+                            Fixed point teaser quote (e.g. "14% flat rack rate"), obscuring processing fees, stamp duty, and compounding drag.
+                          </div>
+                        </td>
+                        <td className="p-4 sm:p-5 align-top">
+                          <div className="p-3 rounded-xl bg-emerald-950/30 border border-emerald-500/30 text-emerald-200 text-xs sm:text-[13px] font-medium leading-relaxed shadow-xs">
+                            Fair Repo-indexed spread band [Min%, Max%] + true RBI KFS All-In APR disclosing every rupee of lifetime cost.
+                          </div>
+                        </td>
+                      </tr>
+                      <tr className="hover:bg-white/[0.02] transition-colors">
+                        <td className="p-4 sm:p-5 font-semibold text-white align-top">
+                          <div className="font-display text-base">Collateral Routing</div>
+                          <div className="text-[11px] text-neutral-400 font-normal mt-0.5">Product optimization</div>
+                        </td>
+                        <td className="p-4 sm:p-5 text-neutral-300 align-top">
+                          <div className="p-3 rounded-xl bg-rose-950/20 border border-rose-500/20 text-rose-200/90 text-xs sm:text-[13px] leading-relaxed">
+                            Pushes 18–22% unsecured business loans to maximize branch margins and relationship manager sales targets.
+                          </div>
+                        </td>
+                        <td className="p-4 sm:p-5 align-top">
+                          <div className="p-3 rounded-xl bg-emerald-950/30 border border-emerald-500/30 text-emerald-200 text-xs sm:text-[13px] font-medium leading-relaxed shadow-xs">
+                            Detects unencumbered real estate and routes to 9.5% Loan Against Property, saving ₹8.4 Lakhs in lifetime interest.
+                          </div>
+                        </td>
+                      </tr>
+                      <tr className="hover:bg-white/[0.02] transition-colors">
+                        <td className="p-4 sm:p-5 font-semibold text-white align-top">
+                          <div className="font-display text-base">Credit History</div>
+                          <div className="text-[11px] text-neutral-400 font-normal mt-0.5">Score uncertainty</div>
+                        </td>
+                        <td className="p-4 sm:p-5 text-neutral-300 align-top">
+                          <div className="p-3 rounded-xl bg-rose-950/20 border border-rose-500/20 text-rose-200/90 text-xs sm:text-[13px] leading-relaxed">
+                            Treats missing or unknown credit histories as high-risk subprime, imposing penal rates or blanket rejections.
+                          </div>
+                        </td>
+                        <td className="p-4 sm:p-5 align-top">
+                          <div className="p-3 rounded-xl bg-emerald-950/30 border border-emerald-500/30 text-emerald-200 text-xs sm:text-[13px] font-medium leading-relaxed shadow-xs">
+                            Widens confidence band honestly, preserves borrower dignity, and prescribes concrete steps to build score leverage.
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
             </div>
           </div>
 

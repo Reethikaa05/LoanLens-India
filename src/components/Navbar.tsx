@@ -1,5 +1,5 @@
 import React from 'react';
-import { Shield, Sparkles, Moon, Sun, UserCheck, LogIn, Compass, FileSpreadsheet, TrendingUp, Sliders, BookOpen, Award } from 'lucide-react';
+import { Shield, Sparkles, Moon, Sun, UserCheck, LogIn, Compass, FileSpreadsheet, TrendingUp, Sliders, BookOpen, Award, LogOut } from 'lucide-react';
 import { PRESET_PROFILES } from '../engine/scenarios';
 import { BorrowerProfile } from '../engine/types';
 
@@ -11,6 +11,7 @@ interface NavbarProps {
   darkMode: boolean;
   onToggleDarkMode: () => void;
   onOpenAuth: () => void;
+  onLogout?: () => void;
   isAuthenticated: boolean;
   userName: string;
 }
@@ -23,6 +24,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   darkMode,
   onToggleDarkMode,
   onOpenAuth,
+  onLogout,
   isAuthenticated,
   userName
 }) => {
@@ -177,24 +179,38 @@ export const Navbar: React.FC<NavbarProps> = ({
             </button>
 
             {/* Auth / Profile Trigger */}
-            <button
-              onClick={onOpenAuth}
-              className="flex items-center gap-2 px-3 py-1.5 text-xs font-medium rounded-lg border border-[#E2D9DE] dark:border-[#33293A] hover:bg-[#EFE3EA] dark:hover:bg-[#2A1F2C] transition-colors"
-            >
-              {isAuthenticated ? (
-                <>
-                  <div className="w-5 h-5 rounded-full bg-[#4B2440] dark:bg-[#CFA5C1] text-white dark:text-neutral-900 flex items-center justify-center text-[10px] font-bold">
-                    {userName.charAt(0)}
-                  </div>
-                  <span className="hidden sm:inline font-medium">{userName}</span>
-                </>
-              ) : (
-                <>
-                  <LogIn className="w-3.5 h-3.5 text-[#4B2440] dark:text-[#CFA5C1]" />
-                  <span>Sign In / Demo</span>
-                </>
+            <div className="flex items-center gap-1.5">
+              <button
+                onClick={onOpenAuth}
+                className="flex items-center gap-2 px-3 py-1.5 text-xs font-medium rounded-lg border border-[#E2D9DE] dark:border-[#33293A] hover:bg-[#EFE3EA] dark:hover:bg-[#2A1F2C] transition-colors cursor-pointer"
+              >
+                {isAuthenticated ? (
+                  <>
+                    <div className="w-5 h-5 rounded-full bg-[#4B2440] dark:bg-[#CFA5C1] text-white dark:text-neutral-900 flex items-center justify-center text-[10px] font-bold">
+                      {userName.charAt(0).toUpperCase()}
+                    </div>
+                    <span className="hidden sm:inline font-medium">{userName}</span>
+                  </>
+                ) : (
+                  <>
+                    <LogIn className="w-3.5 h-3.5 text-[#4B2440] dark:text-[#CFA5C1]" />
+                    <span>Sign In / Demo</span>
+                  </>
+                )}
+              </button>
+
+              {/* Quick Logout Button */}
+              {isAuthenticated && onLogout && (
+                <button
+                  type="button"
+                  onClick={onLogout}
+                  title="Sign Out"
+                  className="p-1.5 rounded-lg text-neutral-400 hover:text-rose-400 hover:bg-rose-950/40 border border-transparent hover:border-rose-500/30 transition-all cursor-pointer"
+                >
+                  <LogOut className="w-3.5 h-3.5" />
+                </button>
               )}
-            </button>
+            </div>
 
             {/* Assessment CTA */}
             <button

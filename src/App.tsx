@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { CheckCircle2, Info, X } from 'lucide-react';
 import { Navbar } from './components/Navbar';
 import { LandingPage } from './components/LandingPage';
 import { DashboardLayout } from './components/DashboardLayout';
@@ -12,6 +13,11 @@ import { PRIYA_PROFILE } from './engine/scenarios';
 import { BorrowerProfile, CopilotResult } from './engine/types';
 import { evaluateCopilot } from './engine/calculator';
 
+interface ToastNotification {
+  message: string;
+  type: 'success' | 'info';
+}
+
 export function App() {
   const [currentTab, setCurrentTab] = useState<string>('landing');
   const [darkMode, setDarkMode] = useState<boolean>(true); // Default to dark aesthetic
@@ -20,6 +26,21 @@ export function App() {
   const [authInitialTab, setAuthInitialTab] = useState<'signin' | 'signup'>('signin');
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   const [userName, setUserName] = useState<string>('Guest Borrower');
+  const [toast, setToast] = useState<ToastNotification | null>(null);
+
+  const showToast = (message: string, type: 'success' | 'info' = 'success') => {
+    setToast({ message, type });
+  };
+
+  // Toast auto-dismiss after 3.5s
+  useEffect(() => {
+    if (toast) {
+      const timer = setTimeout(() => {
+        setToast(null);
+      }, 3500);
+      return () => clearTimeout(timer);
+    }
+  }, [toast]);
 
   // Dark mode effect
   useEffect(() => {
@@ -42,12 +63,38 @@ export function App() {
   const handleAuthenticate = (name: string) => {
     setIsAuthenticated(true);
     setUserName(name);
+    showToast(`Successfully logged in as ${name} — Copilot active`, 'success');
+  };
+
+  const handleLogout = () => {
+    setIsAuthenticated(false);
+    setUserName('Guest Borrower');
+    showToast('Logged out successfully. Reverted to guest session.', 'info');
   };
 
   const copilotResult: CopilotResult = evaluateCopilot(activeProfile);
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#FBF9FA] dark:bg-[#17121A] text-[#221A20] dark:text-[#EEE6EA] font-body transition-colors">
+    <div className="min-h-screen flex flex-col bg-[#FBF9FA] dark:bg-[#17121A] text-[#221A20] dark:text-[#EEE6EA] font-body transition-colors relative">
+      {/* Floating Toast Notification */}
+      {toast && (
+        <div className="fixed top-6 right-6 z-[9999] flex items-center gap-3 px-5 py-3.5 rounded-2xl bg-[#140F18]/95 text-white border border-purple-500/40 shadow-[0_12px_40px_rgba(0,0,0,0.8)] backdrop-blur-xl animate-fadeIn">
+          {toast.type === 'success' ? (
+            <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0" />
+          ) : (
+            <Info className="w-5 h-5 text-purple-400 shrink-0" />
+          )}
+          <span className="text-xs font-medium tracking-wide">{toast.message}</span>
+          <button
+            onClick={() => setToast(null)}
+            className="ml-2 text-neutral-400 hover:text-white transition-colors"
+            aria-label="Close notification"
+          >
+            <X className="w-4 h-4" />
+          </button>
+        </div>
+      )}
+
       {/* Navbar (Only rendered outside landing or seamlessly present) */}
       {currentTab !== 'landing' && (
         <Navbar
@@ -61,6 +108,7 @@ export function App() {
           darkMode={darkMode}
           onToggleDarkMode={() => setDarkMode(!darkMode)}
           onOpenAuth={() => handleOpenAuth('signin')}
+          onLogout={handleLogout}
           isAuthenticated={isAuthenticated}
           userName={userName}
         />
@@ -165,6 +213,9 @@ export function App() {
           handleAuthenticate(name);
           setCurrentTab('copilot');
         }}
+        onLogout={handleLogout}
+        isAuthenticated={isAuthenticated}
+        userName={userName}
         initialTab={authInitialTab}
       />
     </div>
