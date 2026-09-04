@@ -237,7 +237,6 @@ export function App() {
             <PersonaDossier
               onSelectAndLaunch={(p) => {
                 handleSelectProfile(p);
-                navigateTo('dashboard');
               }}
             />
           </div>

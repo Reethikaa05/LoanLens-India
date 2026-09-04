@@ -1093,7 +1093,6 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({
             <PersonaDossier
               onSelectAndLaunch={(p) => {
                 onChangeProfile(p);
-                setActiveSubTab('overview');
               }}
             />
           </div>
