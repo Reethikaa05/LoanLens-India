@@ -154,17 +154,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               <BookOpen className="w-4 h-4" />
               3 Borrowers
             </button>
-            <button
-              onClick={() => onSelectTab('reviewer')}
-              className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-1.5 ${
-                currentTab === 'reviewer'
-                  ? 'bg-[#EA580C] text-[#FBF9FA] dark:bg-[#F59E0B] dark:text-[#17121A]'
-                  : 'text-[#EA580C] dark:text-[#F59E0B] hover:bg-[#1E1424] dark:hover:bg-[#1E1424]'
-              }`}
-            >
-              <Award className="w-4 h-4" />
-              Reviewer Hub
-            </button>
+
           </nav>
 
           {/* Right Action Buttons */}

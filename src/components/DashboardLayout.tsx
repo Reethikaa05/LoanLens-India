@@ -6,7 +6,6 @@ import {
   TrendingUp, 
   Sliders, 
   BookOpen,
-  Award,
   Settings, 
   LogOut, 
   Sparkles, 
@@ -40,7 +39,6 @@ import { NegotiationCard } from './NegotiationCard';
 import { MarketRadar } from './MarketRadar';
 import { RuleSandbox } from './RuleSandbox';
 import { PersonaDossier } from './PersonaDossier';
-import { HiringTeamHub } from './HiringTeamHub';
 import { ProfileSettingsModal } from './ProfileSettingsModal';
 import { OverviewFitnessInspiredGrid } from './OverviewFitnessInspiredGrid';
 
@@ -50,8 +48,7 @@ export type DashboardSubView =
   | 'card' 
   | 'radar' 
   | 'sandbox' 
-  | 'cases' 
-  | 'reviewer';
+  | 'cases';
 
 interface DashboardLayoutProps {
   activeProfile: BorrowerProfile;
@@ -102,7 +99,7 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({
     }
   };
 
-  // Sidebar navigation menu items with detailed descriptions
+  // Sidebar navigation menu items with detailed descriptions (Reviewer Hub removed)
   const menuItems = [
     {
       id: 'overview' as DashboardSubView,
@@ -151,14 +148,6 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({
       icon: BookOpen,
       badge: 'Cases',
       color: 'text-rose-400'
-    },
-    {
-      id: 'reviewer' as DashboardSubView,
-      label: 'Reviewer Hub',
-      subtitle: 'Evaluation Rubric & Alignment',
-      icon: Award,
-      badge: 'Scoring',
-      color: 'text-yellow-400'
     }
   ];
 
@@ -337,7 +326,7 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({
             </p>
           </div>
 
-          {/* Center Switcher Pills for Quick Navigation */}
+          {/* Center Switcher Pills for Quick Navigation (Reviewer Hub removed) */}
           <div className="flex items-center gap-1.5 bg-black/40 p-1.5 rounded-2xl border border-white/5 text-xs font-medium overflow-x-auto max-w-full">
             <button
               onClick={() => setActiveSubTab('overview')}
@@ -400,16 +389,6 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({
             >
               3 Borrowers
             </button>
-            <button
-              onClick={() => setActiveSubTab('reviewer')}
-              className={`px-3 py-1.5 rounded-xl transition-all cursor-pointer whitespace-nowrap ${
-                activeSubTab === 'reviewer'
-                  ? 'bg-orange-500 text-black font-semibold shadow-[0_0_12px_rgba(249,115,22,0.4)]'
-                  : 'text-neutral-400 hover:text-white'
-              }`}
-            >
-              Reviewer Hub
-            </button>
           </div>
 
           {/* Right Status & Profile Pill */}
@@ -447,7 +426,7 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({
         </header>
 
         {/* =================================================================== */}
-        {/* SUBTAB VIEWS (ALL RENDERED RIGHT INSIDE THIS LUXURY DASHBOARD)      */}
+        {/* SUBTAB VIEWS                                                        */}
         {/* =================================================================== */}
         
         {/* VIEW 1: OVERVIEW WITH DUAL DESIGNS INTEGRATED (DESIGN 1 + DESIGN 2) */}
@@ -455,8 +434,7 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({
           <div className="p-6 sm:p-8 space-y-10 max-w-7xl mx-auto w-full animate-fadeIn">
             
             {/* ------------------------------------------------------------- */}
-            {/* DESIGN 1: THE USER-REQUESTED FITNESS-INSPIRED TELEMETRY GRID  */}
-            {/* WITH REAL IMAGE SLIDESHOW HERO BANNER & REPAYMENT STATUS MATRIX */}
+            {/* DESIGN 1: FITNESS-INSPIRED TELEMETRY GRID WITH BRIGHT SLIDESHOW*/}
             {/* ------------------------------------------------------------- */}
             <section className="space-y-6">
               <OverviewFitnessInspiredGrid
@@ -469,7 +447,7 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({
             </section>
 
             {/* ------------------------------------------------------------- */}
-            {/* DESIGN 2: THE AMBER BENTO GRID WITH ARC FOIR GAUGE & PROFILE  */}
+            {/* DESIGN 2: AMBER BENTO GRID WITH ARC FOIR GAUGE & PROFILE      */}
             {/* ------------------------------------------------------------- */}
             <section className="space-y-6 pt-10 border-t border-white/10">
               
@@ -856,13 +834,6 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({
                 setActiveSubTab('overview');
               }}
             />
-          </div>
-        )}
-
-        {/* VIEW 7: REVIEWER HUB (INSIDE NEW LUXURY DASHBOARD) */}
-        {activeSubTab === 'reviewer' && (
-          <div className="p-6 sm:p-8 max-w-5xl mx-auto w-full animate-fadeIn">
-            <HiringTeamHub />
           </div>
         )}
 

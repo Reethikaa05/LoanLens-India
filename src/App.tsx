@@ -242,11 +242,7 @@ export function App() {
           </div>
         )}
 
-        {currentTab === 'reviewer' && (
-          <div className="py-8 px-4 sm:px-6 lg:px-8">
-            <HiringTeamHub />
-          </div>
-        )}
+
       </main>
 
       {/* Footer (Rendered outside landing and standalone auth/dashboard routes) */}
