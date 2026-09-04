@@ -998,7 +998,52 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({
 
         {/* VIEW 2: COPILOT ENGINE (QuestionFlow + Outputs) */}
         {activeSubTab === 'engine' && (
-          <div className="p-6 sm:p-8 max-w-7xl mx-auto w-full animate-fadeIn">
+          <div className="p-6 sm:p-8 max-w-7xl mx-auto w-full animate-fadeIn space-y-6">
+            
+            {/* Top Command Bar for Copilot Engine */}
+            <div className="p-6 sm:p-7 rounded-[2.5rem] bg-gradient-to-r from-[#1E0D1B] via-[#100D1A] to-[#0A1624] border border-amber-500/30 shadow-2xl backdrop-blur-xl relative overflow-hidden flex flex-wrap items-center justify-between gap-4">
+              <div className="absolute top-0 right-0 w-80 h-80 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
+              
+              <div className="relative z-10 space-y-1">
+                <div className="flex items-center gap-2">
+                  <span className="px-3 py-1 rounded-full bg-amber-500/20 border border-amber-400/40 text-[10px] font-mono font-bold text-amber-300 uppercase tracking-wider">
+                    Institutional Copilot Engine · Core v2.4
+                  </span>
+                  <span className="flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-500/20 border border-emerald-400/40 text-emerald-300 text-[10px] font-mono font-bold">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                    REAL-TIME UNDERWRITING ACTIVE
+                  </span>
+                </div>
+                <h2 className="text-2xl sm:text-3xl font-display font-bold text-white tracking-tight">
+                  Adaptive Intake & Algorithmic Underwriting
+                </h2>
+                <p className="text-xs sm:text-sm text-neutral-400 font-light">
+                  Adjust household financial variables on the left. The 4 institutional outputs on the right compute instantly in-browser.
+                </p>
+              </div>
+
+              {/* Quick Preset Selector */}
+              <div className="relative z-10 flex flex-wrap items-center gap-2">
+                <span className="text-xs font-mono text-neutral-400 mr-1 hidden sm:inline">1-Click Test Scenarios:</span>
+                {PRESET_PROFILES.map((preset) => (
+                  <button
+                    key={preset.id}
+                    onClick={() => onChangeProfile(preset.profile)}
+                    className={`px-3 py-1.5 rounded-xl border text-xs font-mono transition-all cursor-pointer flex items-center gap-2 ${
+                      activeProfile.name === preset.profile.name
+                        ? 'bg-amber-500 text-black font-bold border-amber-400 shadow-[0_0_15px_rgba(245,158,11,0.3)]'
+                        : 'bg-white/5 border-white/10 text-neutral-300 hover:text-white hover:bg-white/10'
+                    }`}
+                  >
+                    <span>{preset.profile.name.split(' ')[0]}</span>
+                    <span className="text-[10px] opacity-75">
+                      {preset.id === 'priya' ? '₹8L Wedding' : preset.id === 'ravi' ? '₹15L LAP' : '₹1.5L EV'}
+                    </span>
+                  </button>
+                ))}
+              </div>
+            </div>
+
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
               <div className="lg:col-span-5">
                 <QuestionFlow
