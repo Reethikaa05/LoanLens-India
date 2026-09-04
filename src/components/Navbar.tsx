@@ -100,15 +100,15 @@ export const Navbar: React.FC<NavbarProps> = ({
               Overview
             </button>
             <button
-              onClick={() => onSelectTab('copilot')}
+              onClick={() => onSelectTab('dashboard')}
               className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-1.5 ${
-                currentTab === 'copilot'
+                currentTab === 'dashboard' || currentTab === 'copilot'
                   ? 'bg-[#EFE3EA] dark:bg-[#2A1F2C] text-[#4B2440] dark:text-[#CFA5C1]'
                   : 'text-[#6E6069] dark:text-[#A99DA5] hover:text-[#221A20] dark:hover:text-[#EEE6EA]'
               }`}
             >
               <Compass className="w-4 h-4" />
-              Copilot Engine
+              Dashboard
             </button>
             <button
               onClick={() => onSelectTab('card')}
@@ -218,7 +218,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               className="hidden sm:flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-[#4B2440] text-[#FBF9FA] dark:bg-[#CFA5C1] dark:text-[#17121A] text-xs font-semibold hover:opacity-90 transition-opacity shadow-sm"
             >
               <Sparkles className="w-3.5 h-3.5" />
-              <span>Launch Copilot</span>
+              <span>Dashboard</span>
             </button>
           </div>
         </div>
@@ -233,10 +233,10 @@ export const Navbar: React.FC<NavbarProps> = ({
           Overview
         </button>
         <button
-          onClick={() => onSelectTab('copilot')}
-          className={`px-2.5 py-1 rounded-md whitespace-nowrap ${currentTab === 'copilot' ? 'bg-[#4B2440] text-white dark:bg-[#CFA5C1] dark:text-black font-semibold' : 'text-neutral-600 dark:text-neutral-300'}`}
+          onClick={() => onSelectTab('dashboard')}
+          className={`px-2.5 py-1 rounded-md whitespace-nowrap ${currentTab === 'dashboard' || currentTab === 'copilot' ? 'bg-[#4B2440] text-white dark:bg-[#CFA5C1] dark:text-black font-semibold' : 'text-neutral-600 dark:text-neutral-300'}`}
         >
-          Copilot
+          Dashboard
         </button>
         <button
           onClick={() => onSelectTab('card')}

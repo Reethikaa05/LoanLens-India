@@ -25,7 +25,8 @@ export const PRIYA_PROFILE: BorrowerProfile = {
   coApplicantIncome: 0,
   emergencyFundMonths: 4,
   expectedMonthlyReturnFromLoan: 0,
-  existingLenderOfferRate: 14.0 // Bank quotes 14%
+  existingLenderOfferRate: 14.0, // Bank quotes 14%
+  avatarUrl: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=600&auto=format&fit=crop'
 };
 
 export const RAVI_PROFILE: BorrowerProfile = {
@@ -53,7 +54,8 @@ export const RAVI_PROFILE: BorrowerProfile = {
   coApplicantIncome: 18000, // Wife earns ₹18k teaching
   emergencyFundMonths: 3,
   expectedMonthlyReturnFromLoan: 25000, // Incremental profit from expanded stock & delivery
-  existingLenderOfferRate: 19.5 // NBFC quotes 19.5% unsecured business loan
+  existingLenderOfferRate: 19.5, // NBFC quotes 19.5% unsecured business loan
+  avatarUrl: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=600&auto=format&fit=crop'
 };
 
 export const ANITA_PROFILE: BorrowerProfile = {
@@ -81,7 +83,8 @@ export const ANITA_PROFILE: BorrowerProfile = {
   coApplicantIncome: 0,
   emergencyFundMonths: 0.5,
   expectedMonthlyReturnFromLoan: 15000, // Doubling runs adds ₹15k/month
-  existingLenderOfferRate: 32.0 // Instant app loan quote 32%
+  existingLenderOfferRate: 32.0, // Instant app loan quote 32%
+  avatarUrl: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=600&auto=format&fit=crop'
 };
 
 export const DEFAULT_CUSTOM_PROFILE: BorrowerProfile = {
@@ -102,13 +105,14 @@ export const DEFAULT_CUSTOM_PROFILE: BorrowerProfile = {
   creditScoreBand: 'GOOD_700_749',
   requestedAmount: 500000,
   requestedTenureMonths: 36,
-  loanPurpose: 'HOME_LAP',
+  loanPurpose: 'DEBT_CONSOLIDATION',
   collateralType: 'NONE',
   collateralValue: 0,
   hasCoApplicant: false,
   coApplicantIncome: 0,
   emergencyFundMonths: 3,
-  expectedMonthlyReturnFromLoan: 0
+  expectedMonthlyReturnFromLoan: 0,
+  avatarUrl: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=600&auto=format&fit=crop'
 };
 
 export const PRESET_PROFILES = [

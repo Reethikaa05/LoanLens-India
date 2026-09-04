@@ -34,16 +34,18 @@ export function App() {
     setToast({ message, type });
   };
 
-  // Synchronize route with URL pathname & hash (/login, /signup, etc.)
+  // Synchronize route with URL pathname & hash (/dashboard, /login, /signup, etc.)
   useEffect(() => {
     const handleUrlSync = () => {
       const raw = window.location.pathname.replace(/^\/+/, '') || window.location.hash.replace(/^#\/?/, '');
       const clean = raw.toLowerCase().trim();
-      if (clean === 'login' || clean === 'signin') {
+      if (clean === 'dashboard' || clean === 'copilot') {
+        setCurrentTab('dashboard');
+      } else if (clean === 'login' || clean === 'signin') {
         setCurrentTab('login');
       } else if (clean === 'signup' || clean === 'register') {
         setCurrentTab('signup');
-      } else if (['copilot', 'card', 'radar', 'sandbox', 'cases', 'reviewer'].includes(clean)) {
+      } else if (['card', 'radar', 'sandbox', 'cases', 'reviewer'].includes(clean)) {
         setCurrentTab(clean);
       } else if (clean === '' || clean === 'landing' || clean === 'home') {
         setCurrentTab('landing');
@@ -109,10 +111,11 @@ export function App() {
 
   const copilotResult: CopilotResult = evaluateCopilot(activeProfile);
 
-  const isStandaloneAuthRoute = currentTab === 'login' || currentTab === 'signup';
+  // Suppress top Navbar on standalone auth routes and on full-screen dashboard with its own sidebar
+  const hideTopNavbar = currentTab === 'landing' || currentTab === 'login' || currentTab === 'signup' || currentTab === 'dashboard';
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#FBF9FA] dark:bg-[#17121A] text-[#221A20] dark:text-[#EEE6EA] font-body transition-colors relative">
+    <div className="min-h-screen flex flex-col bg-[#FBF9FA] dark:bg-[#0E0B12] text-[#221A20] dark:text-[#EEE6EA] font-body transition-colors relative">
       {/* Floating Toast Notification */}
       {toast && (
         <div className="fixed top-6 right-6 z-[9999] flex items-center gap-3 px-5 py-3.5 rounded-2xl bg-[#140F18]/95 text-white border border-purple-500/40 shadow-[0_12px_40px_rgba(0,0,0,0.8)] backdrop-blur-xl animate-fadeIn">
@@ -132,15 +135,15 @@ export function App() {
         </div>
       )}
 
-      {/* Navbar (Rendered on standard app tabs, omitted on landing & auth routes) */}
-      {currentTab !== 'landing' && !isStandaloneAuthRoute && (
+      {/* Navbar (Rendered on secondary app tabs like radar, sandbox, cases, reviewer) */}
+      {!hideTopNavbar && (
         <Navbar
           currentTab={currentTab}
           onSelectTab={navigateTo}
           activeProfile={activeProfile}
           onSelectProfile={(p) => {
             handleSelectProfile(p);
-            navigateTo('copilot');
+            navigateTo('dashboard');
           }}
           darkMode={darkMode}
           onToggleDarkMode={() => setDarkMode(!darkMode)}
@@ -152,7 +155,7 @@ export function App() {
       )}
 
       {/* Main Tab Content */}
-      <main className="flex-1">
+      <main className="flex-1 flex flex-col">
         {/* Dedicated Route: /login */}
         {currentTab === 'login' && (
           <LoginPage
@@ -160,11 +163,11 @@ export function App() {
             onNavigateToSignup={() => navigateTo('signup')}
             onSelectProfile={(p) => {
               handleSelectProfile(p);
-              navigateTo('copilot');
+              navigateTo('dashboard');
             }}
             onAuthenticate={(name) => {
               handleAuthenticate(name);
-              navigateTo('copilot');
+              navigateTo('dashboard');
             }}
           />
         )}
@@ -176,31 +179,34 @@ export function App() {
             onNavigateToLogin={() => navigateTo('login')}
             onSelectProfile={(p) => {
               handleSelectProfile(p);
-              navigateTo('copilot');
+              navigateTo('dashboard');
             }}
             onAuthenticate={(name) => {
               handleAuthenticate(name);
-              navigateTo('copilot');
+              navigateTo('dashboard');
             }}
           />
         )}
 
         {currentTab === 'landing' && (
           <LandingPage
-            onStartAssessment={() => navigateTo('copilot')}
+            onStartAssessment={() => navigateTo('dashboard')}
             onSelectProfile={(p) => {
               handleSelectProfile(p);
-              navigateTo('copilot');
+              navigateTo('dashboard');
             }}
             onOpenAuth={handleOpenAuth}
           />
         )}
 
-        {currentTab === 'copilot' && (
+        {/* Dedicated Route: /dashboard */}
+        {(currentTab === 'dashboard' || currentTab === 'copilot') && (
           <DashboardLayout
             activeProfile={activeProfile}
             onChangeProfile={setActiveProfile}
             onOpenCard={() => navigateTo('card')}
+            onNavigateTab={navigateTo}
+            onLogout={handleLogout}
           />
         )}
 
@@ -208,7 +214,7 @@ export function App() {
           <div className="py-8 px-4 sm:px-6 lg:px-8">
             <NegotiationCard
               result={copilotResult}
-              onBack={() => navigateTo('copilot')}
+              onBack={() => navigateTo('dashboard')}
             />
           </div>
         )}
@@ -230,7 +236,7 @@ export function App() {
             <PersonaDossier
               onSelectAndLaunch={(p) => {
                 handleSelectProfile(p);
-                navigateTo('copilot');
+                navigateTo('dashboard');
               }}
             />
           </div>
@@ -243,8 +249,8 @@ export function App() {
         )}
       </main>
 
-      {/* Footer (Rendered outside landing and standalone auth routes) */}
-      {currentTab !== 'landing' && !isStandaloneAuthRoute && (
+      {/* Footer (Rendered outside landing and standalone auth/dashboard routes) */}
+      {!hideTopNavbar && (
         <footer className="border-t border-[#E2D9DE] dark:border-[#33293A] bg-white dark:bg-neutral-900 py-8 px-4 sm:px-6 lg:px-8 text-xs text-[#6E6069] dark:text-[#A99DA5] transition-colors">
           <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
             <div className="flex items-center gap-2">

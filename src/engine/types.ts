@@ -53,6 +53,7 @@ export interface BorrowerProfile {
   emergencyFundMonths: number; // Months of living expenses saved
   expectedMonthlyReturnFromLoan: number; // Additional cashflow from productive asset
   existingLenderOfferRate?: number; // Rate offered by branch (e.g. 14.5%)
+  avatarUrl?: string; // High-res borrower profile photo
 }
 
 export type VerdictStatus = 'BORROW' | 'BORROW_LESS' | 'DONT_BORROW';
