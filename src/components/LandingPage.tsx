@@ -27,10 +27,7 @@ import {
   Sliders,
   Shield,
   Layers,
-  Check,
-  ExternalLink,
-  Eye,
-  RefreshCw
+  Check
 } from 'lucide-react';
 import { PRESET_PROFILES } from '../engine/scenarios';
 import { BorrowerProfile } from '../engine/types';
@@ -75,13 +72,16 @@ export const LandingPage: React.FC<LandingPageProps> = ({
   const simFairMinRate = 10.50;
   const simFairMaxRate = 12.00;
 
-  // Interactive Feature Tab State (Matching Left Card in screenshot)
+  // Interactive Feature Tab State (Left Bento Card)
   const [activeTab, setActiveTab] = useState<'safecarry' | 'reporate' | 'zeroprepay' | 'kfsapr' | 'stresstest'>('safecarry');
 
-  // Video Container Interactive State (The empty box ready for adding video)
-  const [videoUrl, setVideoUrl] = useState<string>('');
-  const [showUrlInput, setShowUrlInput] = useState<boolean>(false);
-  const [customVideoInput, setCustomVideoInput] = useState<string>('');
+  // Video Showcase Player State (Right Bento Card - Live Embedded Video)
+  const showcaseVideoRef = useRef<HTMLVideoElement>(null);
+  const [isShowcasePlaying, setIsShowcasePlaying] = useState<boolean>(true);
+  const [isShowcaseMuted, setIsShowcaseMuted] = useState<boolean>(true);
+  const [showcaseProgress, setShowcaseProgress] = useState<number>(0);
+  const [showcaseDuration, setShowcaseDuration] = useState<number>(0);
+  const [showcaseCurrentTime, setShowcaseCurrentTime] = useState<number>(0);
 
   // Feature pill definitions matching "100% Electric" style card
   const TAB_DATA = {
@@ -125,6 +125,48 @@ export const LandingPage: React.FC<LandingPageProps> = ({
       metric1: { label: 'Income Shock (-20%)', value: 'Solvent & Stable' },
       metric2: { label: 'Repo Spike (+200bps)', value: 'EMI Buffered' }
     }
+  };
+
+  // Video Showcase Player Controls
+  const toggleShowcasePlay = () => {
+    if (!showcaseVideoRef.current) return;
+    if (showcaseVideoRef.current.paused) {
+      showcaseVideoRef.current.play();
+      setIsShowcasePlaying(true);
+    } else {
+      showcaseVideoRef.current.pause();
+      setIsShowcasePlaying(false);
+    }
+  };
+
+  const toggleShowcaseMute = () => {
+    if (!showcaseVideoRef.current) return;
+    showcaseVideoRef.current.muted = !showcaseVideoRef.current.muted;
+    setIsShowcaseMuted(showcaseVideoRef.current.muted);
+  };
+
+  const handleShowcaseTimeUpdate = () => {
+    if (!showcaseVideoRef.current) return;
+    const current = showcaseVideoRef.current.currentTime;
+    const duration = showcaseVideoRef.current.duration || 1;
+    setShowcaseCurrentTime(current);
+    setShowcaseDuration(duration);
+    setShowcaseProgress((current / duration) * 100);
+  };
+
+  const handleShowcaseSeek = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!showcaseVideoRef.current) return;
+    const seekPercent = Number(e.target.value);
+    const duration = showcaseVideoRef.current.duration || 1;
+    const seekTime = (seekPercent / 100) * duration;
+    showcaseVideoRef.current.currentTime = seekTime;
+    setShowcaseProgress(seekPercent);
+  };
+
+  const formatVideoTime = (seconds: number) => {
+    const mins = Math.floor(seconds / 60);
+    const secs = Math.floor(seconds % 60);
+    return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
   };
 
   // Custom JavaScript fade system with requestAnimationFrame (500ms duration)
@@ -395,7 +437,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
             {/* ------------------------------------------------------------------- */}
             {/* LEFT CARD: Feature Bento (100% Borrower Protected)                  */}
             {/* ------------------------------------------------------------------- */}
-            <div className="rounded-[2.5rem] bg-[#0C0B10] border border-neutral-800/90 p-8 sm:p-12 flex flex-col justify-between shadow-2xl relative overflow-hidden group hover:border-[#CFA5C1]/40 transition-all duration-500 min-h-[500px]">
+            <div className="rounded-[2.5rem] bg-[#0C0B10] border border-neutral-800/90 p-8 sm:p-12 flex flex-col justify-between shadow-2xl relative overflow-hidden group hover:border-[#CFA5C1]/40 transition-all duration-500 min-h-[520px]">
               {/* Radial gradient background highlight */}
               <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-[#CFA5C1]/10 via-purple-500/5 to-transparent rounded-full blur-3xl pointer-events-none" />
 
@@ -491,10 +533,10 @@ export const LandingPage: React.FC<LandingPageProps> = ({
             </div>
 
             {/* ------------------------------------------------------------------- */}
-            {/* RIGHT CARD: Dedicated Video Showcase Box                            */}
-            {/* (Empty Box Ready for Video Embed as specifically requested)         */}
+            {/* RIGHT CARD: Embedded Video Showcase Frame                           */}
+            {/* (Fully integrated video player with custom controls & HUD overlay)   */}
             {/* ------------------------------------------------------------------- */}
-            <div className="rounded-[2.5rem] bg-[#07060A] border border-neutral-800/90 overflow-hidden relative p-6 sm:p-10 flex flex-col justify-between shadow-2xl group hover:border-[#CFA5C1]/40 transition-all duration-500 min-h-[500px]">
+            <div className="rounded-[2.5rem] bg-[#07060A] border border-neutral-800/90 overflow-hidden relative p-6 sm:p-8 flex flex-col justify-between shadow-2xl group hover:border-[#CFA5C1]/40 transition-all duration-500 min-h-[520px]">
               
               {/* Ethereal Twilight Sky + Warm Campfire Glow (Matching Screenshot Artwork) */}
               <div className="absolute inset-0 pointer-events-none overflow-hidden">
@@ -514,110 +556,122 @@ export const LandingPage: React.FC<LandingPageProps> = ({
                 <div className="flex items-center gap-2">
                   <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse shrink-0" />
                   <span className="font-mono text-xs font-bold text-neutral-300 uppercase tracking-wider">
-                    Video Showcase Frame
+                    Showcase Walkthrough
                   </span>
-                  <span className="hidden sm:inline-block px-2 py-0.5 rounded-full bg-neutral-800/90 text-[10px] font-mono text-[#CFA5C1] border border-neutral-700">
-                    16:9 4K Ready
+                  <span className="px-2.5 py-0.5 rounded-full bg-neutral-800/90 text-[10px] font-mono text-[#CFA5C1] border border-neutral-700">
+                    4K UHD • 60 FPS
                   </span>
                 </div>
 
-                <button
-                  onClick={() => setShowUrlInput(!showUrlInput)}
-                  className="text-[11px] font-mono text-neutral-400 hover:text-white px-3 py-1 rounded-full bg-neutral-800/70 hover:bg-neutral-800 border border-neutral-700/60 transition-colors flex items-center gap-1.5"
-                >
-                  <Video className="w-3.5 h-3.5 text-[#CFA5C1]" />
-                  <span>{showUrlInput ? 'Close' : 'Load Video URL'}</span>
-                </button>
+                <div className="flex items-center gap-2">
+                  <span className="text-[11px] font-mono text-neutral-400 px-2.5 py-1 rounded-full bg-neutral-900/80 border border-neutral-800">
+                    {formatVideoTime(showcaseCurrentTime)} / {formatVideoTime(showcaseDuration || 80)}
+                  </span>
+                </div>
               </div>
 
-              {/* Optional Custom Video URL Input Bar */}
-              {showUrlInput && (
-                <div className="relative z-20 my-3 p-3 rounded-2xl bg-neutral-900/95 border border-neutral-700/80 shadow-2xl flex items-center gap-2">
-                  <input
-                    type="url"
-                    value={customVideoInput}
-                    onChange={(e) => setCustomVideoInput(e.target.value)}
-                    placeholder="Paste MP4 or video embed URL..."
-                    className="flex-1 bg-black/70 border border-neutral-700 rounded-xl px-3 py-2 text-xs text-white placeholder:text-neutral-500 outline-none focus:border-[#CFA5C1]"
-                  />
-                  <button
-                    onClick={() => {
-                      if (customVideoInput) setVideoUrl(customVideoInput);
-                      setShowUrlInput(false);
-                    }}
-                    className="px-4 py-2 rounded-xl bg-white text-black font-semibold text-xs hover:bg-neutral-200 transition-all shrink-0"
-                  >
-                    Embed
-                  </button>
-                </div>
-              )}
-
               {/* ========================================================================= */}
-              {/* DEDICATED EMPTY VIDEO BOX: Slot for adding custom video files or embeds   */}
-              {/* Replace this placeholder with your <video> tag or video embed code        */}
+              {/* EMBEDDED SHOWCASE VIDEO PLAYER                                            */}
+              {/* Note: To update this video, replace the src URL with your custom video     */}
               {/* ========================================================================= */}
               <div className="relative z-10 my-4 flex-1 flex flex-col justify-center">
-                {videoUrl ? (
-                  <div className="relative w-full aspect-video rounded-2xl overflow-hidden border border-neutral-700 shadow-2xl bg-black">
-                    <video 
-                      src={videoUrl} 
-                      controls 
-                      autoPlay 
-                      className="w-full h-full object-cover"
-                    />
-                    <button 
-                      onClick={() => setVideoUrl('')}
-                      className="absolute top-2 right-2 px-2.5 py-1 rounded-full bg-black/80 text-white text-[10px] font-mono hover:bg-black"
-                    >
-                      Clear Video
-                    </button>
-                  </div>
-                ) : (
-                  /* High-craft Empty Video Box */
-                  <div className="relative w-full aspect-video rounded-2xl border-2 border-dashed border-neutral-700/80 hover:border-[#CFA5C1]/70 bg-black/60 backdrop-blur-md overflow-hidden flex flex-col items-center justify-center p-6 text-center group/videobox transition-all duration-300">
-                    {/* Ambient subtle glow inside video box */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-amber-500/10 via-transparent to-transparent pointer-events-none" />
+                <div className="relative w-full aspect-video rounded-2xl overflow-hidden border border-neutral-700/80 shadow-2xl bg-black group/player">
+                  
+                  {/* The Embedded Video Element */}
+                  <video
+                    ref={showcaseVideoRef}
+                    src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260328_115001_bcdaa3b4-03de-47e7-ad63-ae3e392c32d4.mp4"
+                    autoPlay
+                    loop
+                    muted={isShowcaseMuted}
+                    playsInline
+                    onTimeUpdate={handleShowcaseTimeUpdate}
+                    onClick={toggleShowcasePlay}
+                    className="w-full h-full object-cover cursor-pointer"
+                  />
 
-                    {/* Prominent Liquid Glass Play Button */}
-                    <div 
-                      onClick={() => setShowUrlInput(true)}
-                      className="w-18 h-18 sm:w-20 sm:h-20 rounded-full bg-white/10 hover:bg-white/20 border border-white/30 backdrop-blur-xl flex items-center justify-center text-white shadow-[0_0_40px_rgba(207,165,193,0.3)] transition-all duration-300 group-hover/videobox:scale-110 cursor-pointer mb-3 relative z-10"
-                    >
-                      <Play className="w-8 h-8 fill-white text-white translate-x-0.5" />
+                  {/* Ambient HUD Telemetry Overlay on Video */}
+                  <div className="absolute top-3 left-3 pointer-events-none flex items-center gap-2">
+                    <span className="px-2.5 py-1 rounded-lg bg-black/65 backdrop-blur-md border border-white/10 font-mono text-[10px] text-white/90 flex items-center gap-1.5 shadow-lg">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                      Counter-Underwriting Active
+                    </span>
+                  </div>
+
+                  <div className="absolute top-3 right-3 pointer-events-none">
+                    <span className="px-2 py-0.5 rounded-md bg-black/65 backdrop-blur-md border border-white/10 font-mono text-[10px] text-[#CFA5C1]">
+                      RBI Repo: 6.50%
+                    </span>
+                  </div>
+
+                  {/* Custom Glass Control Bar */}
+                  <div className="absolute bottom-0 inset-x-0 p-3 bg-gradient-to-t from-black/90 via-black/50 to-transparent flex flex-col gap-2 transition-opacity duration-300">
+                    {/* Scrub Progress Bar */}
+                    <div className="w-full flex items-center gap-2">
+                      <input
+                        type="range"
+                        min="0"
+                        max="100"
+                        value={showcaseProgress || 0}
+                        onChange={handleShowcaseSeek}
+                        className="w-full h-1 bg-white/20 hover:bg-white/40 rounded-lg appearance-none cursor-pointer accent-[#CFA5C1]"
+                      />
                     </div>
 
-                    <h4 
-                      className="text-2xl sm:text-3xl text-white font-medium mb-1 tracking-tight"
-                      style={{ fontFamily: "'Instrument Serif', serif" }}
-                    >
-                      Drop or Embed Your Video Here
-                    </h4>
-                    <p className="text-xs text-neutral-400 max-w-sm font-light leading-relaxed mb-4">
-                      Dedicated container configured for product walkthrough, customer case story, or engine demo.
-                    </p>
+                    {/* Controls Row */}
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-3">
+                        <button
+                          onClick={toggleShowcasePlay}
+                          aria-label={isShowcasePlaying ? 'Pause Video' : 'Play Video'}
+                          className="w-8 h-8 rounded-full bg-white/20 hover:bg-white/30 backdrop-blur-md flex items-center justify-center text-white transition-all hover:scale-105 active:scale-95 cursor-pointer"
+                        >
+                          {isShowcasePlaying ? (
+                            <Pause className="w-3.5 h-3.5 fill-white text-white" />
+                          ) : (
+                            <Play className="w-3.5 h-3.5 fill-white text-white translate-x-0.5" />
+                          )}
+                        </button>
 
-                    {/* Video Slot Specs */}
-                    <div className="flex flex-wrap items-center justify-center gap-2 font-mono text-[10px] text-neutral-400">
-                      <span className="px-2.5 py-0.5 rounded-md bg-neutral-800/80 border border-neutral-700/60">MP4 / WebM</span>
-                      <span className="px-2.5 py-0.5 rounded-md bg-neutral-800/80 border border-neutral-700/60">1080p 60fps</span>
-                      <span className="px-2.5 py-0.5 rounded-md bg-neutral-800/80 border border-neutral-700/60">Stereo Sound</span>
-                      <span className="px-2.5 py-0.5 rounded-md bg-neutral-800/80 border border-neutral-700/60">Zero Latency</span>
+                        <button
+                          onClick={toggleShowcaseMute}
+                          aria-label={isShowcaseMuted ? 'Unmute Audio' : 'Mute Audio'}
+                          className="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-md flex items-center justify-center text-white transition-all cursor-pointer"
+                        >
+                          {isShowcaseMuted ? (
+                            <VolumeX className="w-3.5 h-3.5 text-neutral-300" />
+                          ) : (
+                            <Volume2 className="w-3.5 h-3.5 text-white" />
+                          )}
+                        </button>
+
+                        <span className="font-mono text-[11px] text-neutral-300">
+                          {formatVideoTime(showcaseCurrentTime)}
+                        </span>
+                      </div>
+
+                      <div className="flex items-center gap-2">
+                        <span className="font-mono text-[10px] text-emerald-400 bg-emerald-950/60 border border-emerald-800/50 px-2 py-0.5 rounded">
+                          Safe Carry Mode
+                        </span>
+                      </div>
                     </div>
                   </div>
-                )}
+
+                </div>
               </div>
 
               {/* Bottom Details Strip */}
               <div className="relative z-10 pt-4 border-t border-neutral-800/80 flex flex-wrap items-center justify-between gap-3 text-xs">
                 <div>
-                  <span className="font-semibold text-white block text-sm">Underwriting Walkthrough</span>
-                  <span className="text-neutral-400 text-[11px]">How the counter-model reverses bank FOIR traps</span>
+                  <span className="font-semibold text-white block text-sm">Institutional Demo Playback</span>
+                  <span className="text-neutral-400 text-[11px]">Real-time counter-model reversing bank FOIR traps</span>
                 </div>
                 <button
                   onClick={onStartAssessment}
                   className="px-5 py-2.5 rounded-full bg-[#2A1F2C] hover:bg-[#3D2C40] text-[#CFA5C1] font-semibold text-xs border border-[#4B2440] transition-all flex items-center gap-1.5 shadow-md hover:scale-105"
                 >
-                  <span>Run Live Simulator</span>
+                  <span>Launch Live Engine</span>
                   <ArrowRight className="w-3.5 h-3.5" />
                 </button>
               </div>
