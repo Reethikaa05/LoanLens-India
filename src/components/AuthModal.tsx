@@ -40,7 +40,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
             </div>
             <div>
               <h3 className="font-display font-semibold text-lg leading-tight">Borrower Access</h3>
-              <p className="text-[11px] text-[#6E6069] dark:text-[#A99DA5]">Lokta Copilot Portal</p>
+              <p className="text-[11px] text-[#6E6069] dark:text-[#A99DA5]">Borrower Copilot Portal</p>
             </div>
           </div>
           <button

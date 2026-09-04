@@ -32,7 +32,7 @@ export const Navbar: React.FC<NavbarProps> = ({
       <div className="bg-[#EFE3EA]/60 dark:bg-[#2A1F2C]/70 border-b border-[#E2D9DE] dark:border-[#33293A] px-4 py-1.5 text-xs text-[#6E6069] dark:text-[#A99DA5]">
         <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
           <div className="flex items-center gap-2">
-            <span className="font-semibold text-[#4B2440] dark:text-[#CFA5C1] uppercase tracking-wider text-[10px]">Lokta Build Challenge</span>
+            <span className="font-semibold text-[#4B2440] dark:text-[#CFA5C1] uppercase tracking-wider text-[10px]">Independent Credit Assessment Protocol</span>
             <span className="hidden sm:inline text-neutral-400">|</span>
             <span className="hidden sm:inline">Preloaded Challenge Personas:</span>
           </div>

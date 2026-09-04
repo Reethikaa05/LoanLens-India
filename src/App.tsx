@@ -125,7 +125,7 @@ export function App() {
               Lc
             </div>
             <span className="font-display font-medium text-sm text-[#221A20] dark:text-[#EEE6EA]">
-              Lokta Borrower Copilot
+              Borrower Copilot
             </span>
             <span>· Build Challenge Submission</span>
           </div>

@@ -13,10 +13,10 @@ export const HiringTeamHub: React.FC = () => {
           <span className="font-mono text-xs font-bold uppercase tracking-wider px-2.5 py-0.5 rounded bg-[#4B2440] text-white dark:bg-[#CFA5C1] dark:text-black">
             Evaluation Hub
           </span>
-          <span className="text-xs font-mono text-neutral-500">Lokta Review Committee</span>
+          <span className="text-xs font-mono text-neutral-500">Evaluation Committee</span>
         </div>
         <h2 className="font-display text-3xl font-medium tracking-tight">
-          Lokta Build Challenge Deliverables & Scoring Alignment
+          Independent Credit Assessment Protocol Deliverables & Scoring Alignment
         </h2>
         <p className="text-sm text-[#6E6069] dark:text-[#A99DA5] mt-1">
           Everything required by the challenge specification, accessible in-app and in root markdown files.
@@ -205,7 +205,7 @@ export const HiringTeamHub: React.FC = () => {
               1. What We Built & Why It Wins
             </h4>
             <p>
-              Credit scoring in India is asymmetric: lenders possess proprietary models, while borrowers walk into branches with zero data. Lokta Borrower Copilot flips the script by acting as a counter-underwriter. It implements pure FOIR calculations, cash income haircuts, RBI Repo-linked spread benchmarks, and true all-in APR disclosures with statutory fee ceilings.
+              Credit scoring in India is asymmetric: lenders possess proprietary models, while borrowers walk into branches with zero data. Borrower Copilot flips the script by acting as a counter-underwriter. It implements pure FOIR calculations, cash income haircuts, RBI Repo-linked spread benchmarks, and true all-in APR disclosures with statutory fee ceilings.
             </p>
 
             <h4 className="font-display font-semibold text-sm text-[#4B2440] dark:text-[#CFA5C1]">

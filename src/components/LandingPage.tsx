@@ -21,7 +21,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
         <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#EFE3EA] dark:bg-[#2A1F2C] border border-[#DFC2D5] dark:border-[#4B2440] text-xs font-semibold text-[#4B2440] dark:text-[#CFA5C1] mb-6">
             <Sparkles className="w-3.5 h-3.5" />
-            <span>Lokta Take-Home Build Challenge · 2026</span>
+            <span>Open Retail Credit Intelligence · 2026</span>
           </div>
 
           <h1 className="font-display font-medium text-4xl sm:text-6xl lg:text-7xl leading-[1.08] tracking-tight mb-6 max-w-4xl mx-auto">
@@ -31,7 +31,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
 
           <p className="font-display text-xl sm:text-2xl text-[#6E6069] dark:text-[#A99DA5] max-w-3xl mx-auto mb-10 leading-relaxed font-light">
             An Indian borrower walks in blind and pays four points over fair. 
-            Lokta Borrower Copilot is the <strong className="font-semibold text-[#221A20] dark:text-[#EEE6EA]">first self-assessment engine</strong> that answers four critical questions before you ever step foot in a branch.
+            Borrower Copilot is the <strong className="font-semibold text-[#221A20] dark:text-[#EEE6EA]">first self-assessment engine</strong> that answers four critical questions before you ever step foot in a branch.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
@@ -77,7 +77,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
       <section className="py-20 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-3xl mx-auto mb-16">
           <p className="font-mono text-xs font-semibold uppercase tracking-widest text-[#4B2440] dark:text-[#CFA5C1] mb-2">
-            The Lokta Deliverable
+            The Core Framework
           </p>
           <h2 className="font-display text-3xl sm:text-4xl font-medium tracking-tight">
             Four outputs every Indian borrower deserves to see
@@ -178,7 +178,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
                 <tr className="border-b border-[#E2D9DE] dark:border-[#33293A] bg-neutral-50 dark:bg-neutral-800/60 font-mono text-xs uppercase tracking-wider text-[#6E6069] dark:text-[#A99DA5]">
                   <th className="p-4">Dimension</th>
                   <th className="p-4 text-red-700 dark:text-red-400">Lender Underwriting Model</th>
-                  <th className="p-4 text-[#4B2440] dark:text-[#CFA5C1]">Lokta Borrower Copilot</th>
+                  <th className="p-4 text-[#4B2440] dark:text-[#CFA5C1]">Borrower Copilot</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-[#E2D9DE] dark:divide-[#33293A]">
@@ -294,7 +294,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
             Zero Bureau Pulls. 100% Client-Side Privacy.
           </h3>
           <p className="text-sm text-[#6E6069] dark:text-[#A99DA5] max-w-2xl mx-auto">
-            Unlike lead-generation portals that sell your phone number to 20 spamming DSA call centers, Lokta Copilot performs 100% of calculations in your local browser memory. No bureau credit score inquiry is logged, and nothing touches a remote database.
+            Unlike lead-generation portals that sell your phone number to 20 spamming DSA call centers, Borrower Copilot performs 100% of calculations in your local browser memory. No bureau credit score inquiry is logged, and nothing touches a remote database.
           </p>
         </div>
       </section>

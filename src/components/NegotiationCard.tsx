@@ -70,7 +70,7 @@ export const NegotiationCard: React.FC<NegotiationCardProps> = ({
               <span className="font-mono text-[10px] font-bold uppercase tracking-widest px-2.5 py-0.5 rounded bg-white/20 dark:bg-black/20">
                 Branch Negotiation Battle Card
               </span>
-              <span className="font-mono text-xs opacity-75">Lokta Verified</span>
+              <span className="font-mono text-xs opacity-75">Independent Verification</span>
             </div>
             <span className="font-mono text-xs">Present This To Loan Officer</span>
           </div>
@@ -218,7 +218,7 @@ export const NegotiationCard: React.FC<NegotiationCardProps> = ({
 
           {/* Verification Watermark */}
           <div className="pt-4 border-t border-neutral-200 dark:border-neutral-800 flex items-center justify-between text-[11px] font-mono text-neutral-400">
-            <span>Generated locally by Lokta Borrower Copilot</span>
+            <span>Generated locally by Borrower Copilot</span>
             <span>Version 1.0 · Independent Borrower Representation</span>
           </div>
         </div>
