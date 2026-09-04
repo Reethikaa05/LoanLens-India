@@ -17,11 +17,77 @@
 
 Every commercial bank and NBFC in India operates proprietary algorithmic credit underwriting engines designed to maximize lender gross yield and fee origination. Retail borrowers typically enter bank branches blind, accept the first pre-approved sanction letter offered, and discover years later that they paid **400 basis points over fair** while stretched to **65% of their net household income**.
 
-**LoanLens India** (Borrower Copilot) fundamentally levels this asymmetrical power dynamic. It acts as an **independent counter-underwriting platform** that arms Indian citizens with institutional-grade financial intelligence before they speak with a loan officer.
+**LoanLens India** fundamentally levels this asymmetrical power dynamic. It acts as an **independent counter-underwriting platform** that arms Indian citizens with institutional-grade financial intelligence before they speak with a loan officer.
 
 - **Zero Bureau Pulls:** Zero hard inquiries that damage your CIBIL/Experian score.
 - **100% Ephemeral Client-Side Memory:** Zero data retention, zero database leaks, zero lead sales to DSA telecallers.
 - **Sovereign RBI Regulatory Enforcement:** Strict integration with RBI Master Directions on External Benchmark Lending Rates (EBLR), Key Fact Statements (KFS April 2024), Fair Practices Code, and Microfinance Affordability Norms.
+
+---
+
+## 📸 Visual Platform Walkthrough & Screenshots
+
+Below is an end-to-end visual walkthrough of LoanLens India, illustrating each layer from public intake to branch negotiation:
+
+---
+
+### 1. Editorial Landing Page & Sovereign Mission
+![LoanLens India Landing Page](./screenshot/01_landing_page.jpeg)
+
+> **Short Note — Public Presentation Layer:**
+> - **Cinematic Hero**: Sets the sovereign counter-underwriting theme with real-time RBI Repo ticker (6.50%).
+> - **Two-Column Bento Showcase**: Demonstrates the "100% Borrower Protected" paradigm with interactive feature pills (Safe Carry, Repo Spread, 0% Foreclosure, KFS APR).
+> - **Interactive 5-Second Affordability Gauge**: Instant live comparison between what banks aggressively sanction vs what borrowers can safely carry.
+> - **The 4 Core Decisions Preview**: Clear orientation on honest verdicts, capacity limits, fair rates, and stress testing.
+> - **"What the Bank Conceals vs What Copilot Reveals"**: Complete comparative transparency table showing how bank sales quotas distort underwriting.
+
+---
+
+### 2. Ephemeral Authentication & 1-Click Demo Gate
+![Authentication & Demo Credentials Portal](./screenshot/02_auth_portal.jpeg)
+
+> **Short Note — Zero-Retention Auth Gate (`/login`):**
+> - **Zero Bureau Inquiries**: Complete security assurance that credit profiles remain 100% intact without CIBIL/CRIF footprint.
+> - **1-Click Demo Personas**: Pre-loaded instant access pills for **Priya** (Salaried MNC), **Ravi** (Kirana MSME), and **Anita** (Gig Economy Delivery).
+> - **In-Browser Ephemeral Session**: Password-free guest exploration option executing entirely in client-side memory.
+
+---
+
+### 3. Adaptive Copilot Underwriting Engine
+![Adaptive Intake and Algorithmic Underwriting Engine](./screenshot/03_copilot_engine.jpeg)
+
+> **Short Note — Real-Time Algorithmic Underwriting (`/dashboard`):**
+> - **Two-Tier Adaptive Intake (Left)**: Tier-1 collects 8 non-negotiable cashflow metrics; Tier-2 triggers high-impact dynamic branches (ITR vs cash haircut, unencumbered collateral LAP, co-applicant additions, and NACH bounce history).
+> - **The 4 Core Institutional Outputs (Right)**:
+>   - **O1 Verdict**: Real-time routing verdict (`BORROW (OPTIMAL SECURED ROUTE)` for Ravi) with product redirection advice.
+>   - **O2 Capacity Dual-Matrix**: Direct comparison between Lender Sanction Max (₹24.2L) vs Borrower Safe Carry (₹26.3L).
+>   - **O3 Fair Rate & KFS APR**: Direct sovereign spread formula (**9.25% – 11.25%** with 11.38% All-In KFS APR).
+>   - **O4 Safe Monthly EMI Outgo**: 7-year tenure selector ensuring outgo stays under safe cashflow ceiling, coupled with 3-scenario stress testing (-20% Income Slump, +200 bps Rate Hike, ₹40,000 Emergency Shock).
+
+---
+
+### 4. Official Negotiation Battle Card with Verified Photo ID
+![Official Institutional Negotiation Battle Card](./screenshot/04_negotiation_battle_card.jpeg)
+
+> **Short Note — Branch Negotiation Shield (`/card`):**
+> - **Verified Borrower Portrait Frame**: Features the borrower's authentic portrait (`ID-AUTH`) in an illuminated institutional frame with sovereign verification badges.
+> - **Target Fair Rate Anchor**: Bold, undeniable statutory demand box (**9.25% – 11.25%**, Max Fair APR: 11.38%).
+> - **Mandatory Product Redirection Defense**: Prominently highlights **₹8,40,000 projected interest saved** by avoiding high-commission unsecured business loans.
+> - **Processing Fee Anti-Gouging Interceptor**: Interactive slider showing exact rupees saved by enforcing the statutory 0.50% fee ceiling.
+> - **Word-for-Word Branch Counter-Scripts**: Scenario-based conversational scripts with legal citations and audio delivery tips.
+> - **Print Battle Card (PDF)**: High-resolution print styling formatted for physical presentation to bank branch managers.
+
+---
+
+### 5. Indian Retail Lending Rates & APR Radar
+![Indian Retail Lending Rates & APR Radar](./screenshot/05_rates_radar.jpeg)
+
+> **Short Note — Institutional Rate Intelligence Terminal (`/radar`):**
+> - **Live Central Bank Benchmark**: Active RBI Repo Rate at **6.50%**, Standing Deposit Facility (SDF **6.25%**), and Marginal Standing Facility (MSF **6.75%**).
+> - **RBI Key Fact Statement (KFS) True Cost Calculator**: Interactive sliders for loan amount, nominal rate, fee %, and tenure. Computes real All-In APR with 18% GST and unmasks predatory bundled insurance drag.
+> - **Floating Rate Hike Shock Simulator**: Stress-tests future RBI MPC rate decisions (+25 bps, +50 bps, +100 bps shock, -25 bps cut) showing exact monthly EMI changes and cumulative interest burden.
+> - **2026 Card Rates Comparative Matrix**: Filterable comparison across PSU Banks (SBI, BoB, PNB), Tier-1 Private Banks (HDFC, ICICI, Axis), NBFCs (Bajaj, Tata Capital, Muthoot), and Fintech Apps (Navi, KreditBee) with 1-click simulation buttons.
+> - **The 4 Statutory Rate Defense Principles**: Authoritative summary of EBLR linkage, 0% foreclosure penalties, mandatory KFS, and negative amortization prohibitions.
 
 ---
 
@@ -195,8 +261,8 @@ LoanLens India tests every algorithmic decision against three real-world Indian 
 - **The Trap:** NBFC agents push an **Unsecured Business Loan at 19.5%** with ₹53,100 upfront fees to maximize commission.
 - **Copilot Action:** Enforces `BORROW`. Detects Ravi's **₹45 Lakh unencumbered commercial shop** and redirects him to **Secured LAP at 9.25% - 10.25%**, saving **₹8,40,000 in interest**.
 
-### 3. Anita (Pune) · Gig Economy Delivery Partner
-- **Profile:** Net income ₹32,000/mo, multiple 32-36% instant app loans, 1 recent NACH bounce, ₹1.5L EV scooter ask.
+### 3. Anita (Hubballi) · Gig Economy Delivery Partner
+- **Profile:** Net income ₹28,000/mo, multiple 32-36% instant app loans, 1 recent NACH bounce, ₹1.5L EV scooter ask.
 - **The Trap:** Digital fintech apps offer instant credit rollover, creating a compounding debt spiral exceeding 65% of her income.
 - **Copilot Action:** Enforces `DONT BORROW`. Triggers hard stop on unsecured personal borrowing. Prescribes debt consolidation and redirects EV financing to **Pradhan Mantri Mudra Yojana (PMMY Shishu)**.
 
