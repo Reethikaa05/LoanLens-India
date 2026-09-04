@@ -7,7 +7,6 @@ import { NegotiationCard } from './components/NegotiationCard';
 import { MarketRadar } from './components/MarketRadar';
 import { RuleSandbox } from './components/RuleSandbox';
 import { PersonaDossier } from './components/PersonaDossier';
-import { HiringTeamHub } from './components/HiringTeamHub';
 import { AuthModal } from './components/AuthModal';
 import { LoginPage } from './components/LoginPage';
 import { SignupPage } from './components/SignupPage';
